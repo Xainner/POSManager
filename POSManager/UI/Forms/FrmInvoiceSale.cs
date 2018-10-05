@@ -21,7 +21,6 @@ namespace UI.Forms
     public partial class FrmInvoiceSale : MetroForm
     {
         //---------GLOBALS---------\\
-        List<ProductModel> productModels = new List<ProductModel>();
         public static ClientModel ClientModel { get; set; }
         public static EmployeeModel EmployeeModel { get; set; }
         public List<decimal> discounts;
@@ -120,6 +119,7 @@ namespace UI.Forms
             productsGridView.Columns.Add("discount", "Descuento (%)");
             productsGridView.Columns.Add("taxType", "Tipo de Impuesto");
             productsGridView.Columns.Add("taxes", "I.V.I");
+            productsGridView.Columns.Add("id", "Id");
 
             foreach (DataGridViewColumn dataGridViewColumn in productsGridView.Columns)
             {
@@ -131,6 +131,8 @@ namespace UI.Forms
 
             productsGridView.Columns[3].ReadOnly = false;
             productsGridView.Columns[6].ReadOnly = false;
+
+            productsGridView.Columns[9].Visible = false;
 
             productsGridView.MultiSelect = false;
         }
@@ -264,7 +266,7 @@ namespace UI.Forms
                     {
                         taxType = 'E';
                     }
-                    productsGridView.Rows.Add(code, description, subCategory, quantity, price, paymentAmount, discount, taxType, taxes);
+                    productsGridView.Rows.Add(code, description, subCategory, quantity, price, paymentAmount, discount, taxType, taxes, productModel.idProduct);
                 }
                 ModifyProductDetails();
                 CalculateInvoiceDetails();
@@ -273,5 +275,29 @@ namespace UI.Forms
         }
 
         //---------CRUD---------\\
+        private void generateSaleInvoiceTile_Click(object sender, EventArgs e)
+        {
+            decimal discount = decimal.Parse(discountTextBox.Text);
+            decimal taxes = decimal.Parse(taxesTextBox.Text);
+            decimal subTotal = decimal.Parse(subTotalTextBox.Text);
+            decimal total = decimal.Parse(totalTextBox.Text);
+            decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
+            decimal cardAmount = 0;
+            string currencyType = metroComboBox1.SelectedItem.ToString();
+            decimal totalPayment = decimal.Parse(totalTextBox.Text);
+            int employeeId = EmployeeModel.IdEmployee;
+            int clientId = 0;
+            int mainBusinessId = BusinessManagement.SelectMainBusinessId();
+            if (ClientModel != null)
+            {
+                clientId = ClientModel.IdClient;
+            }
+            List<int> productsIds = new List<int>();
+            foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+            {
+                productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
+            }
+            ExternalInvoiceSaleManagement.InsertExternalInvoiceSaleDetails(discount, taxes, subTotal, total, cashAmount, cardAmount, currencyType, mainBusinessId, clientId, employeeId, productsIds);
+        }
     }
 }

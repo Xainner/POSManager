@@ -64,6 +64,8 @@
             this.codeTextBox = new MetroFramework.Controls.MetroTextBox();
             this.currentTimeTimer = new System.Windows.Forms.Timer(this.components);
             this.reloadLatestInvoiceNumber = new System.Windows.Forms.Timer(this.components);
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -73,6 +75,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.metroComboBox1);
+            this.groupBox1.Controls.Add(this.metroLabel8);
             this.groupBox1.Controls.Add(this.employeeTextBox);
             this.groupBox1.Controls.Add(this.clientTextBox);
             this.groupBox1.Controls.Add(this.metroLabel3);
@@ -296,6 +300,7 @@
             this.generateSaleInvoiceTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.generateSaleInvoiceTile.UseSelectable = true;
             this.generateSaleInvoiceTile.UseTileImage = true;
+            this.generateSaleInvoiceTile.Click += new System.EventHandler(this.generateSaleInvoiceTile_Click);
             // 
             // taxesTextBox
             // 
@@ -678,6 +683,29 @@
             this.reloadLatestInvoiceNumber.Interval = 5000;
             this.reloadLatestInvoiceNumber.Tick += new System.EventHandler(this.reloadLatestInvoiceNumber_Tick);
             // 
+            // metroLabel8
+            // 
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(373, 28);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(107, 19);
+            this.metroLabel8.TabIndex = 3;
+            this.metroLabel8.Text = "Tipo de Moneda";
+            // 
+            // metroComboBox1
+            // 
+            this.metroComboBox1.FormattingEnabled = true;
+            this.metroComboBox1.ItemHeight = 23;
+            this.metroComboBox1.Items.AddRange(new object[] {
+            "Colón",
+            "Dolar",
+            "Euro"});
+            this.metroComboBox1.Location = new System.Drawing.Point(486, 22);
+            this.metroComboBox1.Name = "metroComboBox1";
+            this.metroComboBox1.Size = new System.Drawing.Size(85, 29);
+            this.metroComboBox1.TabIndex = 4;
+            this.metroComboBox1.UseSelectable = true;
+            // 
             // FrmInvoiceSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -741,5 +769,7 @@
         private MetroFramework.Controls.MetroButton changeButton;
         private System.Windows.Forms.Timer currentTimeTimer;
         private System.Windows.Forms.Timer reloadLatestInvoiceNumber;
+        private MetroFramework.Controls.MetroComboBox metroComboBox1;
+        private MetroFramework.Controls.MetroLabel metroLabel8;
     }
 }

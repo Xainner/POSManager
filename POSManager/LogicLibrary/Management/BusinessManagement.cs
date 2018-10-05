@@ -50,6 +50,18 @@ namespace LogicLibrary.Management
             }
         }
 
+        public static int SelectMainBusinessId()
+        {
+            try
+            {
+                return BusinessConnection.SelectMainBusinessId();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public static BusinessModel SelectBusinessById(int id)
         {
             try
@@ -122,6 +134,22 @@ namespace LogicLibrary.Management
                     IdBusiness = id
                 };
                 return BusinessConnection.DeleteBusinessById(businessModel);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static bool InsertBusiness(string fantasyName, string societyName, string legalCertification, int main, string telephone, byte[] logo)
+        {
+            try
+            {
+                BusinessModel businessModel = new BusinessModel()
+                {
+                    FantasyName = fantasyName, SocietyName = societyName, LegalCertification = legalCertification, Main = main, Telephone = telephone, Logo = logo, GeneralAddress = "", MainAddress = ""
+                };
+                return BusinessConnection.InsertBusiness(businessModel);
             }
             catch (Exception ex)
             {

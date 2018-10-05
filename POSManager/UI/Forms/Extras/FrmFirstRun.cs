@@ -61,12 +61,12 @@ namespace UI.Forms.Extras
 
         private void startUpAdvancedWizard_Next(object sender, AdvancedWizardControl.EventArguments.WizardEventArgs e)
         {
-            switch (e.CurrentPageIndex)
+            switch (e.NextPageIndex)
             {
-                case 0:
-                    startUpAdvancedWizard.NextButtonEnabled = false;
-                    break;
                 case 1:
+                    break;
+                case 2:
+                    startUpAdvancedWizard.BackButtonEnabled = false;
                     try
                     {
                         if (!string.IsNullOrEmpty(userNameTextBox.Text))
@@ -80,31 +80,35 @@ namespace UI.Forms.Extras
                                         if (UserManagement.InsertUser(userNameTextBox.Text, 0, passwordTextBox.Text))
                                         {
                                             startUpAdvancedWizard.NextButtonEnabled = true;
-                                            startUpAdvancedWizard.BackButtonEnabled = false;
                                         }
                                         else
                                         {
                                             MetroMessageBox.Show(this, "Ha ocurrido un error, intentelo nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            startUpAdvancedWizard.ClickBack();
                                         }
                                     }
                                     else
                                     {
                                         MetroMessageBox.Show(this, "Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        startUpAdvancedWizard.ClickBack();
                                     }
                                 }
                                 else
                                 {
                                     MetroMessageBox.Show(this, "El campo de validación de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    startUpAdvancedWizard.ClickBack();
                                 }
                             }
                             else
                             {
                                 MetroMessageBox.Show(this, "El campo de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                startUpAdvancedWizard.ClickBack();
                             }
                         }
                         else
                         {
                             MetroMessageBox.Show(this, "El campo del nombre de usuario no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            startUpAdvancedWizard.ClickBack();
                         }
                     }
                     catch (Exception ex)
@@ -112,25 +116,49 @@ namespace UI.Forms.Extras
                         throw;
                     }
                     break;
-                case 2:
-                    string storeName = fantasyNameTextBox.Text;
-                    string societyName = societyNameTextBox.Text;
-                    string legalCertification = juridicIdTextBox.Text;
-                    string telephone = telephoneTextBox.Text;
-
-                    BusinessModel businessModel = new BusinessModel()
+                case 3:
+                    if (!string.IsNullOrEmpty(fantasyNameTextBox.Text))
                     {
-                        FantasyName = storeName,
-                        LegalCertification = legalCertification,
-                        Logo = ImageManagement.ImageToByte(ImageManagement.TemporaryImage(pictureBox1.Image)),
-                        Telephone = telephone,
-                        SocietyName = societyName,
-                        Main = 1
-                    };
-                    Properties.Settings.Default.mainStore = storeName;
-                    advancedWizardPage4.HeaderTitle = storeName;
-                    startUpAdvancedWizard.FinishButtonEnabled = true;
-                    Properties.Settings.Default.Save();
+                        if (!string.IsNullOrEmpty(societyNameTextBox.Text))
+                        {
+                            if (!string.IsNullOrEmpty(juridicIdTextBox.Text))
+                            {
+                                if (!string.IsNullOrEmpty(telephoneTextBox.Text))
+                                {
+                                    if (BusinessManagement.InsertBusiness(fantasyNameTextBox.Text, societyNameTextBox.Text, juridicIdTextBox.Text, 0, telephoneTextBox.Text, ImageManagement.ImageToByte(ImageManagement.TemporaryImage(pictureBox1.Image))))
+                                    {
+                                        startUpAdvancedWizard.NextButtonEnabled = true;
+                                        startUpAdvancedWizard.FinishButtonEnabled = true;
+                                    }
+                                    else
+                                    {
+                                        MetroMessageBox.Show(this, $"Ha ocurrido un error al agregar el negocio: { fantasyNameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        startUpAdvancedWizard.ClickBack();
+                                    }
+                                }
+                                else
+                                {
+                                    MetroMessageBox.Show(this, "El número de teléfono no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    startUpAdvancedWizard.ClickBack();
+                                }
+                            }
+                            else
+                            {
+                                MetroMessageBox.Show(this, "La cédula jurídica no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                startUpAdvancedWizard.ClickBack();
+                            }
+                        }
+                        else
+                        {
+                            MetroMessageBox.Show(this, "El nombre de la sociedad no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            startUpAdvancedWizard.ClickBack();
+                        }
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "El nombre de fantasía no puede estar vacío", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        startUpAdvancedWizard.ClickBack();
+                    }
                     break;
             }
         }

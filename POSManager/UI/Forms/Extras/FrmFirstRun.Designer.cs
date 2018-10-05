@@ -70,6 +70,7 @@
             // 
             // startUpAdvancedWizard
             // 
+            this.startUpAdvancedWizard.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.startUpAdvancedWizard.BackButtonEnabled = false;
             this.startUpAdvancedWizard.BackButtonText = "< Atras";
             this.startUpAdvancedWizard.ButtonLayout = AdvancedWizardControl.Enums.ButtonLayoutKind.Default;
@@ -94,7 +95,7 @@
             this.startUpAdvancedWizard.ProcessKeys = false;
             this.startUpAdvancedWizard.Size = new System.Drawing.Size(760, 370);
             this.startUpAdvancedWizard.TabIndex = 0;
-            this.startUpAdvancedWizard.TouchScreen = false;
+            this.startUpAdvancedWizard.TouchScreen = true;
             this.startUpAdvancedWizard.WizardPages.Add(this.advancedWizardPage1);
             this.startUpAdvancedWizard.WizardPages.Add(this.advancedWizardPage2);
             this.startUpAdvancedWizard.WizardPages.Add(this.advancedWizardPage3);
@@ -124,7 +125,7 @@
             this.advancedWizardPage1.Location = new System.Drawing.Point(0, 0);
             this.advancedWizardPage1.Name = "advancedWizardPage1";
             this.advancedWizardPage1.PreviousPage = 0;
-            this.advancedWizardPage1.Size = new System.Drawing.Size(760, 330);
+            this.advancedWizardPage1.Size = new System.Drawing.Size(760, 310);
             this.advancedWizardPage1.SubTitle = "Suit completa de punto de venta";
             this.advancedWizardPage1.SubTitleFont = new System.Drawing.Font("Tahoma", 8F);
             this.advancedWizardPage1.TabIndex = 1;
@@ -201,7 +202,7 @@
             this.advancedWizardPage3.Location = new System.Drawing.Point(0, 0);
             this.advancedWizardPage3.Name = "advancedWizardPage3";
             this.advancedWizardPage3.PreviousPage = 1;
-            this.advancedWizardPage3.Size = new System.Drawing.Size(760, 330);
+            this.advancedWizardPage3.Size = new System.Drawing.Size(760, 310);
             this.advancedWizardPage3.SubTitle = "Necesitaremos configurar un negocio como principal, más adelante puedes cambiar e" +
     "sta configuración";
             this.advancedWizardPage3.SubTitleFont = new System.Drawing.Font("Tahoma", 8F);
@@ -437,7 +438,7 @@
             this.advancedWizardPage2.Location = new System.Drawing.Point(0, 0);
             this.advancedWizardPage2.Name = "advancedWizardPage2";
             this.advancedWizardPage2.PreviousPage = 0;
-            this.advancedWizardPage2.Size = new System.Drawing.Size(760, 330);
+            this.advancedWizardPage2.Size = new System.Drawing.Size(760, 310);
             this.advancedWizardPage2.SubTitle = "Usuario administrador";
             this.advancedWizardPage2.SubTitleFont = new System.Drawing.Font("Tahoma", 8F);
             this.advancedWizardPage2.TabIndex = 2;
@@ -602,7 +603,7 @@
             this.advancedWizardPage4.Location = new System.Drawing.Point(0, 0);
             this.advancedWizardPage4.Name = "advancedWizardPage4";
             this.advancedWizardPage4.PreviousPage = 2;
-            this.advancedWizardPage4.Size = new System.Drawing.Size(760, 330);
+            this.advancedWizardPage4.Size = new System.Drawing.Size(760, 310);
             this.advancedWizardPage4.SubTitle = "Configuración Finalizada";
             this.advancedWizardPage4.SubTitleFont = new System.Drawing.Font("Tahoma", 8F);
             this.advancedWizardPage4.TabIndex = 4;
