@@ -11,12 +11,15 @@ using MetroFramework.Forms;
 using MetroFramework;
 using UI.Utilities;
 using BusinessLibrary.Models;
+using LogicLibrary.Management;
+using FoxLearn.License;
 
 namespace UI.Forms.Extras
 {
     public partial class FrmFirstRun : MetroForm
     {
         string tempImage;
+        const int ProductCode = 1;
 
         public FrmFirstRun()
         {
@@ -104,6 +107,38 @@ namespace UI.Forms.Extras
                     tempImage = ImageManagement.TemporaryImage(Image.FromFile(openFileDialog.FileName));
                     pictureBox1.Load(tempImage);
                 }
+            }
+        }
+
+        private void validateSerialButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(keyMaskedTextBox.Text))
+            {
+                if (KeyManagement.SelectKeyByCode(keyMaskedTextBox.Text) != null)
+                {
+                    KeyManager keyManager = new KeyManager("0000000000");
+                    string productKey = keyMaskedTextBox.Text;
+                    if (keyManager.ValidKey(ref productKey))
+                    {
+                        KeyValuesClass keyValuesClass = new KeyValuesClass();
+                        if (keyManager.DisassembleKey(productKey, ref keyValuesClass))
+                        {
+                            LicenseInfo licenseInfo = new LicenseInfo();
+                            licenseInfo.ProductKey = productKey;
+                            licenseInfo.FullName = "User";
+                            keyManager.SaveSuretyFile(string.Format(@"{0}\key.lic", Application.StartupPath), licenseInfo);
+                            MetroMessageBox.Show(this, "¡Licencia ingresada de manera correcta!", "Licencia ", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            startUpAdvancedWizard.NextButtonEnabled = false;
+                        }
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "La licencia no es valida.", "Licencia invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            } else
+            {
+                MetroMessageBox.Show(this, "Debe ingresar un valor.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

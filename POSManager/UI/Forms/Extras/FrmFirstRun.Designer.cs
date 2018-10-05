@@ -32,7 +32,7 @@
             this.startUpAdvancedWizard = new AdvancedWizardControl.Wizard.AdvancedWizard();
             this.advancedWizardPage1 = new AdvancedWizardControl.WizardPages.AdvancedWizardPage();
             this.validateSerialButton = new MetroFramework.Controls.MetroButton();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.keyMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -110,7 +110,7 @@
             // advancedWizardPage1
             // 
             this.advancedWizardPage1.Controls.Add(this.validateSerialButton);
-            this.advancedWizardPage1.Controls.Add(this.maskedTextBox1);
+            this.advancedWizardPage1.Controls.Add(this.keyMaskedTextBox);
             this.advancedWizardPage1.Controls.Add(this.metroLabel13);
             this.advancedWizardPage1.Controls.Add(this.metroLabel2);
             this.advancedWizardPage1.Controls.Add(this.metroLabel1);
@@ -137,15 +137,16 @@
             this.validateSerialButton.TabIndex = 4;
             this.validateSerialButton.Text = "Validar";
             this.validateSerialButton.UseSelectable = true;
+            this.validateSerialButton.Click += new System.EventHandler(this.validateSerialButton_Click);
             // 
-            // maskedTextBox1
+            // keyMaskedTextBox
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(170, 209);
-            this.maskedTextBox1.Mask = "CCCCC-CCCCC-CCCCC-CCCCC-CCCCC-CCCCC";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.PromptChar = ' ';
-            this.maskedTextBox1.Size = new System.Drawing.Size(228, 20);
-            this.maskedTextBox1.TabIndex = 3;
+            this.keyMaskedTextBox.Location = new System.Drawing.Point(170, 209);
+            this.keyMaskedTextBox.Mask = "CCCCC-CCCCC-CCCCC-CCCCC-CCCCC-CCCCC";
+            this.keyMaskedTextBox.Name = "keyMaskedTextBox";
+            this.keyMaskedTextBox.PromptChar = ' ';
+            this.keyMaskedTextBox.Size = new System.Drawing.Size(228, 20);
+            this.keyMaskedTextBox.TabIndex = 3;
             // 
             // metroLabel13
             // 
@@ -667,7 +668,7 @@
         private MetroFramework.Controls.MetroLink rotateLeftLink;
         private MetroFramework.Controls.MetroButton selectLogoButton;
         private MetroFramework.Controls.MetroLabel metroLabel12;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox keyMaskedTextBox;
         private MetroFramework.Controls.MetroLabel metroLabel13;
         private MetroFramework.Controls.MetroButton validateSerialButton;
     }

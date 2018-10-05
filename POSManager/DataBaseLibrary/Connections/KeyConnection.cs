@@ -30,7 +30,7 @@ namespace DataBaseLibrary.Connections
             }
             catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
 
