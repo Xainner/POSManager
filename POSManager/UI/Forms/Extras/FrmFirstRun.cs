@@ -25,6 +25,7 @@ namespace UI.Forms.Extras
         {
             InitializeComponent();
             startUpAdvancedWizard.NextButtonEnabled = false;
+            startUpAdvancedWizard.FinishButtonEnabled = false;
         }
 
         private void startUpAdvancedWizard_Load(object sender, EventArgs e)
@@ -83,6 +84,7 @@ namespace UI.Forms.Extras
                     };
                     Properties.Settings.Default.mainStore = storeName;
                     advancedWizardPage4.HeaderTitle = storeName;
+                    startUpAdvancedWizard.FinishButtonEnabled = true;
                     break;
             }
         }
