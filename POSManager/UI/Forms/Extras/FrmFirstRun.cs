@@ -13,6 +13,7 @@ using UI.Utilities;
 using BusinessLibrary.Models;
 using LogicLibrary.Management;
 using FoxLearn.License;
+using LogicLibrary.Utilities;
 
 namespace UI.Forms.Extras
 {
@@ -35,16 +36,17 @@ namespace UI.Forms.Extras
 
         private void startUpAdvancedWizard_Leave(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (MetroMessageBox.Show(this, "¿Seguro que deseas salir? Esta acción no se puede devolver.", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void startUpAdvancedWizard_Finish(object sender, EventArgs e)
         {
-            Properties.Settings.Default.startUp = true;
-            Properties.Settings.Default.Save();
             FrmLogin frmLogin = new FrmLogin();
             frmLogin.Show();
-            Dispose();
+            Hide();
         }
 
         private void startUpAdvancedWizard_Back(object sender, EventArgs e)
@@ -62,10 +64,53 @@ namespace UI.Forms.Extras
             switch (e.CurrentPageIndex)
             {
                 case 0:
-                    
+                    startUpAdvancedWizard.NextButtonEnabled = false;
                     break;
                 case 1:
-                    
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(userNameTextBox.Text))
+                        {
+                            if (!string.IsNullOrEmpty(passwordTextBox.Text))
+                            {
+                                if (!string.IsNullOrEmpty(validatePasswordTextBox.Text))
+                                {
+                                    if (validatePasswordTextBox.Text.Equals(passwordTextBox.Text))
+                                    {
+                                        if (UserManagement.InsertUser(userNameTextBox.Text, 0, passwordTextBox.Text))
+                                        {
+                                            startUpAdvancedWizard.NextButtonEnabled = true;
+                                            startUpAdvancedWizard.BackButtonEnabled = false;
+                                        }
+                                        else
+                                        {
+                                            MetroMessageBox.Show(this, "Ha ocurrido un error, intentelo nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MetroMessageBox.Show(this, "Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
+                                else
+                                {
+                                    MetroMessageBox.Show(this, "El campo de validación de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+                            else
+                            {
+                                MetroMessageBox.Show(this, "El campo de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                        else
+                        {
+                            MetroMessageBox.Show(this, "El campo del nombre de usuario no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
                     break;
                 case 2:
                     string storeName = fantasyNameTextBox.Text;
@@ -85,13 +130,17 @@ namespace UI.Forms.Extras
                     Properties.Settings.Default.mainStore = storeName;
                     advancedWizardPage4.HeaderTitle = storeName;
                     startUpAdvancedWizard.FinishButtonEnabled = true;
+                    Properties.Settings.Default.Save();
                     break;
             }
         }
 
         private void startUpAdvancedWizard_Cancel(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (MetroMessageBox.Show(this, "¿Seguro que deseas salir? Esta acción no se puede devolver.", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         //---------EVENTS---------\\

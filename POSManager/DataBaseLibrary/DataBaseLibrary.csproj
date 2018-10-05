@@ -63,6 +63,7 @@
     <Compile Include="Connections\CategoryConnection.cs" />
     <Compile Include="Connections\ClientConnection.cs" />
     <Compile Include="Connections\EmployeeConnection.cs" />
+    <Compile Include="Connections\InvoiceSaleDetailsConnection.cs" />
     <Compile Include="Connections\KeyConnection.cs" />
     <Compile Include="Connections\PositionConnection.cs" />
     <Compile Include="Connections\ProductConnection.cs" />

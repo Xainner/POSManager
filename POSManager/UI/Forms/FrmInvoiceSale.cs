@@ -12,6 +12,9 @@ using LogicLibrary.Management;
 using MetroFramework.Forms;
 using UI.Forms.SearchForms;
 using UI.Utilities;
+using MetroFramework;
+using System.Threading;
+using Timer = System.Threading.Timer;
 
 namespace UI.Forms
 {
@@ -21,6 +24,8 @@ namespace UI.Forms
         List<ProductModel> productModels = new List<ProductModel>();
         public static ClientModel ClientModel { get; set; }
         public static EmployeeModel EmployeeModel { get; set; }
+        public List<decimal> discounts;
+        
 
         //---------FORM---------\\
 
@@ -32,8 +37,10 @@ namespace UI.Forms
         private void FrmInvoiceSale_Load(object sender, EventArgs e)
         {
             WireUpProductsGridView();
-            metroLabel14.Text = DateTime.Today.ToString();
-            metroLabel4.Text = "";
+            currentTimeTimer.Start();
+            metroLabel14.Text = DateTime.Now.ToString();
+            int id = ExternalInvoiceSaleManagement.SelectLastInvoiceNumber();
+            metroLabel4.Text = (id + 1).ToString();
         }
 
         private void FrmInvoiceSale_Leave(object sender, EventArgs e)
@@ -65,12 +72,20 @@ namespace UI.Forms
 
             amount = (amount - (amount * (discount / 100)));
 
-            string tax = "0.13";
+            string tax;
+            if (dataGridViewRow.Cells[7].Value.ToString().Equals("G"))
+            {
+                tax = "0.13";
+            } else
+            {
+                tax = "0";
+            }
+            
             decimal subTotal = amount - (decimal.Parse(tax) * amount);
 
             decimal taxes = amount - subTotal;
             dataGridViewRow.Cells[5].Value = amount.ToString("#.##");
-            dataGridViewRow.Cells[7].Value = taxes.ToString("#.##");
+            dataGridViewRow.Cells[8].Value = taxes.ToString("#.##");
 
             CalculateInvoiceDetails();
         }
@@ -122,20 +137,22 @@ namespace UI.Forms
 
         private void CalculateInvoiceDetails()
         {
-            decimal discounts = 0;
             decimal amount = 0;
             decimal taxes = 0;
 
             foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
             {
                 amount += decimal.Parse(dataGridViewRow.Cells[5].Value.ToString());
-                taxes += decimal.Parse(dataGridViewRow.Cells[8].Value.ToString());
+                if (dataGridViewRow.Cells[7].Value.ToString().Equals("G"))
+                {
+                    taxes += decimal.Parse(dataGridViewRow.Cells[8].Value.ToString());
+                }
             }
 
             decimal subTotal = amount - taxes;
             decimal total = amount;
 
-            discountTextBox.Text = discounts.ToString("#.##");
+            discountTextBox.Text = "0";
             subTotalTextBox.Text = subTotal.ToString("#.##");
             taxesTextBox.Text = taxes.ToString("#.##");
             totalTextBox.Text = total.ToString("#.##");
@@ -152,7 +169,57 @@ namespace UI.Forms
             }
         }
 
+        private void ValidateChange()
+        {
+            decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
+            decimal totalPayment = decimal.Parse(totalTextBox.Text);
+            decimal change = cashAmount - totalPayment;
+            if (change >= 0)
+            {
+                if (change != 0)
+                {
+                    changeTextBox.Text = change.ToString("#.##");
+                } else
+                {
+                    changeTextBox.Text = "0";
+                }
+            } else
+            {
+                MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         //---------EVENTS---------\\
+
+        private void reloadLatestInvoiceNumber_Tick(object sender, EventArgs e)
+        {
+            int id = ExternalInvoiceSaleManagement.SelectLastInvoiceNumber();
+            metroLabel4.Text = (id + 1).ToString();
+        }
+
+        private void currentTimeTimer_Tick(object sender, EventArgs e)
+        {
+            metroLabel14.Text = DateTime.Now.ToString();
+        }
+
+        private void cashAmountTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ValidateChange();
+            }
+        }
+
+        private void changeButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cashAmountTextBox.Text) && !string.IsNullOrEmpty(totalTextBox.Text))
+            {
+                ValidateChange();
+            } else
+            {
+                MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
         private void employeeTextBox_ButtonClick(object sender, EventArgs e)
         {
@@ -205,7 +272,6 @@ namespace UI.Forms
             }
         }
 
-        
         //---------CRUD---------\\
     }
 }

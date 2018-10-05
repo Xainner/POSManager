@@ -60,7 +60,7 @@ namespace DataBaseLibrary
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    var output = cnn.Query<BusinessModel>("SELECT * FROM business WHERE Main = 1");
+                    var output = cnn.Query<BusinessModel>("SELECT Main FROM business WHERE Main = 1");
                     return output.Single();
                 }
             }

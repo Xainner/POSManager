@@ -19,12 +19,12 @@ namespace UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (!Properties.Settings.Default.startUp)
-            {
-                Application.Run(new FrmLogin());
-            } else
+            if (BusinessManagement.SelectMainBusiness() == null)
             {
                 Application.Run(new FrmFirstRun());
+            } else
+            {
+                Application.Run(new FrmLogin());
             }
         }
     }
