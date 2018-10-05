@@ -19,7 +19,7 @@ namespace UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (BusinessManagement.SelectMainBusiness() != null)
+            if (Properties.Settings.Default.startUp)
             {
                 Application.Run(new FrmLogin());
             } else
