@@ -38,6 +38,18 @@ namespace LogicLibrary.Management
             }
         }
 
+        public static BusinessModel SelectMainBusiness()
+        {
+            try
+            {
+                return BusinessConnection.SelectMainBusiness();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public static BusinessModel SelectBusinessById(int id)
         {
             try

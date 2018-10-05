@@ -54,6 +54,22 @@ namespace DataBaseLibrary
             }
         }
 
+        public static BusinessModel SelectMainBusiness()
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<BusinessModel>("SELECT * FROM business WHERE Main = 1");
+                    return output.Single();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public static BusinessModel SelectBusinessById(BusinessModel businessModel)
         {
             try

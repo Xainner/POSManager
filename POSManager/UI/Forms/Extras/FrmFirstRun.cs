@@ -128,7 +128,7 @@ namespace UI.Forms.Extras
                             licenseInfo.FullName = "User";
                             keyManager.SaveSuretyFile(string.Format(@"{0}\key.lic", Application.StartupPath), licenseInfo);
                             MetroMessageBox.Show(this, "¡Licencia ingresada de manera correcta!", "Licencia ", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                            startUpAdvancedWizard.NextButtonEnabled = false;
+                            startUpAdvancedWizard.NextButtonEnabled = true;
                         }
                     }
                     else

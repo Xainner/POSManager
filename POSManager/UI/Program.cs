@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicLibrary.Management;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,13 @@ namespace UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmFirstRun());
+            if (BusinessManagement.SelectMainBusiness() != null)
+            {
+                Application.Run(new FrmLogin());
+            } else
+            {
+                Application.Run(new FrmFirstRun());
+            }
         }
     }
 }
