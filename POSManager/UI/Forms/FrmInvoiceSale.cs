@@ -23,7 +23,7 @@ namespace UI.Forms
         //---------GLOBALS---------\\
         public static ClientModel ClientModel { get; set; }
         public static EmployeeModel EmployeeModel { get; set; }
-        public List<decimal> discounts;
+        public decimal discounts = 0;
         
 
         //---------FORM---------\\
@@ -40,6 +40,7 @@ namespace UI.Forms
             metroLabel14.Text = DateTime.Now.ToString();
             int id = ExternalInvoiceSaleManagement.SelectLastInvoiceNumber();
             metroLabel4.Text = (id + 1).ToString();
+            metroComboBox1.SelectedIndex = 0;
         }
 
         private void FrmInvoiceSale_Leave(object sender, EventArgs e)
@@ -57,6 +58,9 @@ namespace UI.Forms
                 {
                     int quantity = int.Parse(dataGridViewRow.Cells[3].Value.ToString());
                     dataGridViewRow.Cells[3].Value = (quantity + 1);
+
+                    ModifyProductDetails(dataGridViewRow);
+
                     return true;
                 }
             }
@@ -69,7 +73,32 @@ namespace UI.Forms
             decimal amount = quantity * decimal.Parse(dataGridViewRow.Cells[4].Value.ToString());
             decimal discount = int.Parse(dataGridViewRow.Cells[6].Value.ToString());
 
+            decimal otrotest2 = amount * (discount / 100);
             amount = (amount - (amount * (discount / 100)));
+
+            discounts -= decimal.Parse(dataGridViewRow.Cells[10].Value.ToString());
+
+            if (discounts == 0)
+            {
+                discountTextBox.Text = "0";
+            }
+
+            if (decimal.Parse(discountTextBox.Text) != 0)
+            {
+                dataGridViewRow.Cells[10].Value = otrotest2;
+                discounts += otrotest2;
+                discountTextBox.Text = discounts.ToString("#,##");
+            } else
+            {
+                dataGridViewRow.Cells[10].Value = otrotest2;
+                discounts += otrotest2;
+                decimal otroTest = decimal.Parse(dataGridViewRow.Cells[10].Value.ToString());
+                discountTextBox.Text = discounts.ToString("#,##");
+                if (discounts == 0)
+                {
+                    discountTextBox.Text = "0";
+                }
+            }
 
             string tax;
             if (dataGridViewRow.Cells[7].Value.ToString().Equals("G"))
@@ -83,8 +112,8 @@ namespace UI.Forms
             decimal subTotal = amount - (decimal.Parse(tax) * amount);
 
             decimal taxes = amount - subTotal;
-            dataGridViewRow.Cells[5].Value = amount.ToString("#.##");
-            dataGridViewRow.Cells[8].Value = taxes.ToString("#.##");
+            dataGridViewRow.Cells[5].Value = amount.ToString("#,##");
+            dataGridViewRow.Cells[8].Value = taxes.ToString("#,##");
 
             CalculateInvoiceDetails();
         }
@@ -120,6 +149,7 @@ namespace UI.Forms
             productsGridView.Columns.Add("taxType", "Tipo de Impuesto");
             productsGridView.Columns.Add("taxes", "I.V.I");
             productsGridView.Columns.Add("id", "Id");
+            productsGridView.Columns.Add("discount2", "Descuento (#)");
 
             foreach (DataGridViewColumn dataGridViewColumn in productsGridView.Columns)
             {
@@ -133,6 +163,7 @@ namespace UI.Forms
             productsGridView.Columns[6].ReadOnly = false;
 
             productsGridView.Columns[9].Visible = false;
+            productsGridView.Columns[10].Visible = true;
 
             productsGridView.MultiSelect = false;
         }
@@ -144,20 +175,50 @@ namespace UI.Forms
 
             foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
             {
-                amount += decimal.Parse(dataGridViewRow.Cells[5].Value.ToString());
-                if (dataGridViewRow.Cells[7].Value.ToString().Equals("G"))
+                if (dataGridViewRow.Cells[5].Value.ToString() != "")
                 {
-                    taxes += decimal.Parse(dataGridViewRow.Cells[8].Value.ToString());
+                    amount += decimal.Parse(dataGridViewRow.Cells[5].Value.ToString());
+                    if (dataGridViewRow.Cells[7].Value.ToString().Equals("G"))
+                    {
+                        taxes += decimal.Parse(dataGridViewRow.Cells[8].Value.ToString());
+                    }
+                } else
+                {
+                    amount = 0;
+                    taxes = 0;
                 }
+                
             }
 
             decimal subTotal = amount - taxes;
             decimal total = amount;
 
-            discountTextBox.Text = "0";
-            subTotalTextBox.Text = subTotal.ToString("#.##");
-            taxesTextBox.Text = taxes.ToString("#.##");
-            totalTextBox.Text = total.ToString("#.##");
+            if (subTotal != 0)
+            {
+                subTotalTextBox.Text = subTotal.ToString("#.##");
+
+            }
+            else
+            {
+                subTotalTextBox.Text = "0";
+            }
+            if (taxes != 0)
+            {
+                taxesTextBox.Text = taxes.ToString("#.##");
+
+            }
+            else
+            {
+                subTotalTextBox.Text = "0";
+            }
+            if (total != 0)
+            {
+                totalTextBox.Text = total.ToString("#.##");
+            }
+            else
+            {
+                subTotalTextBox.Text = "0";
+            }
         }
 
         private void ValidateTaxes()
@@ -266,7 +327,7 @@ namespace UI.Forms
                     {
                         taxType = 'E';
                     }
-                    productsGridView.Rows.Add(code, description, subCategory, quantity, price, paymentAmount, discount, taxType, taxes, productModel.idProduct);
+                    productsGridView.Rows.Add(code, description, subCategory, quantity, price, paymentAmount, discount, taxType, taxes, productModel.idProduct, 0);
                 }
                 ModifyProductDetails();
                 CalculateInvoiceDetails();

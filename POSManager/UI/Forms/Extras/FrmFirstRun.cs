@@ -125,7 +125,7 @@ namespace UI.Forms.Extras
                             {
                                 if (!string.IsNullOrEmpty(telephoneTextBox.Text))
                                 {
-                                    if (BusinessManagement.InsertBusiness(fantasyNameTextBox.Text, societyNameTextBox.Text, juridicIdTextBox.Text, 0, telephoneTextBox.Text, ImageManagement.ImageToByte(ImageManagement.TemporaryImage(pictureBox1.Image))))
+                                    if (BusinessManagement.InsertBusiness(fantasyNameTextBox.Text, societyNameTextBox.Text, juridicIdTextBox.Text, 1, telephoneTextBox.Text, ImageManagement.ImageToByte(ImageManagement.TemporaryImage(pictureBox1.Image))))
                                     {
                                         startUpAdvancedWizard.NextButtonEnabled = true;
                                         startUpAdvancedWizard.FinishButtonEnabled = true;

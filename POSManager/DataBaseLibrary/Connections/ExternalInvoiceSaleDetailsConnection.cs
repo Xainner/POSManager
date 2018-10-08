@@ -43,7 +43,7 @@ namespace DataBaseLibrary.Connections
                 {
                     using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                     {
-                        cnn.Query("INSERT detailexternalinvoicesell (IdClient, idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDepost, totalDiscount, subTotal, TOtal) VALUES (@IdClient, @idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDepost, @totalDiscount, @subTotal, @TOtal)");
+                        cnn.Execute("INSERT detailexternalinvoicesell (IdClient, idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDeposit, totalDiscount, subTotal, TOtal) VALUES (@IdClient, @idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDeposit, @totalDiscount, @subTotal, @Total)", externalInvoiceSaleDetailsModel);
                         InsertProductsXInvoice(productsIds);
                         return true;
                     }
@@ -51,7 +51,7 @@ namespace DataBaseLibrary.Connections
                 {
                     using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                     {
-                        cnn.Query("INSERT detailexternalinvoicesell (idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDepost, totalDiscount, subTotal, TOtal) VALUES (@idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDepost, @totalDiscount, @subTotal, @TOtal)");
+                        cnn.Execute("INSERT detailexternalinvoicesell (idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDeposit, totalDiscount, subTotal, TOtal) VALUES (@idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDeposit, @totalDiscount, @subTotal, @Total)", externalInvoiceSaleDetailsModel);
                         InsertProductsXInvoice(productsIds);
                         return true;
                     }
@@ -78,7 +78,7 @@ namespace DataBaseLibrary.Connections
             
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    cnn.Query("INSERT externalinvoicesell (Product_idProduct, idDetailExternalInvoiceSell) VALUES (@Product_idProduct, @idDetailExternalInvoiceSell)", productsXInvoiceModel);
+                    cnn.Execute("INSERT externalinvoicesell (Product_idProduct, idDetailExternalInvoiceSell) VALUES (@Product_idProduct, @idDetailExternalInvoiceSell)", productsXInvoiceModel);
                 }
             }
         }

@@ -17,5 +17,25 @@ namespace UI.UserControls
         {
             InitializeComponent();
         }
+
+        private void createButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
