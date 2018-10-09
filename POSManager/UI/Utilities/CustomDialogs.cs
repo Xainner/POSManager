@@ -10,20 +10,20 @@ namespace UI.Utilities
 {
     public static class CustomDialogs
     {
-        public static DialogResult SearchClient()
+        public static DialogResult SearchClient(int frm)
         {
             DialogResult dialogResult = DialogResult.None;
-            using (FrmSearchClient frmSearchClient = new FrmSearchClient())
+            using (FrmSearchClient frmSearchClient = new FrmSearchClient(frm))
             {
                 dialogResult = frmSearchClient.ShowDialog();
             }
             return dialogResult;
         }
 
-        public static DialogResult SearchEmployee()
+        public static DialogResult SearchEmployee(int frm)
         {
             DialogResult dialogResult = DialogResult.None;
-            using (FrmSearchEmployee frmSearchEmployee = new FrmSearchEmployee())
+            using (FrmSearchEmployee frmSearchEmployee = new FrmSearchEmployee(frm))
             {
                 dialogResult = frmSearchEmployee.ShowDialog();
             }
