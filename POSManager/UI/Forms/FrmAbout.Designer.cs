@@ -33,9 +33,10 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.productNameLabel = new MetroFramework.Controls.MetroLabel();
+            this.productKeyLabel = new MetroFramework.Controls.MetroLabel();
+            this.licenseTypeLabel = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -84,15 +85,6 @@
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Windows icons by Icons8";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(345, 63);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(278, 246);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
@@ -102,13 +94,42 @@
             this.metroLabel5.TabIndex = 4;
             this.metroLabel5.Text = "Versión 2.0 “Goku”";
             // 
+            // productNameLabel
+            // 
+            this.productNameLabel.AutoSize = true;
+            this.productNameLabel.Location = new System.Drawing.Point(369, 114);
+            this.productNameLabel.Name = "productNameLabel";
+            this.productNameLabel.Size = new System.Drawing.Size(83, 19);
+            this.productNameLabel.TabIndex = 5;
+            this.productNameLabel.Text = "metroLabel6";
+            // 
+            // productKeyLabel
+            // 
+            this.productKeyLabel.AutoSize = true;
+            this.productKeyLabel.Location = new System.Drawing.Point(369, 142);
+            this.productKeyLabel.Name = "productKeyLabel";
+            this.productKeyLabel.Size = new System.Drawing.Size(83, 19);
+            this.productKeyLabel.TabIndex = 5;
+            this.productKeyLabel.Text = "metroLabel6";
+            // 
+            // licenseTypeLabel
+            // 
+            this.licenseTypeLabel.AutoSize = true;
+            this.licenseTypeLabel.Location = new System.Drawing.Point(369, 171);
+            this.licenseTypeLabel.Name = "licenseTypeLabel";
+            this.licenseTypeLabel.Size = new System.Drawing.Size(83, 19);
+            this.licenseTypeLabel.TabIndex = 5;
+            this.licenseTypeLabel.Text = "metroLabel6";
+            // 
             // FrmAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(646, 332);
+            this.Controls.Add(this.licenseTypeLabel);
+            this.Controls.Add(this.productKeyLabel);
+            this.Controls.Add(this.productNameLabel);
             this.Controls.Add(this.metroLabel5);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel3);
@@ -116,7 +137,7 @@
             this.Controls.Add(this.metroLabel1);
             this.Name = "FrmAbout";
             this.Text = "Acerca de la aplicación";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.FrmAbout_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,7 +150,9 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroLabel productNameLabel;
+        private MetroFramework.Controls.MetroLabel productKeyLabel;
+        private MetroFramework.Controls.MetroLabel licenseTypeLabel;
     }
 }

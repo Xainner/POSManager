@@ -37,6 +37,9 @@
     <Reference Include="AdvancedWizard, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f78a146ea70566cc, processorArchitecture=MSIL">
       <HintPath>..\packages\AdvancedWizard.4.0.0.0\lib\AdvancedWizard.dll</HintPath>
     </Reference>
+    <Reference Include="AeroWizard, Version=2.1.11.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.1.11\lib\net452\AeroWizard.dll</HintPath>
+    </Reference>
     <Reference Include="FoxLearn.License, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Old\FoxLearn.License.dll</HintPath>
