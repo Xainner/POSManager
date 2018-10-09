@@ -63,6 +63,7 @@ namespace UI
             UCDashboard ucDashboard = new UCDashboard(UserModel);
             mainPanel.Controls.Add(ucDashboard);
             userNameLabel.Text = UserModel.UserName;
+            toolStripStatusLabel1.Text = "Estás en el Dashboard";
         }
 
         private void FrmMain_Leave(object sender, EventArgs e)
@@ -74,6 +75,7 @@ namespace UI
         {
             mainPanel.Controls["ucDashboard"].BringToFront();
             goBackLink.Visible = false;
+            toolStripStatusLabel1.Text = "Estás en el Dashboard";
         }
     }
 }

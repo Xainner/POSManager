@@ -31,7 +31,7 @@ namespace UI.Forms
                 KeyValuesClass keyValuesClass = new KeyValuesClass();
                 if (keyManager.DisassembleKey(productKey, ref keyValuesClass))
                 {
-                    productKeyLabel.Text = "MiFacturador";
+                    productNameLabel.Text = "MiFacturador";
                     productKeyLabel.Text = productKey;
                     licenseTypeLabel.Text = "Completa";
                 }
