@@ -180,5 +180,11 @@ namespace UI.UserControls
             FrmMain.Instance.Dispose();
             frmLogin.Show();
         }
+
+        private void offsetSaleTile_Click(object sender, EventArgs e)
+        {
+            FrmSelectOffset frmSelectOffset = new FrmSelectOffset();
+            frmSelectOffset.Show();
+        }
     }
 }

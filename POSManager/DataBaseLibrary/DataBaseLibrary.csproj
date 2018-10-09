@@ -65,6 +65,7 @@
     <Compile Include="Connections\EmployeeConnection.cs" />
     <Compile Include="Connections\ExternalInvoiceSaleDetailsConnection.cs" />
     <Compile Include="Connections\KeyConnection.cs" />
+    <Compile Include="Connections\OffsetDetailsConnection.cs" />
     <Compile Include="Connections\PositionConnection.cs" />
     <Compile Include="Connections\ProductConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

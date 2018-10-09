@@ -286,7 +286,7 @@ namespace UI.Forms
 
         private void employeeTextBox_ButtonClick(object sender, EventArgs e)
         {
-            if (CustomDialogs.SearchEmployee() == DialogResult.OK)
+            if (CustomDialogs.SearchEmployee(0) == DialogResult.OK)
             {
                 employeeTextBox.Text = $" { EmployeeModel.Name } { EmployeeModel.Lastname}";
             }
@@ -294,7 +294,7 @@ namespace UI.Forms
 
         private void clientTextBox_ButtonClick(object sender, EventArgs e)
         {
-            if (CustomDialogs.SearchClient() == DialogResult.OK)
+            if (CustomDialogs.SearchClient(0) == DialogResult.OK)
             {
                 clientTextBox.Text = $" { ClientModel.Name } { ClientModel.Lastname}";
             }

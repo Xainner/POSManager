@@ -40,6 +40,7 @@
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.logOutTile = new MetroFramework.Controls.MetroTile();
             this.brandsTile = new MetroFramework.Controls.MetroTile();
+            this.offsetSaleTile = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // positionsAndSalariesTile
@@ -221,6 +222,21 @@
             this.brandsTile.UseTileImage = true;
             this.brandsTile.Click += new System.EventHandler(this.brandTile_Click);
             // 
+            // offsetSaleTile
+            // 
+            this.offsetSaleTile.ActiveControl = null;
+            this.offsetSaleTile.Location = new System.Drawing.Point(423, 277);
+            this.offsetSaleTile.Name = "offsetSaleTile";
+            this.offsetSaleTile.Size = new System.Drawing.Size(134, 131);
+            this.offsetSaleTile.TabIndex = 1;
+            this.offsetSaleTile.Text = "Factura Apartado";
+            this.offsetSaleTile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.offsetSaleTile.TileImage = global::UI.Properties.Resources.Bill_56px;
+            this.offsetSaleTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.offsetSaleTile.UseSelectable = true;
+            this.offsetSaleTile.UseTileImage = true;
+            this.offsetSaleTile.Click += new System.EventHandler(this.offsetSaleTile_Click);
+            // 
             // UCDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,6 +246,7 @@
             this.Controls.Add(this.businessTile);
             this.Controls.Add(this.employeesTile);
             this.Controls.Add(this.productsTile);
+            this.Controls.Add(this.offsetSaleTile);
             this.Controls.Add(this.invoiceSaleTile);
             this.Controls.Add(this.clientsTile);
             this.Controls.Add(this.aboutTile);
@@ -258,5 +275,6 @@
         private MetroFramework.Controls.MetroTile productsTile;
         private MetroFramework.Controls.MetroTile aboutTile;
         private MetroFramework.Controls.MetroTile userTile;
+        private MetroFramework.Controls.MetroTile offsetSaleTile;
     }
 }

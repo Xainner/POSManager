@@ -1,6 +1,6 @@
 ﻿namespace UI.Forms
 {
-    partial class FrmInvoiceSale
+    partial class FrmNewOffset
     {
         /// <summary>
         /// Required designer variable.
@@ -32,30 +32,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.productsGridView = new MetroFramework.Controls.MetroGrid();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.changeButton = new MetroFramework.Controls.MetroButton();
-            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.clearButton = new MetroFramework.Controls.MetroButton();
+            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
-            this.currentTimeTimer = new System.Windows.Forms.Timer(this.components);
-            this.reloadLatestInvoiceNumber = new System.Windows.Forms.Timer(this.components);
-            this.generateSaleInvoiceTile = new MetroFramework.Controls.MetroTile();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.changeButton = new MetroFramework.Controls.MetroButton();
+            this.addOffsetTile = new MetroFramework.Controls.MetroTile();
             this.taxesTextBox = new MetroFramework.Controls.MetroTextBox();
             this.subTotalTextBox = new MetroFramework.Controls.MetroTextBox();
             this.discountTextBox = new MetroFramework.Controls.MetroTextBox();
@@ -63,153 +46,74 @@
             this.totalTextBox = new MetroFramework.Controls.MetroTextBox();
             this.creditAmountTextBox = new MetroFramework.Controls.MetroTextBox();
             this.cashAmountTextBox = new MetroFramework.Controls.MetroTextBox();
-            this.codeTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.productsGridView = new MetroFramework.Controls.MetroGrid();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.endDateTime = new MetroFramework.Controls.MetroDateTime();
+            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.employeeTextBox = new MetroFramework.Controls.MetroTextBox();
             this.clientTextBox = new MetroFramework.Controls.MetroTextBox();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.codeTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.currentTimeTimer = new System.Windows.Forms.Timer(this.components);
+            this.reloadLatestInvoiceNumber = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // clearButton
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.White;
-            this.groupBox1.Controls.Add(this.metroComboBox1);
-            this.groupBox1.Controls.Add(this.metroLabel8);
-            this.groupBox1.Controls.Add(this.employeeTextBox);
-            this.groupBox1.Controls.Add(this.clientTextBox);
-            this.groupBox1.Controls.Add(this.metroLabel3);
-            this.groupBox1.Controls.Add(this.metroLabel4);
-            this.groupBox1.Controls.Add(this.metroLabel2);
-            this.groupBox1.Controls.Add(this.metroLabel1);
-            this.groupBox1.Location = new System.Drawing.Point(23, 63);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(876, 99);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Detalles de la Factura";
+            this.clearButton.Location = new System.Drawing.Point(810, 620);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(89, 23);
+            this.clearButton.TabIndex = 23;
+            this.clearButton.Text = "Limpiar";
+            this.clearButton.UseSelectable = true;
             // 
-            // metroComboBox1
+            // metroLabel14
             // 
-            this.metroComboBox1.FormattingEnabled = true;
-            this.metroComboBox1.ItemHeight = 23;
-            this.metroComboBox1.Items.AddRange(new object[] {
-            "Colón",
-            "Dolar",
-            "Euro"});
-            this.metroComboBox1.Location = new System.Drawing.Point(486, 22);
-            this.metroComboBox1.Name = "metroComboBox1";
-            this.metroComboBox1.Size = new System.Drawing.Size(85, 29);
-            this.metroComboBox1.TabIndex = 4;
-            this.metroComboBox1.UseSelectable = true;
+            this.metroLabel14.AutoSize = true;
+            this.metroLabel14.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel14.Location = new System.Drawing.Point(697, 25);
+            this.metroLabel14.Name = "metroLabel14";
+            this.metroLabel14.Size = new System.Drawing.Size(113, 25);
+            this.metroLabel14.TabIndex = 22;
+            this.metroLabel14.Text = "metroLabel14";
             // 
-            // metroLabel8
+            // statusStrip1
             // 
-            this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(373, 28);
-            this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(107, 19);
-            this.metroLabel8.TabIndex = 3;
-            this.metroLabel8.Text = "Tipo de Moneda";
+            this.statusStrip1.BackColor = System.Drawing.Color.White;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(20, 627);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(882, 22);
+            this.statusStrip1.TabIndex = 21;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // metroLabel3
+            // toolStripStatusLabel1
             // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel3.Location = new System.Drawing.Point(629, 38);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(158, 25);
-            this.metroLabel3.TabIndex = 1;
-            this.metroLabel3.Text = "Número de Factura";
-            // 
-            // metroLabel4
-            // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel4.Location = new System.Drawing.Point(815, 38);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(21, 25);
-            this.metroLabel4.TabIndex = 1;
-            this.metroLabel4.Text = "0";
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(6, 62);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(49, 19);
-            this.metroLabel2.TabIndex = 0;
-            this.metroLabel2.Text = "Cliente";
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(6, 28);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(66, 19);
-            this.metroLabel1.TabIndex = 0;
-            this.metroLabel1.Text = "Vendedor";
-            // 
-            // productsGridView
-            // 
-            this.productsGridView.AllowUserToAddRows = false;
-            this.productsGridView.AllowUserToDeleteRows = false;
-            this.productsGridView.AllowUserToResizeRows = false;
-            this.productsGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.productsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.productsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.productsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.productsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.productsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.productsGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.productsGridView.EnableHeadersVisualStyles = false;
-            this.productsGridView.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.productsGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.productsGridView.Location = new System.Drawing.Point(23, 197);
-            this.productsGridView.Name = "productsGridView";
-            this.productsGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.productsGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.productsGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.productsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.productsGridView.Size = new System.Drawing.Size(876, 206);
-            this.productsGridView.TabIndex = 4;
-            this.productsGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.productsGridView_CellEndEdit);
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(23, 168);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(133, 19);
-            this.metroLabel5.TabIndex = 3;
-            this.metroLabel5.Text = "Código del Producto";
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.changeButton);
-            this.groupBox2.Controls.Add(this.generateSaleInvoiceTile);
+            this.groupBox2.Controls.Add(this.addOffsetTile);
             this.groupBox2.Controls.Add(this.taxesTextBox);
             this.groupBox2.Controls.Add(this.subTotalTextBox);
             this.groupBox2.Controls.Add(this.discountTextBox);
@@ -223,10 +127,10 @@
             this.groupBox2.Controls.Add(this.metroLabel10);
             this.groupBox2.Controls.Add(this.metroLabel9);
             this.groupBox2.Controls.Add(this.metroLabel6);
-            this.groupBox2.Location = new System.Drawing.Point(23, 420);
+            this.groupBox2.Location = new System.Drawing.Point(23, 410);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(876, 204);
-            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Información de Pago";
             // 
@@ -236,125 +140,24 @@
             this.changeButton.Name = "changeButton";
             this.changeButton.Size = new System.Drawing.Size(113, 39);
             this.changeButton.TabIndex = 15;
-            this.changeButton.Text = "Calcular cambio";
+            this.changeButton.Text = "Calcular Saldo";
             this.changeButton.UseSelectable = true;
             this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
             // 
-            // metroLabel11
+            // addOffsetTile
             // 
-            this.metroLabel11.AutoSize = true;
-            this.metroLabel11.Location = new System.Drawing.Point(386, 68);
-            this.metroLabel11.Name = "metroLabel11";
-            this.metroLabel11.Size = new System.Drawing.Size(58, 19);
-            this.metroLabel11.TabIndex = 0;
-            this.metroLabel11.Text = "SubTotal";
-            // 
-            // metroLabel7
-            // 
-            this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(6, 92);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(104, 19);
-            this.metroLabel7.TabIndex = 0;
-            this.metroLabel7.Text = "Monto a crédito";
-            // 
-            // metroLabel12
-            // 
-            this.metroLabel12.AutoSize = true;
-            this.metroLabel12.Location = new System.Drawing.Point(386, 159);
-            this.metroLabel12.Name = "metroLabel12";
-            this.metroLabel12.Size = new System.Drawing.Size(36, 19);
-            this.metroLabel12.TabIndex = 0;
-            this.metroLabel12.Text = "Total";
-            // 
-            // metroLabel10
-            // 
-            this.metroLabel10.AutoSize = true;
-            this.metroLabel10.Location = new System.Drawing.Point(386, 114);
-            this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(27, 19);
-            this.metroLabel10.TabIndex = 0;
-            this.metroLabel10.Text = "I.V.I";
-            // 
-            // metroLabel9
-            // 
-            this.metroLabel9.AutoSize = true;
-            this.metroLabel9.Location = new System.Drawing.Point(386, 23);
-            this.metroLabel9.Name = "metroLabel9";
-            this.metroLabel9.Size = new System.Drawing.Size(69, 19);
-            this.metroLabel9.TabIndex = 0;
-            this.metroLabel9.Text = "Descuento";
-            // 
-            // metroLabel6
-            // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(6, 34);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(115, 19);
-            this.metroLabel6.TabIndex = 0;
-            this.metroLabel6.Text = "Monto en Efectivo";
-            // 
-            // clearButton
-            // 
-            this.clearButton.Location = new System.Drawing.Point(810, 630);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(89, 23);
-            this.clearButton.TabIndex = 15;
-            this.clearButton.Text = "Limpiar";
-            this.clearButton.UseSelectable = true;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.Color.White;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(20, 627);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(882, 22);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // metroLabel14
-            // 
-            this.metroLabel14.AutoSize = true;
-            this.metroLabel14.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel14.Location = new System.Drawing.Point(697, 35);
-            this.metroLabel14.Name = "metroLabel14";
-            this.metroLabel14.Size = new System.Drawing.Size(113, 25);
-            this.metroLabel14.TabIndex = 6;
-            this.metroLabel14.Text = "metroLabel14";
-            // 
-            // currentTimeTimer
-            // 
-            this.currentTimeTimer.Interval = 1000;
-            this.currentTimeTimer.Tick += new System.EventHandler(this.currentTimeTimer_Tick);
-            // 
-            // reloadLatestInvoiceNumber
-            // 
-            this.reloadLatestInvoiceNumber.Enabled = true;
-            this.reloadLatestInvoiceNumber.Interval = 5000;
-            this.reloadLatestInvoiceNumber.Tick += new System.EventHandler(this.reloadLatestInvoiceNumber_Tick);
-            // 
-            // generateSaleInvoiceTile
-            // 
-            this.generateSaleInvoiceTile.ActiveControl = null;
-            this.generateSaleInvoiceTile.Location = new System.Drawing.Point(714, 34);
-            this.generateSaleInvoiceTile.Name = "generateSaleInvoiceTile";
-            this.generateSaleInvoiceTile.Size = new System.Drawing.Size(136, 148);
-            this.generateSaleInvoiceTile.TabIndex = 14;
-            this.generateSaleInvoiceTile.Text = "Facturar";
-            this.generateSaleInvoiceTile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.generateSaleInvoiceTile.TileImage = global::UI.Properties.Resources.Bill_56px;
-            this.generateSaleInvoiceTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.generateSaleInvoiceTile.UseSelectable = true;
-            this.generateSaleInvoiceTile.UseTileImage = true;
-            this.generateSaleInvoiceTile.Click += new System.EventHandler(this.generateSaleInvoiceTile_Click);
+            this.addOffsetTile.ActiveControl = null;
+            this.addOffsetTile.Location = new System.Drawing.Point(714, 34);
+            this.addOffsetTile.Name = "addOffsetTile";
+            this.addOffsetTile.Size = new System.Drawing.Size(136, 148);
+            this.addOffsetTile.TabIndex = 14;
+            this.addOffsetTile.Text = "Agregar Apartado";
+            this.addOffsetTile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.addOffsetTile.TileImage = global::UI.Properties.Resources.Bill_56px;
+            this.addOffsetTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.addOffsetTile.UseSelectable = true;
+            this.addOffsetTile.UseTileImage = true;
+            this.addOffsetTile.Click += new System.EventHandler(this.addOffsetTile_Click);
             // 
             // taxesTextBox
             // 
@@ -609,40 +412,175 @@
             this.cashAmountTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.cashAmountTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cashAmountTextBox_KeyUp);
             // 
-            // codeTextBox
+            // metroLabel11
             // 
+            this.metroLabel11.AutoSize = true;
+            this.metroLabel11.Location = new System.Drawing.Point(386, 68);
+            this.metroLabel11.Name = "metroLabel11";
+            this.metroLabel11.Size = new System.Drawing.Size(58, 19);
+            this.metroLabel11.TabIndex = 0;
+            this.metroLabel11.Text = "SubTotal";
             // 
+            // metroLabel7
             // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(6, 92);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(104, 19);
+            this.metroLabel7.TabIndex = 0;
+            this.metroLabel7.Text = "Monto a crédito";
             // 
-            this.codeTextBox.CustomButton.Image = null;
-            this.codeTextBox.CustomButton.Location = new System.Drawing.Point(194, 1);
-            this.codeTextBox.CustomButton.Name = "";
-            this.codeTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.codeTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.codeTextBox.CustomButton.TabIndex = 1;
-            this.codeTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.codeTextBox.CustomButton.UseSelectable = true;
-            this.codeTextBox.CustomButton.Visible = false;
-            this.codeTextBox.DisplayIcon = true;
-            this.codeTextBox.Icon = global::UI.Properties.Resources.Barcode_16px;
-            this.codeTextBox.Lines = new string[0];
-            this.codeTextBox.Location = new System.Drawing.Point(162, 168);
-            this.codeTextBox.MaxLength = 32767;
-            this.codeTextBox.Name = "codeTextBox";
-            this.codeTextBox.PasswordChar = '\0';
-            this.codeTextBox.PromptText = "Ingrese el código del producto";
-            this.codeTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.codeTextBox.SelectedText = "";
-            this.codeTextBox.SelectionLength = 0;
-            this.codeTextBox.SelectionStart = 0;
-            this.codeTextBox.ShortcutsEnabled = true;
-            this.codeTextBox.Size = new System.Drawing.Size(216, 23);
-            this.codeTextBox.TabIndex = 3;
-            this.codeTextBox.UseSelectable = true;
-            this.codeTextBox.WaterMark = "Ingrese el código del producto";
-            this.codeTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.codeTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.codeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.codeTextBox_KeyUp);
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(386, 159);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(36, 19);
+            this.metroLabel12.TabIndex = 0;
+            this.metroLabel12.Text = "Total";
+            // 
+            // metroLabel10
+            // 
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(386, 114);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(27, 19);
+            this.metroLabel10.TabIndex = 0;
+            this.metroLabel10.Text = "I.V.I";
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.Location = new System.Drawing.Point(386, 23);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(69, 19);
+            this.metroLabel9.TabIndex = 0;
+            this.metroLabel9.Text = "Descuento";
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(6, 34);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(115, 19);
+            this.metroLabel6.TabIndex = 0;
+            this.metroLabel6.Text = "Monto en Efectivo";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(23, 158);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(133, 19);
+            this.metroLabel5.TabIndex = 17;
+            this.metroLabel5.Text = "Código del Producto";
+            // 
+            // productsGridView
+            // 
+            this.productsGridView.AllowUserToAddRows = false;
+            this.productsGridView.AllowUserToDeleteRows = false;
+            this.productsGridView.AllowUserToResizeRows = false;
+            this.productsGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.productsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.productsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.productsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.productsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.productsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.productsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.productsGridView.EnableHeadersVisualStyles = false;
+            this.productsGridView.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.productsGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.productsGridView.Location = new System.Drawing.Point(23, 187);
+            this.productsGridView.Name = "productsGridView";
+            this.productsGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.productsGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.productsGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.productsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.productsGridView.Size = new System.Drawing.Size(876, 206);
+            this.productsGridView.TabIndex = 20;
+            this.productsGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.productsGridView_CellEndEdit);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.endDateTime);
+            this.groupBox1.Controls.Add(this.metroComboBox1);
+            this.groupBox1.Controls.Add(this.metroLabel13);
+            this.groupBox1.Controls.Add(this.metroLabel8);
+            this.groupBox1.Controls.Add(this.employeeTextBox);
+            this.groupBox1.Controls.Add(this.clientTextBox);
+            this.groupBox1.Controls.Add(this.metroLabel3);
+            this.groupBox1.Controls.Add(this.metroLabel4);
+            this.groupBox1.Controls.Add(this.metroLabel2);
+            this.groupBox1.Controls.Add(this.metroLabel1);
+            this.groupBox1.Location = new System.Drawing.Point(23, 53);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(876, 99);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Detalles de la Factura";
+            // 
+            // endDateTime
+            // 
+            this.endDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.endDateTime.Location = new System.Drawing.Point(486, 62);
+            this.endDateTime.MinimumSize = new System.Drawing.Size(0, 29);
+            this.endDateTime.Name = "endDateTime";
+            this.endDateTime.Size = new System.Drawing.Size(119, 29);
+            this.endDateTime.TabIndex = 5;
+            // 
+            // metroComboBox1
+            // 
+            this.metroComboBox1.FormattingEnabled = true;
+            this.metroComboBox1.ItemHeight = 23;
+            this.metroComboBox1.Items.AddRange(new object[] {
+            "Colón",
+            "Dolar",
+            "Euro"});
+            this.metroComboBox1.Location = new System.Drawing.Point(486, 22);
+            this.metroComboBox1.Name = "metroComboBox1";
+            this.metroComboBox1.Size = new System.Drawing.Size(119, 29);
+            this.metroComboBox1.TabIndex = 4;
+            this.metroComboBox1.UseSelectable = true;
+            // 
+            // metroLabel13
+            // 
+            this.metroLabel13.AutoSize = true;
+            this.metroLabel13.Location = new System.Drawing.Point(373, 62);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(86, 19);
+            this.metroLabel13.TabIndex = 3;
+            this.metroLabel13.Text = "Fecha Expira:";
+            // 
+            // metroLabel8
+            // 
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(373, 28);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(107, 19);
+            this.metroLabel8.TabIndex = 3;
+            this.metroLabel8.Text = "Tipo de Moneda";
             // 
             // employeeTextBox
             // 
@@ -714,7 +652,88 @@
             this.clientTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.clientTextBox.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.clientTextBox_ButtonClick);
             // 
-            // FrmInvoiceSale
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel3.Location = new System.Drawing.Point(629, 28);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(158, 25);
+            this.metroLabel3.TabIndex = 1;
+            this.metroLabel3.Text = "Número de Factura";
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel4.Location = new System.Drawing.Point(815, 28);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(21, 25);
+            this.metroLabel4.TabIndex = 1;
+            this.metroLabel4.Text = "0";
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(6, 62);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(49, 19);
+            this.metroLabel2.TabIndex = 0;
+            this.metroLabel2.Text = "Cliente";
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(6, 28);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(66, 19);
+            this.metroLabel1.TabIndex = 0;
+            this.metroLabel1.Text = "Vendedor";
+            // 
+            // codeTextBox
+            // 
+            // 
+            // 
+            // 
+            this.codeTextBox.CustomButton.Image = null;
+            this.codeTextBox.CustomButton.Location = new System.Drawing.Point(194, 1);
+            this.codeTextBox.CustomButton.Name = "";
+            this.codeTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.codeTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.codeTextBox.CustomButton.TabIndex = 1;
+            this.codeTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.codeTextBox.CustomButton.UseSelectable = true;
+            this.codeTextBox.CustomButton.Visible = false;
+            this.codeTextBox.DisplayIcon = true;
+            this.codeTextBox.Icon = global::UI.Properties.Resources.Barcode_16px;
+            this.codeTextBox.Lines = new string[0];
+            this.codeTextBox.Location = new System.Drawing.Point(162, 158);
+            this.codeTextBox.MaxLength = 32767;
+            this.codeTextBox.Name = "codeTextBox";
+            this.codeTextBox.PasswordChar = '\0';
+            this.codeTextBox.PromptText = "Ingrese el código del producto";
+            this.codeTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.codeTextBox.SelectedText = "";
+            this.codeTextBox.SelectionLength = 0;
+            this.codeTextBox.SelectionStart = 0;
+            this.codeTextBox.ShortcutsEnabled = true;
+            this.codeTextBox.Size = new System.Drawing.Size(216, 23);
+            this.codeTextBox.TabIndex = 18;
+            this.codeTextBox.UseSelectable = true;
+            this.codeTextBox.WaterMark = "Ingrese el código del producto";
+            this.codeTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.codeTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.codeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.codeTextBox_KeyUp);
+            // 
+            // currentTimeTimer
+            // 
+            this.currentTimeTimer.Tick += new System.EventHandler(this.currentTimeTimer_Tick);
+            // 
+            // reloadLatestInvoiceNumber
+            // 
+            this.reloadLatestInvoiceNumber.Tick += new System.EventHandler(this.reloadLatestInvoiceNumber_Tick);
+            // 
+            // FrmNewOffset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -727,17 +746,17 @@
             this.Controls.Add(this.codeTextBox);
             this.Controls.Add(this.productsGridView);
             this.Controls.Add(this.groupBox1);
-            this.Name = "FrmInvoiceSale";
-            this.Text = "Factura de Venta";
-            this.Load += new System.EventHandler(this.FrmInvoiceSale_Load);
-            this.Leave += new System.EventHandler(this.FrmInvoiceSale_Leave);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.Name = "FrmNewOffset";
+            this.Text = "Factura de Apartado";
+            this.Load += new System.EventHandler(this.FrmNewOffset_Load);
+            this.Leave += new System.EventHandler(this.FrmNewOffset_Leave);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -745,21 +764,13 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroTextBox clientTextBox;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroTextBox employeeTextBox;
-        private MetroFramework.Controls.MetroGrid productsGridView;
-        private MetroFramework.Controls.MetroTextBox codeTextBox;
-        private MetroFramework.Controls.MetroLabel metroLabel5;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private MetroFramework.Controls.MetroButton clearButton;
+        private MetroFramework.Controls.MetroLabel metroLabel14;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private MetroFramework.Controls.MetroLabel metroLabel7;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private MetroFramework.Controls.MetroButton changeButton;
+        private MetroFramework.Controls.MetroTile addOffsetTile;
         private MetroFramework.Controls.MetroTextBox taxesTextBox;
         private MetroFramework.Controls.MetroTextBox subTotalTextBox;
         private MetroFramework.Controls.MetroTextBox discountTextBox;
@@ -768,16 +779,26 @@
         private MetroFramework.Controls.MetroTextBox creditAmountTextBox;
         private MetroFramework.Controls.MetroTextBox cashAmountTextBox;
         private MetroFramework.Controls.MetroLabel metroLabel11;
+        private MetroFramework.Controls.MetroLabel metroLabel7;
         private MetroFramework.Controls.MetroLabel metroLabel12;
         private MetroFramework.Controls.MetroLabel metroLabel10;
         private MetroFramework.Controls.MetroLabel metroLabel9;
-        private MetroFramework.Controls.MetroButton clearButton;
-        private MetroFramework.Controls.MetroTile generateSaleInvoiceTile;
-        private MetroFramework.Controls.MetroLabel metroLabel14;
-        private MetroFramework.Controls.MetroButton changeButton;
-        private System.Windows.Forms.Timer currentTimeTimer;
-        private System.Windows.Forms.Timer reloadLatestInvoiceNumber;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroTextBox codeTextBox;
+        private MetroFramework.Controls.MetroGrid productsGridView;
+        private System.Windows.Forms.GroupBox groupBox1;
         private MetroFramework.Controls.MetroComboBox metroComboBox1;
         private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroTextBox employeeTextBox;
+        private MetroFramework.Controls.MetroTextBox clientTextBox;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private System.Windows.Forms.Timer currentTimeTimer;
+        private System.Windows.Forms.Timer reloadLatestInvoiceNumber;
+        private MetroFramework.Controls.MetroDateTime endDateTime;
+        private MetroFramework.Controls.MetroLabel metroLabel13;
     }
 }

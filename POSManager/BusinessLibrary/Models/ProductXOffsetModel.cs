@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLibrary.Models
 {
-    public class ProductsXInvoiceModel
+    public class ProductXOffsetModel
     {
-        public int IdDetailExternalInvoiceSell { get; set; }
-        public int Product_idProduct { get; set; }
+        public int IdDetailOffsetInvoice { get; set; }
+        public int IdProduct { get; set; }
         public int Quantity { get; set; }
     }
 }

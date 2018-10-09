@@ -17,9 +17,11 @@ namespace UI.Forms.SearchForms
     public partial class FrmSearchEmployee : MetroForm
     {
         List<EmployeeModel> employeeModels;
+        int frmNew;
 
-        public FrmSearchEmployee()
+        public FrmSearchEmployee(int frm)
         {
+            frmNew = frm;
             InitializeComponent();
             toolStripStatusLabel1.Text = "Búsqueda rápida de clientes.";
             employeesGridView.DataSource = null;
@@ -27,14 +29,30 @@ namespace UI.Forms.SearchForms
 
         private void getEmployeeButton_Click(object sender, EventArgs e)
         {
-            if (employeesGridView.DataSource != null)
+            switch (frmNew)
             {
-                EmployeeModel employeeModel = EmployeeManagement.SelectEmployeeById(int.Parse(employeesGridView.CurrentRow.Cells[0].Value.ToString()));
-                FrmInvoiceSale.EmployeeModel = employeeModel;
-            }
-            else
-            {
-                MetroMessageBox.Show(this, "Debe selecccionar un empleado antes de poder envíarlo.", "Empleado incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                case 0:
+                    if (employeesGridView.DataSource != null)
+                    {
+                        EmployeeModel employeeModel = EmployeeManagement.SelectEmployeeById(int.Parse(employeesGridView.CurrentRow.Cells[0].Value.ToString()));
+                        FrmInvoiceSale.EmployeeModel = employeeModel;
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Debe selecccionar un empleado antes de poder envíarlo.", "Empleado incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    break;
+                case 1:
+                    if (employeesGridView.DataSource != null)
+                    {
+                        EmployeeModel employeeModel = EmployeeManagement.SelectEmployeeById(int.Parse(employeesGridView.CurrentRow.Cells[0].Value.ToString()));
+                        FrmNewOffset.EmployeeModel = employeeModel;
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Debe selecccionar un empleado antes de poder envíarlo.", "Empleado incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    break;
             }
         }
 

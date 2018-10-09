@@ -18,9 +18,11 @@ namespace UI.Forms.SearchForms
     public partial class FrmSearchClient : MetroForm
     {
         List<ClientModel> clientModels;
+        int frmNew;
 
-        public FrmSearchClient()
+        public FrmSearchClient(int frm)
         {
+            frmNew = frm;
             InitializeComponent();
             toolStripStatusLabel1.Text = "Búsqueda rápida de clientes.";
             clientsGridView.DataSource = null;
@@ -28,13 +30,30 @@ namespace UI.Forms.SearchForms
 
         private void getClientButton_Click(object sender, EventArgs e)
         {
-            if (clientsGridView.DataSource != null)
+            switch (frmNew)
             {
-                ClientModel clientModel = ClientManagement.SelectClientById(int.Parse(clientsGridView.CurrentRow.Cells[0].Value.ToString()));
-                FrmInvoiceSale.ClientModel = clientModel;
-            } else
-            {
-                MetroMessageBox.Show(this, "Debe selecccionar un cliente antes de poder envíarlo.", "Cliente incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                case 0:
+                    if (clientsGridView.DataSource != null)
+                    {
+                        ClientModel clientModel = ClientManagement.SelectClientById(int.Parse(clientsGridView.CurrentRow.Cells[0].Value.ToString()));
+                        FrmInvoiceSale.ClientModel = clientModel;
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Debe selecccionar un cliente antes de poder envíarlo.", "Cliente incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    break;
+                case 1:
+                    if (clientsGridView.DataSource != null)
+                    {
+                        ClientModel clientModel = ClientManagement.SelectClientById(int.Parse(clientsGridView.CurrentRow.Cells[0].Value.ToString()));
+                        FrmNewOffset.ClientModel = clientModel;
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Debe selecccionar un cliente antes de poder envíarlo.", "Cliente incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    break;
             }
         }
 

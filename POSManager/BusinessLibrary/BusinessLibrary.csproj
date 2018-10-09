@@ -48,9 +48,11 @@
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\ExternalInvoiceSaleDetailsModel.cs" />
     <Compile Include="Models\KeyModel.cs" />
+    <Compile Include="Models\OffSetDetailsModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductsXInvoiceModel.cs" />
+    <Compile Include="Models\ProductXOffsetModel.cs" />
     <Compile Include="Models\RolesModel.cs" />
     <Compile Include="Models\SalaryModel.cs" />
     <Compile Include="Models\SubCategoryModel.cs" />
