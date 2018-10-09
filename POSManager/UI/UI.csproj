@@ -154,6 +154,12 @@
     <Compile Include="UserControls\UCBusiness.Designer.cs">
       <DependentUpon>UCBusiness.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCEmployees.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCEmployees.Designer.cs">
+      <DependentUpon>UCEmployees.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCClients.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,11 +172,11 @@
     <Compile Include="UserControls\UCDashboard.Designer.cs">
       <DependentUpon>UCDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UCEmployees.cs">
+    <Compile Include="UserControls\UCEmployeesOld.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\UCEmployees.Designer.cs">
-      <DependentUpon>UCEmployees.cs</DependentUpon>
+    <Compile Include="UserControls\UCEmployeesOld.Designer.cs">
+      <DependentUpon>UCEmployeesOld.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCProducts.cs">
       <SubType>UserControl</SubType>
@@ -235,14 +241,17 @@
     <EmbeddedResource Include="UserControls\UCBusiness.resx">
       <DependentUpon>UCBusiness.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCEmployees.resx">
+      <DependentUpon>UCEmployees.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCClients.resx">
       <DependentUpon>UCClients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCDashboard.resx">
       <DependentUpon>UCDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UCEmployees.resx">
-      <DependentUpon>UCEmployees.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\UCEmployeesOld.resx">
+      <DependentUpon>UCEmployeesOld.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCProducts.resx">
       <DependentUpon>UCProducts.cs</DependentUpon>

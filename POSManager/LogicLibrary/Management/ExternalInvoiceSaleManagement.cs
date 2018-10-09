@@ -39,5 +39,57 @@ namespace LogicLibrary.Management
                 throw;
             }
         }
+
+        public static List<ExternalInvoiceSaleDetailsModel> SelectInvoices()
+        {
+            try
+            {
+                return ExternalInvoiceSaleDetailsConnection.SelectInvoices();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static List<ExternalInvoiceSaleDetailsModel> SelectInvoicesByDay(DateTime date)
+        {
+            try
+            {
+                return ExternalInvoiceSaleDetailsConnection.SelectInvoicesByDay(date);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static List<ExternalInvoiceSaleDetailsModel> SelectInvoicesByMonth(DateTime date)
+        {
+            try
+            {
+                return ExternalInvoiceSaleDetailsConnection.SelectInvoicesByMonth(date);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static List<ExternalInvoiceSaleDetailsModel> SelectInvoicesByDate(DateTime start, DateTime end)
+        {
+            try
+            {
+                return ExternalInvoiceSaleDetailsConnection.SelectInvoicesByDate(start, end);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

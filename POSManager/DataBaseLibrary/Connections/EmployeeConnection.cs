@@ -39,7 +39,7 @@ namespace DataBaseLibrary.Connections
             try
             {
                 employeeModel.Name = $"%{ employeeModel.Name }%";
-                employeeModel.LastName = $"%{ employeeModel.LastName }%";
+                employeeModel.Lastname = $"%{ employeeModel.Lastname }%";
                 employeeModel.Identification = $"%{ employeeModel.Identification }%";
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
@@ -93,7 +93,7 @@ namespace DataBaseLibrary.Connections
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    cnn.Execute("INSERT INTO employee (Name, lastName, identificationType, Identification, Email, bornDate) VALUES (@Name, @lastName, @identificationType, @Identification, @Email,  @bornDate)", employeeModel);
+                    cnn.Execute("INSERT INTO employee (Name, lastName, identificationType, Identification, bornDate) VALUES (@Name, @lastName, @identificationType, @Identification,  @bornDate)", employeeModel);
                 }
                 return true;
             }
@@ -109,7 +109,7 @@ namespace DataBaseLibrary.Connections
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    cnn.Execute("UPDATE employee SET Name = @Name, lastName = @lastName, identificationType = @identificationType, Identification = @Identification, Email = @Email, bornDate = @bornDate WHERE idEmployee = @idEmployee", employeeModel);
+                    cnn.Execute("UPDATE employee SET Name = @Name, lastName = @lastName, identificationType = @identificationType, Identification = @Identification, bornDate = @bornDate WHERE idEmployee = @idEmployee", employeeModel);
                     return true;
                 }
             }

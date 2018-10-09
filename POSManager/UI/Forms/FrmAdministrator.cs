@@ -20,6 +20,7 @@ namespace UI.Forms
         //---------GLOBALS---------\\
         List<UserModel> userManagementModels;
         List<UserModel> userRolesModels;
+        List<ExternalInvoiceSaleDetailsModel> invoices;
 
         int id;
 
@@ -37,6 +38,12 @@ namespace UI.Forms
             WireUpUserRolesListBox();
             toolStripStatusLabel1.Text = "Área de usuarios.";
             metroTabControl1.SelectedTab = metroTabPage1;
+            inicioFecha.Enabled = false;
+            metroButton1.Enabled = false;
+            finalFecha.Enabled = false;
+            comboBoxRangos.SelectedIndex = 0;
+            invoices = ExternalInvoiceSaleManagement.SelectInvoices();
+            metroGrid1.DataSource = invoices;
         }
 
         private void FrmAdministrator_Leave(object sender, EventArgs e)
@@ -472,6 +479,46 @@ namespace UI.Forms
             {
                 invoiceSaleCheckBox.Checked = true;
             }
+        }
+
+        private void comboBoxRangos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxRangos.SelectedIndex == 1)
+            {
+                inicioFecha.Enabled = true;
+                finalFecha.Enabled = true;
+                metroButton1.Enabled = true;
+            } else
+            {
+                inicioFecha.Enabled = false;
+                finalFecha.Enabled = false;
+                metroButton1.Enabled = false;
+            }
+            switch (comboBoxRangos.SelectedIndex)
+            {
+                case 0:
+                    invoices = ExternalInvoiceSaleManagement.SelectInvoicesByDay(DateTime.Today);
+                    break;                  
+            }
+            metroGrid1.DataSource = invoices;
+            GetTotal();
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            invoices = ExternalInvoiceSaleManagement.SelectInvoicesByDate(inicioFecha.Value, finalFecha.Value);
+            metroGrid1.DataSource = invoices;
+            GetTotal();
+        }
+
+        private void GetTotal()
+        {
+            decimal total = 0;
+            foreach (DataGridViewRow item in metroGrid1.Rows)
+            {
+                total += decimal.Parse(item.Cells[11].Value.ToString());
+            }
+            totalTextBox.Text = total.ToString("#.##");
         }
     }
 }

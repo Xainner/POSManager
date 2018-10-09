@@ -288,7 +288,7 @@ namespace UI.Forms
         {
             if (CustomDialogs.SearchEmployee() == DialogResult.OK)
             {
-                employeeTextBox.Text = $" { EmployeeModel.Name } { EmployeeModel.LastName}";
+                employeeTextBox.Text = $" { EmployeeModel.Name } { EmployeeModel.Lastname}";
             }
         }
 

@@ -30,7 +30,7 @@ namespace LogicLibrary.Management
                 {
                     Name = value,
                     Identification = value,
-                    LastName = value
+                    Lastname = value
                 };
                 return EmployeeConnection.MultipleValueSearch(employeeModel);
             }
@@ -79,7 +79,7 @@ namespace LogicLibrary.Management
                 EmployeeModel employeeModel = new EmployeeModel()
                 {
                     Name = name,
-                    LastName = lastName,
+                    Lastname = lastName,
                     IdentificationType = idType,
                     Identification = identification,
                     BornDate = bornDate
@@ -100,7 +100,7 @@ namespace LogicLibrary.Management
                 {
                     IdEmployee = id,
                     Name = name,
-                    LastName = lastName,
+                    Lastname = lastName,
                     IdentificationType = idType,
                     Identification = identification,
                     BornDate = bornDate
