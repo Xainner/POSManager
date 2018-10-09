@@ -10,11 +10,11 @@ namespace LogicLibrary.Management
 {
     public class OffsetDetailsManagement
     {
-        public static List<OffSetDetailsModel> SelectAllOffsetDetails()
+        public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
         {
             try
             {
-                return OffsetDetailsConnection.SelectAllOffsetDetails();
+                return OffsetDetailsConnection.SelectAllOffsetDeposit();
             }
             catch (Exception ex)
             {
@@ -22,15 +22,15 @@ namespace LogicLibrary.Management
             }
         }
 
-        public static OffSetDetailsModel SelectOffsetDetailByInvoice(string code)
+        public static DepositXOffsetModel SelectOffsetDetailByInvoice(string code)
         {
             try
             {
-                OffSetDetailsModel offSetDetails = new OffSetDetailsModel()
+                DepositXOffsetModel offSetDetails = new DepositXOffsetModel()
                 {
                     IdDetailOffsetInvoice = int.Parse(code)
                 };
-                return OffsetDetailsConnection.SelectOffsetDetailByInvoice(offSetDetails);
+                return OffsetDetailsConnection.SelectDepositByInvoice(offSetDetails);
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace LogicLibrary.Management
         }
 
         public static bool InsertOffsetInvoiceDetails(int clientId, int employeeId, int businessId, string endDate, string currencyType,
-             decimal cashAmount, decimal cardAmount, decimal discount, decimal subTotal, decimal total, decimal taxes, List<int> productsIds, List<int> quantities)
+             decimal cashAmount, decimal cardAmount, decimal discount, decimal subTotal, decimal total, decimal taxes, decimal deposit, List<int> productsIds, List<int> quantities)
         {
             try
             {
@@ -70,9 +70,27 @@ namespace LogicLibrary.Management
                     Total = total,
                     Taxes = taxes
                 };
-                return OffsetDetailsConnection.InsertExternalInvoiceSaleDetails(offsetDetailsModel, productsIds, quantities);
+                return OffsetDetailsConnection.InsertOffsetDetails(offsetDetailsModel, productsIds, quantities, deposit);
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static bool InsertOffsetDeposit(string id, decimal deposit)
+        {
+            try
+            {
+                DepositXOffsetModel depositXOffset = new DepositXOffsetModel()
+                {
+                    IdDetailOffsetInvoice = int.Parse(id),
+                    Deposit = deposit
+                };
+                return OffsetDetailsConnection.InsertOffsetDeposit(depositXOffset);
+            }
+            catch (Exception)
             {
 
                 throw;

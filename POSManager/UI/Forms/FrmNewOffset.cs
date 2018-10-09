@@ -129,7 +129,7 @@ namespace UI.Forms
             string tax;
             if (dataGridViewRow.Cells[7].Value.ToString().Equals("G"))
             {
-                tax = "0.13";
+                tax = "0,13";
             }
             else
             {
@@ -155,12 +155,12 @@ namespace UI.Forms
 
                 amount = (amount - (amount * (discount / 100)));
 
-                string tax = "0.13";
+                string tax = "0,13";
                 decimal subTotal = amount - (decimal.Parse(tax) * amount);
 
                 decimal taxes = amount - subTotal;
-                dataGridViewRow.Cells[5].Value = amount.ToString("#.##");
-                dataGridViewRow.Cells[8].Value = taxes.ToString("#.##");
+                dataGridViewRow.Cells[5].Value = amount.ToString("#,##");
+                dataGridViewRow.Cells[8].Value = taxes.ToString("#,##");
             }
         }
 
@@ -192,7 +192,7 @@ namespace UI.Forms
 
             if (subTotal != 0)
             {
-                subTotalTextBox.Text = subTotal.ToString("#.##");
+                subTotalTextBox.Text = subTotal.ToString("#,##");
 
             }
             else
@@ -201,7 +201,7 @@ namespace UI.Forms
             }
             if (taxes != 0)
             {
-                taxesTextBox.Text = taxes.ToString("#.##");
+                taxesTextBox.Text = taxes.ToString("#,##");
 
             }
             else
@@ -210,7 +210,7 @@ namespace UI.Forms
             }
             if (total != 0)
             {
-                totalTextBox.Text = total.ToString("#.##");
+                totalTextBox.Text = total.ToString("#,##");
             }
             else
             {
@@ -239,11 +239,11 @@ namespace UI.Forms
                 if (residue != 0)
                 {
                     residue = Math.Abs(residue);
-                    changeTextBox.Text = residue.ToString("#.##");
+                    depositTextBox.Text = residue.ToString("#,##");
                 }
                 else
                 {
-                    changeTextBox.Text = "0";
+                    depositTextBox.Text = "0";
                 }
             }
             else
@@ -305,7 +305,7 @@ namespace UI.Forms
             {
                 if (CustomDialogs.SearchEmployee(1) == DialogResult.OK)
                 {
-                    employeeTextBox.Text = $" { EmployeeModel.Name } { EmployeeModel.LastName}";
+                    employeeTextBox.Text = $" { EmployeeModel.Name } { EmployeeModel.Lastname}";
                 }
             }
             catch (Exception ex)
@@ -400,6 +400,7 @@ namespace UI.Forms
                 int clientId = 0;
                 int mainBusinessId = BusinessManagement.SelectMainBusinessId();
                 string endDate = endDateTime.Text;
+                decimal deposit = decimal.Parse(depositTextBox.Text);
 
                 if (ClientModel != null)
                 {
@@ -414,7 +415,7 @@ namespace UI.Forms
                     quantities.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
                 }
                 OffsetDetailsManagement.InsertOffsetInvoiceDetails(clientId, employeeId, mainBusinessId, endDate, currencyType,
-                    cashAmount, cardAmount, discount, subTotal, total, taxes, productsIds, quantities);
+                    cashAmount, cardAmount, discount, subTotal, total, taxes, deposit, productsIds, quantities);
             }
             catch (Exception)
             {

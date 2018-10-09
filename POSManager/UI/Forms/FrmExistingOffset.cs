@@ -1,5 +1,6 @@
 ﻿using BusinessLibrary.Models;
 using LogicLibrary.Management;
+using MetroFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,10 +34,10 @@ namespace UI.Forms
         //---------CUSTOM METHODS---------\\
         private void WireUpOffsetDataGridView()
         {
-            offsetGridView.DataSource = OffsetDetailsManagement.SelectAllOffsetDetails();
+            offsetGridView.DataSource = OffsetDetailsManagement.SelectAllOffsetDeposit();
         }
 
-        private void SearchBrands()
+        private void SearchDeposits()
         {
             if (!string.IsNullOrEmpty(searchTextBox.Text))
             {
@@ -48,14 +49,30 @@ namespace UI.Forms
             }
         }
 
+        private void ValidateChange()
+        {
+            decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
+            decimal deposit = decimal.Parse(depositTextBox.Text);
+            decimal residue = cashAmount - deposit;
+
+            if (residue != 0)
+            {
+                residue = Math.Abs(residue);
+                newResidueTextBox.Text = residue.ToString("#,##");
+            }
+            else
+            {
+                depositTextBox.Text = "0";
+            }
+        }
+
         private void offsetGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (offsetGridView.SelectedRows[0] != null)
                 {
-                    clientTextBox.Text = offsetGridView.CurrentRow.Cells[2].Value.ToString();
-                    employeeTextBox.Text = offsetGridView.CurrentRow.Cells[3].Value.ToString();
+                    depositTextBox.Text = offsetGridView.CurrentRow.Cells[2].Value.ToString();
                 }
             }
             catch (Exception)
@@ -63,6 +80,47 @@ namespace UI.Forms
 
                 throw;
             }
+        }
+
+        private void depositButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(cashAmountTextBox.Text) && !string.IsNullOrEmpty(depositTextBox.Text))
+                {
+                    ValidateChange();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void addDepositTile_Click(object sender, EventArgs e)
+        {
+            string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
+            decimal deposit = decimal.Parse(newResidueTextBox.Text);
+
+            try
+            {
+                if (OffsetDetailsManagement.InsertOffsetDeposit(id, deposit))
+                {
+                    MetroMessageBox.Show(this, "Ingresado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void searchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            SearchDeposits();
         }
     }
 }

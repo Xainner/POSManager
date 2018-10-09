@@ -19,13 +19,13 @@ namespace DataBaseLibrary.Connections
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
-        public static List<OffSetDetailsModel> SelectAllOffsetDetails()
+        public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
         {
             try
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    var output = cnn.Query<OffSetDetailsModel>("SELECT IdDetailOffsetInvoice, IdClient, IdEmployee, EndDate, Total FROM detailoffsetinvoice");
+                    var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits");
                     return output.ToList();
                 }
             }
@@ -35,11 +35,11 @@ namespace DataBaseLibrary.Connections
             }
         }
 
-        public static OffSetDetailsModel SelectOffsetDetailByInvoice(OffSetDetailsModel offSetDetails)
+        public static DepositXOffsetModel SelectDepositByInvoice(DepositXOffsetModel depositXOffset)
         {
             using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<OffSetDetailsModel>("SELECT * FROM detailoffsetinvoice WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice", offSetDetails);
+                var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice", depositXOffset);
                 return output.Single();
             }
         }
@@ -61,7 +61,7 @@ namespace DataBaseLibrary.Connections
             }
         }
 
-        public static bool InsertExternalInvoiceSaleDetails(OffSetDetailsModel offSetDetails, List<int> productsIds, List<int> quantities)
+        public static bool InsertOffsetDetails(OffSetDetailsModel offSetDetails, List<int> productsIds, List<int> quantities, decimal deposit)
         {
             try
             {
@@ -71,6 +71,7 @@ namespace DataBaseLibrary.Connections
                     {
                         cnn.Execute("INSERT detailoffsetinvoice (IdClient, IdEmployee, IdBusiness, EndDate, CurrencyType, Discount, SubTotal, Total, CashDeposit, CardDeposit, Taxes) VALUES (@IdClient, @IdEmployee, @IdBusiness, @EndDate, @CurrencyType, @Discount, @SubTotal, @Total, @CashDeposit, @CardDeposit, @Taxes)", offSetDetails);
                         InsertProductsXOffset(productsIds, quantities);
+                        InsertDepositOffset(deposit);
                         return true;
                     }
                 }
@@ -80,6 +81,7 @@ namespace DataBaseLibrary.Connections
                     {
                         cnn.Execute("INSERT detailoffsetinvoice (idEmployee, idBusiness, EndDate, CurrencyType, Discount, SubTotal, Total, CashDeposit, CardDeposit, Taxes) VALUES (@IdEmployee, @IdBusiness, @EndDate, @CurrencyType, @Discount, @SubTotal, @Total, @CashDeposit, @CardDeposit, @Taxes)", offSetDetails);
                         InsertProductsXOffset(productsIds, quantities);
+                        InsertDepositOffset(deposit);
                         return true;
                     }
                 }
@@ -119,9 +121,45 @@ namespace DataBaseLibrary.Connections
             }
         }
 
-        public static void InsertPaymentXOffset(decimal payment, OffSetDetailsModel offSetDetails)
+        public static void InsertDepositOffset(decimal deposit)
         {
+            try
+            {
+                DepositXOffsetModel depositXOffsetModel;
 
+                depositXOffsetModel = new DepositXOffsetModel()
+                {
+                    IdDetailOffsetInvoice = SelectLastOffsetNumber(),
+                    Deposit = deposit
+                };
+
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    cnn.Execute("INSERT offsetdeposits (IdDetailOffsetInvoice, Deposit) VALUES (@IdDetailOffsetInvoice, @Deposit)", depositXOffsetModel);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static bool InsertOffsetDeposit (DepositXOffsetModel depositXOffset)
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    cnn.Execute("INSERT INTO offsetdeposits (IdDetailOffsetInvoice, Deposit) VALUES(@IdDetailOffsetInvoice, @Deposit)", depositXOffset);
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }
