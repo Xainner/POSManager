@@ -451,32 +451,56 @@ namespace UI.Forms
         {
             try
             {
-                decimal discount = decimal.Parse(discountTextBox.Text);
-                decimal taxes = decimal.Parse(taxesTextBox.Text);
-                decimal subTotal = decimal.Parse(subTotalTextBox.Text);
-                decimal total = decimal.Parse(totalTextBox.Text);
-                decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
-                decimal cardAmount = 0;
-                string currencyType = metroComboBox1.SelectedItem.ToString();
-                decimal totalPayment = decimal.Parse(totalTextBox.Text);
-                int employeeId = EmployeeModel.IdEmployee;
-                int clientId = 0;
-                int mainBusinessId = BusinessManagement.SelectMainBusinessId();
-                if (ClientModel != null)
+                if (!string.IsNullOrEmpty(cashAmountTextBox.Text) || !string.IsNullOrEmpty(creditAmountTextBox.Text))
                 {
-                    clientId = ClientModel.IdClient;
-                }
-                List<int> productsIds = new List<int>();
-                foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                    decimal discount = decimal.Parse(discountTextBox.Text);
+                    decimal taxes = decimal.Parse(taxesTextBox.Text);
+                    decimal subTotal = decimal.Parse(subTotalTextBox.Text);
+                    decimal total = decimal.Parse(totalTextBox.Text);
+                    decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
+                    decimal cardAmount = 0;
+                    string currencyType = metroComboBox1.SelectedItem.ToString();
+                    decimal totalPayment = decimal.Parse(totalTextBox.Text);
+                    int employeeId = EmployeeModel.IdEmployee;
+                    int clientId = 0;
+                    int mainBusinessId = BusinessManagement.SelectMainBusinessId();
+                    if (ClientModel != null)
+                    {
+                        clientId = ClientModel.IdClient;
+                    }
+                    List<int> productsIds = new List<int>();
+                    foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                    {
+                        productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
+                    }
+
+                    List<int> productquantity = new List<int>();
+                    foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                    {
+                        productquantity.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
+                    }
+                    ExternalInvoiceSaleManagement.InsertExternalInvoiceSaleDetails(discount, taxes, subTotal, total, cashAmount, cardAmount, currencyType, mainBusinessId, clientId, employeeId, productsIds, productquantity);
+                    clearButton.PerformClick();
+                } else
                 {
-                    productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
+                    MetroMessageBox.Show(this, "Debe ingresar un monto.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                ExternalInvoiceSaleManagement.InsertExternalInvoiceSaleDetails(discount, taxes, subTotal, total, cashAmount, cardAmount, currencyType, mainBusinessId, clientId, employeeId, productsIds);
             }
             catch (Exception ex)
             {
                 toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            productsGridView.Rows.Clear();
+            codeTextBox.Text = string.Empty;
+            clientTextBox.Text = string.Empty;
+            employeeTextBox.Text = string.Empty;
+            changeTextBox.Text = string.Empty;
+            cashAmountTextBox.Text = string.Empty;
+            creditAmountTextBox.Text = string.Empty;
         }
     }
 }

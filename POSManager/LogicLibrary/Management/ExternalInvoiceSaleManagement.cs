@@ -23,7 +23,7 @@ namespace LogicLibrary.Management
             }
         }
 
-        public static bool InsertExternalInvoiceSaleDetails(decimal discount, decimal taxes, decimal subTotal, decimal total, decimal cashAmount, decimal cardAmount, string currencyType, int businessId, int clientId, int employeeId, List<int> productsIds)
+        public static bool InsertExternalInvoiceSaleDetails(decimal discount, decimal taxes, decimal subTotal, decimal total, decimal cashAmount, decimal cardAmount, string currencyType, int businessId, int clientId, int employeeId, List<int> productsIds, List<int> productquantity)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace LogicLibrary.Management
                 {
                     IdClient = clientId, IdEmployee = employeeId, IdBusiness = businessId, CurrencyType = currencyType, IviAmount = taxes, CashDeposit = cashAmount, CardDeposit = cardAmount, SubTotal = subTotal, TotalDiscount = discount, Total = total
                 };
-                return ExternalInvoiceSaleDetailsConnection.InsertExternalInvoiceSaleDetails(externalInvoiceSaleDetailsModel, productsIds);
+                return ExternalInvoiceSaleDetailsConnection.InsertExternalInvoiceSaleDetails(externalInvoiceSaleDetailsModel, productsIds, productquantity);
             }
             catch (Exception ex)
             {

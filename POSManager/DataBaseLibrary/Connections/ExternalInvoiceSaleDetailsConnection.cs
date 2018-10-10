@@ -51,7 +51,7 @@ namespace DataBaseLibrary.Connections
             }
         }
 
-        public static bool InsertExternalInvoiceSaleDetails(ExternalInvoiceSaleDetailsModel externalInvoiceSaleDetailsModel, List<int> productsIds)
+        public static bool InsertExternalInvoiceSaleDetails(ExternalInvoiceSaleDetailsModel externalInvoiceSaleDetailsModel, List<int> productsIds, List<int> productquantity)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace DataBaseLibrary.Connections
                     using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                     {
                         cnn.Execute("INSERT detailexternalinvoicesell (ActualDate, IdClient, idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDeposit, totalDiscount, subTotal, TOtal) VALUES (@ActualDate, @IdClient, @idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDeposit, @totalDiscount, @subTotal, @Total)", externalInvoiceSaleDetailsModel);
-                        InsertProductsXInvoice(productsIds);
+                        InsertProductsXInvoice(productsIds, productquantity);
                         return true;
                     }
                 } else
@@ -69,7 +69,7 @@ namespace DataBaseLibrary.Connections
                     using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                     {
                         cnn.Execute("INSERT detailexternalinvoicesell (ActualDate, idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDeposit, totalDiscount, subTotal, TOtal) VALUES (@ActualDate, @idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDeposit, @totalDiscount, @subTotal, @Total)", externalInvoiceSaleDetailsModel);
-                        InsertProductsXInvoice(productsIds);
+                        InsertProductsXInvoice(productsIds, productquantity);
                         return true;
                     }
                 }
@@ -136,21 +136,24 @@ namespace DataBaseLibrary.Connections
             }
         }
 
-        private static void InsertProductsXInvoice(List<int> productsids)
+        private static void InsertProductsXInvoice(List<int> productsids, List<int> quantites)
         {
             ProductsXInvoiceModel productsXInvoiceModel;
+            int i = 0;
             foreach (int item in productsids)
             {
                 productsXInvoiceModel = new ProductsXInvoiceModel()
                 {
                     Product_idProduct = item,
-                    IdDetailExternalInvoiceSell = SelectLastInvoiceNumber()
+                    IdDetailExternalInvoiceSell = SelectLastInvoiceNumber(),
+                    Quantity = quantites[i],
                 };
             
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    cnn.Execute("INSERT externalinvoicesell (Product_idProduct, idDetailExternalInvoiceSell) VALUES (@Product_idProduct, @idDetailExternalInvoiceSell)", productsXInvoiceModel);
+                    cnn.Execute("INSERT externalinvoicesell (Product_idProduct, idDetailExternalInvoiceSell, quantity) VALUES (@Product_idProduct, @idDetailExternalInvoiceSell, @Quantity)", productsXInvoiceModel);
                 }
+                i++;
             }
         }
     }
