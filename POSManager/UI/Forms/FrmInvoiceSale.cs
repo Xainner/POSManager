@@ -481,6 +481,7 @@ namespace UI.Forms
                     }
                     ExternalInvoiceSaleManagement.InsertExternalInvoiceSaleDetails(discount, taxes, subTotal, total, cashAmount, cardAmount, currencyType, mainBusinessId, clientId, employeeId, productsIds, productquantity);
                     clearButton.PerformClick();
+                    toolStripStatusLabel1.Text = "Factura realizada con éxito";
                 } else
                 {
                     MetroMessageBox.Show(this, "Debe ingresar un monto.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
