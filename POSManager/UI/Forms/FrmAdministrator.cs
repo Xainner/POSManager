@@ -21,6 +21,7 @@ namespace UI.Forms
         List<UserModel> userManagementModels;
         List<UserModel> userRolesModels;
         List<ExternalInvoiceSaleDetailsModel> invoices;
+        List<ProductXQuantityModel> productsInvoices;
 
         int id;
 
@@ -42,6 +43,7 @@ namespace UI.Forms
             metroButton1.Enabled = false;
             finalFecha.Enabled = false;
             comboBoxRangos.SelectedIndex = 0;
+            rangosProductos.SelectedIndex = 0;
             invoices = ExternalInvoiceSaleManagement.SelectInvoices();
             metroGrid1.DataSource = invoices;
         }
@@ -519,6 +521,37 @@ namespace UI.Forms
                 total += decimal.Parse(item.Cells[11].Value.ToString());
             }
             totalTextBox.Text = total.ToString("#.##");
+        }
+
+        ///PRODUCTS
+
+        private void buscarFechaProductos_Click(object sender, EventArgs e)
+        {
+            productsInvoices = ExternalInvoiceSaleManagement.SelectProductsByDate(inicioFechaProductos.Value, finFechaProductos.Value);
+            metroGrid2.DataSource = productsInvoices;
+        }
+
+        private void rangosProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rangosProductos.SelectedIndex == 1)
+            {
+                inicioFechaProductos.Enabled = true;
+                finFechaProductos.Enabled = true;
+                buscarFechaProductos.Enabled = true;
+            }
+            else
+            {
+                inicioFechaProductos.Enabled = false;
+                finFechaProductos.Enabled = false;
+                buscarFechaProductos.Enabled = false;
+            }
+            switch (rangosProductos.SelectedIndex)
+            {
+                case 0:
+                    productsInvoices = ExternalInvoiceSaleManagement.SelectProductsByDay(DateTime.Today);
+                    break;
+            }
+            metroGrid2.DataSource = productsInvoices;
         }
     }
 }

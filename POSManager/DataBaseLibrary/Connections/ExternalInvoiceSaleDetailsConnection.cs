@@ -82,6 +82,31 @@ namespace DataBaseLibrary.Connections
             }
         }
 
+        public static List<int> SelectProductsByDay(DateTime date)
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<int>("SELECT numberInvoice FROM detailexternalinvoicesell WHERE ActualDate = @date", new { date });
+                    return output.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static List<ProductXQuantityModel> productXQuantityModels(int id)
+        {
+            using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+            {
+                var output2 = cnn.Query<ProductXQuantityModel>("SELECT description, quantity FROM product INNER JOIN externalinvoicesell ON product.idProduct = externalinvoicesell.Product_idProduct WHERE externalinvoicesell.idDetailExternalInvoiceSell = @id", new { id });
+                return output2.ToList();
+            }
+        }
+
         public static List<ExternalInvoiceSaleDetailsModel> SelectInvoicesByDate(DateTime start, DateTime end)
         {
             try
@@ -94,6 +119,28 @@ namespace DataBaseLibrary.Connections
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
                     var output = cnn.Query<ExternalInvoiceSaleDetailsModel>("SELECT * FROM detailexternalinvoicesell WHERE ActualDate BETWEEN " +
+                        "@start AND @end", testDateModel);
+                    return output.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static List<int> SelectInvoicesByDate2(DateTime start, DateTime end)
+        {
+            try
+            {
+                TestDateModel testDateModel = new TestDateModel()
+                {
+                    end = end,
+                    start = start
+                };
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<int>("SELECT numberInvoice FROM detailexternalinvoicesell WHERE ActualDate BETWEEN " +
                         "@start AND @end", testDateModel);
                     return output.ToList();
                 }
