@@ -36,6 +36,30 @@ namespace UI.Forms
             metroComboBox1.SelectedIndex = 0;
         }
 
+        private void CleanNewOffset()
+        {
+            employeeTextBox.Text = " ";
+            clientTextBox.Text = " ";
+            codeTextBox.Text = " ";
+            cashAmountTextBox.Text = " ";
+            creditAmountTextBox.Text = " ";
+            depositTextBox.Text = " ";
+            discountTextBox.Text = " ";
+            subTotalTextBox.Text = " ";
+            taxesTextBox.Text = " ";
+           
+            productsGridView.Rows.Clear();
+        }
+
+        private void CleanDeposit()
+        {
+            currentResidueTextbox.Text = " ";
+            offsetCashTextbox.Text = " ";
+            offsetCreditTextbox.Text = " ";
+            newResidueTextBox.Text = " ";
+            
+        }
+
         private void WireUpProductsGridView()
         {
             productsGridView.Columns.Add("code", "Código");
@@ -427,13 +451,18 @@ namespace UI.Forms
                 
                 List<int> productsIds = new List<int>();
                 List<int> quantities = new List<int>();
+
                 foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
                 {
                     productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
                     quantities.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
                 }
+
                 OffsetDetailsManagement.InsertOffsetInvoiceDetails(client, employeeId, mainBusinessId, endDate, currencyType,
                     cashAmount, cardAmount, discount, subTotal, total, taxes, deposit, productsIds, quantities);
+
+                toolStripStatusLabel1.Text = "El Apartado ha sido agregado correctamente.";
+                CleanNewOffset();
             }
             catch (Exception)
             {
@@ -504,7 +533,8 @@ namespace UI.Forms
             {
                 if (OffsetDetailsManagement.InsertOffsetDeposit(id, name, deposit))
                 {
-                    MetroMessageBox.Show(this, "Ingresado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    toolStripStatusLabel1.Text = "El deposito ha sido agregado correctamente.";
+                    CleanDeposit();
                 }
             }
             catch (Exception)

@@ -96,12 +96,6 @@
     <Compile Include="Forms\FrmCategoriesAndSubCategories.Designer.cs">
       <DependentUpon>FrmCategoriesAndSubCategories.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmExistingOffset.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmExistingOffset.Designer.cs">
-      <DependentUpon>FrmExistingOffset.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmInvoiceSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,12 +131,6 @@
     </Compile>
     <Compile Include="Forms\Extras\FrmSplashScreen.Designer.cs">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FrmSelectOffset.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmSelectOffset.Designer.cs">
-      <DependentUpon>FrmSelectOffset.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmUser.cs">
       <SubType>Form</SubType>
@@ -229,9 +217,6 @@
     <EmbeddedResource Include="Forms\FrmCategoriesAndSubCategories.resx">
       <DependentUpon>FrmCategoriesAndSubCategories.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmExistingOffset.resx">
-      <DependentUpon>FrmExistingOffset.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmInvoiceSale.resx">
       <DependentUpon>FrmInvoiceSale.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,9 +231,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmPositionsAndSalaries.resx">
       <DependentUpon>FrmPositionsAndSalaries.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmSelectOffset.resx">
-      <DependentUpon>FrmSelectOffset.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmUser.resx">
       <DependentUpon>FrmUser.cs</DependentUpon>
