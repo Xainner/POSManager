@@ -56,6 +56,12 @@ namespace UI.Forms
                 dataGridViewColumn.ReadOnly = true;
             }
 
+            foreach (DataGridViewColumn dataGridViewColumn in offsetGridView.Columns)
+            {
+                dataGridViewColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewColumn.ReadOnly = true;
+            }
+
             productsGridView.Columns["description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             productsGridView.Columns[3].ReadOnly = false;
@@ -112,14 +118,14 @@ namespace UI.Forms
             {
                 dataGridViewRow.Cells[10].Value = otrotest2;
                 discounts += otrotest2;
-                discountTextBox.Text = discounts.ToString("#,##");
+                discountTextBox.Text = discounts.ToString("#.##");
             }
             else
             {
                 dataGridViewRow.Cells[10].Value = otrotest2;
                 discounts += otrotest2;
                 decimal otroTest = decimal.Parse(dataGridViewRow.Cells[10].Value.ToString());
-                discountTextBox.Text = discounts.ToString("#,##");
+                discountTextBox.Text = discounts.ToString("#.##");
                 if (discounts == 0)
                 {
                     discountTextBox.Text = "0";
@@ -129,7 +135,7 @@ namespace UI.Forms
             string tax;
             if (dataGridViewRow.Cells[7].Value.ToString().Equals("G"))
             {
-                tax = "0,13";
+                tax = "0.13";
             }
             else
             {
@@ -139,8 +145,8 @@ namespace UI.Forms
             decimal subTotal = amount - (decimal.Parse(tax) * amount);
 
             decimal taxes = amount - subTotal;
-            dataGridViewRow.Cells[5].Value = amount.ToString("#,##");
-            dataGridViewRow.Cells[8].Value = taxes.ToString("#,##");
+            dataGridViewRow.Cells[5].Value = amount.ToString("#.##");
+            dataGridViewRow.Cells[8].Value = taxes.ToString("#.##");
 
             CalculateInvoiceDetails();
         }
@@ -155,12 +161,12 @@ namespace UI.Forms
 
                 amount = (amount - (amount * (discount / 100)));
 
-                string tax = "0,13";
+                string tax = "0.13";
                 decimal subTotal = amount - (decimal.Parse(tax) * amount);
 
                 decimal taxes = amount - subTotal;
-                dataGridViewRow.Cells[5].Value = amount.ToString("#,##");
-                dataGridViewRow.Cells[8].Value = taxes.ToString("#,##");
+                dataGridViewRow.Cells[5].Value = amount.ToString("#.##");
+                dataGridViewRow.Cells[8].Value = taxes.ToString("#.##");
             }
         }
 
@@ -192,7 +198,7 @@ namespace UI.Forms
 
             if (subTotal != 0)
             {
-                subTotalTextBox.Text = subTotal.ToString("#,##");
+                subTotalTextBox.Text = subTotal.ToString("#.##");
 
             }
             else
@@ -201,7 +207,7 @@ namespace UI.Forms
             }
             if (taxes != 0)
             {
-                taxesTextBox.Text = taxes.ToString("#,##");
+                taxesTextBox.Text = taxes.ToString("#.##");
 
             }
             else
@@ -210,7 +216,7 @@ namespace UI.Forms
             }
             if (total != 0)
             {
-                totalTextBox.Text = total.ToString("#,##");
+                totalTextBox.Text = total.ToString("#.##");
             }
             else
             {
@@ -239,12 +245,29 @@ namespace UI.Forms
                 if (residue != 0)
                 {
                     residue = Math.Abs(residue);
-                    depositTextBox.Text = residue.ToString("#,##");
+                    depositTextBox.Text = residue.ToString("#.##");
                 }
                 else
                 {
                     depositTextBox.Text = "0";
                 }
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void ValidateChangeOffset()
+        {
+            decimal cashAmount = decimal.Parse(offsetCashTextbox.Text);
+            decimal deposit = decimal.Parse(currentResidueTextbox.Text);
+            decimal residue = cashAmount - deposit;
+
+            if (residue != 0 && cashAmount > 0)
+            {
+                residue = Math.Abs(residue);
+                newResidueTextBox.Text = residue.ToString("#.##");
             }
             else
             {
@@ -397,15 +420,10 @@ namespace UI.Forms
                 string currencyType = metroComboBox1.SelectedItem.ToString();
                 decimal totalPayment = decimal.Parse(totalTextBox.Text);
                 int employeeId = EmployeeModel.IdEmployee;
-                int clientId = 0;
+                string client = clientTextBox.Text;
                 int mainBusinessId = BusinessManagement.SelectMainBusinessId();
                 string endDate = endDateTime.Text;
                 decimal deposit = decimal.Parse(depositTextBox.Text);
-
-                if (ClientModel != null)
-                {
-                    clientId = ClientModel.IdClient;
-                }
                 
                 List<int> productsIds = new List<int>();
                 List<int> quantities = new List<int>();
@@ -414,8 +432,80 @@ namespace UI.Forms
                     productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
                     quantities.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
                 }
-                OffsetDetailsManagement.InsertOffsetInvoiceDetails(clientId, employeeId, mainBusinessId, endDate, currencyType,
+                OffsetDetailsManagement.InsertOffsetInvoiceDetails(client, employeeId, mainBusinessId, endDate, currencyType,
                     cashAmount, cardAmount, discount, subTotal, total, taxes, deposit, productsIds, quantities);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void searchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(searchTextBox.Text))
+            {
+                List<DepositXOffsetModel> depositModel;
+                depositModel = OffsetDetailsManagement.MultipleValueSearch(searchTextBox.Text);
+                
+                if (depositModel != null)
+                {
+                    offsetGridView.DataSource = depositModel;
+                    offsetGridView.Columns.RemoveAt(2);
+                }
+            }
+            else
+            {
+                offsetGridView.DataSource = null;
+            }
+        }
+
+        private void offsetGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (offsetGridView.SelectedRows[0] != null)
+                {
+                    currentResidueTextbox.Text = offsetGridView.CurrentRow.Cells[2].Value.ToString();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void depositButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(offsetCashTextbox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.Text))
+                {
+                    ValidateChangeOffset();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void addDepositTile_Click(object sender, EventArgs e)
+        {
+            string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
+            string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
+            decimal deposit = decimal.Parse(newResidueTextBox.Text);
+
+            try
+            {
+                if (OffsetDetailsManagement.InsertOffsetDeposit(id, name, deposit))
+                {
+                    MetroMessageBox.Show(this, "Ingresado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
             catch (Exception)
             {

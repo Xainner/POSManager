@@ -9,6 +9,7 @@ namespace BusinessLibrary.Models
     public class DepositXOffsetModel
     {
         public int IdDetailOffsetInvoice { get; set; }
+        public string Name { get; set; }
         public DateTime CurrentDate { get; set; }
         public decimal Deposit { get; set; }
     }

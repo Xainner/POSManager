@@ -10,7 +10,7 @@ namespace BusinessLibrary.Models
     {
         public int IdDetailOffsetInvoice { get; set; }
         public DateTime CurrentDate { get; set; }
-        public int IdClient { get; set; }
+        public string Client { get; set; }
         public int IdEmployee { get; set; }
         public int IdBusiness { get; set; }
         public DateTime EndDate { get; set; }

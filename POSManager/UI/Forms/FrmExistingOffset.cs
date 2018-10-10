@@ -15,8 +15,6 @@ namespace UI.Forms
 {
     public partial class FrmExistingOffset : MetroFramework.Forms.MetroForm
     {
-        //---------GLOBALS---------\\
-        List<OffSetDetailsModel> offSetDetails;
 
         //---------FORM---------\\
 
@@ -102,11 +100,12 @@ namespace UI.Forms
         private void addDepositTile_Click(object sender, EventArgs e)
         {
             string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
+            string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
             decimal deposit = decimal.Parse(newResidueTextBox.Text);
 
             try
             {
-                if (OffsetDetailsManagement.InsertOffsetDeposit(id, deposit))
+                if (OffsetDetailsManagement.InsertOffsetDeposit(id, name, deposit))
                 {
                     MetroMessageBox.Show(this, "Ingresado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }

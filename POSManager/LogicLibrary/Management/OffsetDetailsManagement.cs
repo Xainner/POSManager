@@ -51,14 +51,14 @@ namespace LogicLibrary.Management
             }
         }
 
-        public static bool InsertOffsetInvoiceDetails(int clientId, int employeeId, int businessId, string endDate, string currencyType,
+        public static bool InsertOffsetInvoiceDetails(string client, int employeeId, int businessId, string endDate, string currencyType,
              decimal cashAmount, decimal cardAmount, decimal discount, decimal subTotal, decimal total, decimal taxes, decimal deposit, List<int> productsIds, List<int> quantities)
         {
             try
             {
                 OffSetDetailsModel offsetDetailsModel = new OffSetDetailsModel()
                 {
-                    IdClient = clientId,
+                    Client = client,
                     IdEmployee = employeeId,
                     IdBusiness = businessId,
                     EndDate = DateTime.Parse(endDate),
@@ -79,13 +79,14 @@ namespace LogicLibrary.Management
             }
         }
 
-        public static bool InsertOffsetDeposit(string id, decimal deposit)
+        public static bool InsertOffsetDeposit(string id, string name, decimal deposit)
         {
             try
             {
                 DepositXOffsetModel depositXOffset = new DepositXOffsetModel()
                 {
                     IdDetailOffsetInvoice = int.Parse(id),
+                    Name = name,
                     Deposit = deposit
                 };
                 return OffsetDetailsConnection.InsertOffsetDeposit(depositXOffset);
@@ -93,6 +94,27 @@ namespace LogicLibrary.Management
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public static List<DepositXOffsetModel> MultipleValueSearch(string value)
+        {
+            try
+            {
+                if (int.TryParse(value, out int id))
+                {
+                    DepositXOffsetModel depositXOffsetNum = new DepositXOffsetModel() { IdDetailOffsetInvoice = id };
+                    return OffsetDetailsConnection.MultipleValueNum(depositXOffsetNum);
+                }
+                else
+                {
+                    DepositXOffsetModel depositXOffset = new DepositXOffsetModel() { Name = value };
+                    return OffsetDetailsConnection.MultipleValueName(depositXOffset);
+                }
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }

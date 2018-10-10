@@ -183,8 +183,8 @@ namespace UI.UserControls
 
         private void offsetSaleTile_Click(object sender, EventArgs e)
         {
-            FrmSelectOffset frmSelectOffset = new FrmSelectOffset();
-            frmSelectOffset.Show();
+            FrmNewOffset frmNewOffset = new FrmNewOffset();
+            frmNewOffset.Show();
         }
     }
 }
