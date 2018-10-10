@@ -64,6 +64,8 @@ namespace UI.Forms.Extras
             switch (e.NextPageIndex)
             {
                 case 1:
+                    startUpAdvancedWizard.BackButtonEnabled = false;
+                    startUpAdvancedWizard.NextButtonEnabled = false;
                     break;
                 case 2:
                     startUpAdvancedWizard.BackButtonEnabled = false;
