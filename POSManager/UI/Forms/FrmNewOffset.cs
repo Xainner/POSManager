@@ -272,6 +272,7 @@ namespace UI.Forms
             else
             {
                 cashAmountTextBox.Text = "";
+                depositTextBox.Text = "";
                 MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
@@ -295,6 +296,7 @@ namespace UI.Forms
             else
             {
                 offsetCashTextbox.Text = "";
+                newResidueTextBox.Text = "";
                 MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
@@ -441,34 +443,44 @@ namespace UI.Forms
         {
             try
             {
-                decimal discount = decimal.Parse(discountTextBox.Text);
-                decimal taxes = decimal.Parse(taxesTextBox.Text);
-                decimal subTotal = decimal.Parse(subTotalTextBox.Text);
-                decimal total = decimal.Parse(totalTextBox.Text);
-                decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
-                decimal cardAmount = 0;
-                string currencyType = metroComboBox1.SelectedItem.ToString();
-                decimal totalPayment = decimal.Parse(totalTextBox.Text);
-                int employeeId = EmployeeModel.IdEmployee;
-                string client = clientTextBox.Text;
-                int mainBusinessId = BusinessManagement.SelectMainBusinessId();
-                string endDate = endDateTime.Text;
-                decimal deposit = decimal.Parse(depositTextBox.Text);
-                
-                List<int> productsIds = new List<int>();
-                List<int> quantities = new List<int>();
-
-                foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                if (!string.IsNullOrEmpty(depositTextBox.Text) && !string.IsNullOrEmpty(employeeTextBox.Text)
+                    && !string.IsNullOrEmpty(clientTextBox.Text) && !string.IsNullOrEmpty(totalTextBox.Text)
+                    && !string.IsNullOrEmpty(cashAmountTextBox.Text))
                 {
-                    productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
-                    quantities.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
+                    decimal discount = decimal.Parse(discountTextBox.Text);
+                    decimal taxes = decimal.Parse(taxesTextBox.Text);
+                    decimal subTotal = decimal.Parse(subTotalTextBox.Text);
+                    decimal total = decimal.Parse(totalTextBox.Text);
+                    decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
+                    decimal cardAmount = 0;
+                    string currencyType = metroComboBox1.SelectedItem.ToString();
+                    decimal totalPayment = decimal.Parse(totalTextBox.Text);
+                    int employeeId = EmployeeModel.IdEmployee;
+                    string client = clientTextBox.Text;
+                    int mainBusinessId = BusinessManagement.SelectMainBusinessId();
+                    string endDate = endDateTime.Text;
+                    decimal deposit = decimal.Parse(depositTextBox.Text);
+
+                    List<int> productsIds = new List<int>();
+                    List<int> quantities = new List<int>();
+
+                    foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                    {
+                        productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
+                        quantities.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
+                    }
+
+                    OffsetDetailsManagement.InsertOffsetInvoiceDetails(client, employeeId, mainBusinessId, endDate, currencyType,
+                        cashAmount, cardAmount, discount, subTotal, total, taxes, deposit, productsIds, quantities);
+
+                    toolStripStatusLabel1.Text = "El Apartado ha sido agregado correctamente.";
+                    CleanNewOffset();
                 }
-
-                OffsetDetailsManagement.InsertOffsetInvoiceDetails(client, employeeId, mainBusinessId, endDate, currencyType,
-                    cashAmount, cardAmount, discount, subTotal, total, taxes, deposit, productsIds, quantities);
-
-                toolStripStatusLabel1.Text = "El Apartado ha sido agregado correctamente.";
-                CleanNewOffset();
+                else
+                {
+                    MetroMessageBox.Show(this, "Se encontraron campos vacios", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
             }
             catch (Exception)
             {
@@ -520,6 +532,10 @@ namespace UI.Forms
                 {
                     ValidateChangeOffset();
                 }
+                else
+                {
+                    MetroMessageBox.Show(this, "Se encontraron campos vacios", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
             }
             catch (Exception)
@@ -531,16 +547,24 @@ namespace UI.Forms
 
         private void addDepositTile_Click(object sender, EventArgs e)
         {
-            string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
-            string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
-            decimal deposit = decimal.Parse(newResidueTextBox.Text);
-
             try
             {
-                if (OffsetDetailsManagement.InsertOffsetDeposit(id, name, deposit))
+                if (!string.IsNullOrEmpty(newResidueTextBox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.ToString())
+                    && !string.IsNullOrEmpty(offsetCashTextbox.ToString()))
                 {
-                    toolStripStatusLabel1.Text = "El deposito ha sido agregado correctamente.";
-                    CleanDeposit();
+                    string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
+                    string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
+                    decimal deposit = decimal.Parse(newResidueTextBox.Text);
+
+                    if (OffsetDetailsManagement.InsertOffsetDeposit(id, name, deposit))
+                    {
+                        toolStripStatusLabel1.Text = "El deposito ha sido agregado correctamente.";
+                        CleanDeposit();
+                    }
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Se encontraron campos vacios", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception)
