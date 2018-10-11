@@ -549,22 +549,29 @@ namespace UI.Forms
         {
             try
             {
-                if (!string.IsNullOrEmpty(newResidueTextBox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.Text)
-                    && !string.IsNullOrEmpty(offsetCashTextbox.Text))
+                if (!currentResidueTextbox.Text.Equals("0,00"))
                 {
-                    string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
-                    string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
-                    decimal deposit = decimal.Parse(newResidueTextBox.Text);
-
-                    if (OffsetDetailsManagement.InsertOffsetDeposit(id, name, deposit))
+                    if (!string.IsNullOrEmpty(newResidueTextBox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.Text)
+                    && !string.IsNullOrEmpty(offsetCashTextbox.Text))
                     {
-                        toolStripStatusLabel1.Text = "El deposito ha sido agregado correctamente.";
-                        CleanDeposit();
+                        string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
+                        string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
+                        decimal deposit = decimal.Parse(newResidueTextBox.Text);
+
+                        if (OffsetDetailsManagement.InsertOffsetDeposit(id, name, deposit))
+                        {
+                            toolStripStatusLabel1.Text = "El deposito ha sido agregado correctamente.";
+                            CleanDeposit();
+                        }
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Se encontraron campos vacios", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Se encontraron campos vacios", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                    MetroMessageBox.Show(this, "El apartado ya ha sido completado", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception)
