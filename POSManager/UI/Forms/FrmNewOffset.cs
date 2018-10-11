@@ -263,40 +263,46 @@ namespace UI.Forms
         {
             decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
             decimal totalPayment = decimal.Parse(totalTextBox.Text);
-            decimal residue = cashAmount - totalPayment;
-            if (residue <= 0)
+            decimal residue = totalPayment - cashAmount;
+
+            if (residue >= 0 && cashAmount <= totalPayment)
             {
-                if (residue != 0)
-                {
-                    residue = Math.Abs(residue);
-                    depositTextBox.Text = residue.ToString("#.##");
-                }
-                else
-                {
-                    depositTextBox.Text = "0";
-                }
+                depositTextBox.Text = residue.ToString("#.##");
             }
             else
             {
+                cashAmountTextBox.Text = "";
                 MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+            if (residue == 0)
+            {
+                depositTextBox.Text = "0";
+            }
+
         }
 
         private void ValidateChangeOffset()
         {
             decimal cashAmount = decimal.Parse(offsetCashTextbox.Text);
             decimal deposit = decimal.Parse(currentResidueTextbox.Text);
-            decimal residue = cashAmount - deposit;
+            decimal residue = deposit - cashAmount;
 
-            if (residue != 0 && cashAmount > 0)
+            if (residue >= 0 && cashAmount <= deposit)
             {
-                residue = Math.Abs(residue);
                 newResidueTextBox.Text = residue.ToString("#.##");
             }
             else
             {
+                offsetCashTextbox.Text = "";
                 MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+            if (residue == 0)
+            {
+                newResidueTextBox.Text = "0";
+            }
+
         }
 
         private void reloadLatestInvoiceNumber_Tick(object sender, EventArgs e)
