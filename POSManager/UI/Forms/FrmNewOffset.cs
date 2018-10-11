@@ -549,8 +549,8 @@ namespace UI.Forms
         {
             try
             {
-                if (!string.IsNullOrEmpty(newResidueTextBox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.ToString())
-                    && !string.IsNullOrEmpty(offsetCashTextbox.ToString()))
+                if (!string.IsNullOrEmpty(newResidueTextBox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.Text)
+                    && !string.IsNullOrEmpty(offsetCashTextbox.Text))
                 {
                     string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
                     string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
