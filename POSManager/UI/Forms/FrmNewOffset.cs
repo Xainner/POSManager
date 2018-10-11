@@ -564,7 +564,7 @@ namespace UI.Forms
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Se encontraron campos vacios", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MetroMessageBox.Show(this, "Se encontraron campos vacios", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
                 }
             }
             catch (Exception)
