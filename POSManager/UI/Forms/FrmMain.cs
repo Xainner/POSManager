@@ -11,6 +11,7 @@ using MetroFramework.Forms;
 using MetroFramework.Controls;
 using UI.UserControls;
 using BusinessLibrary.Models;
+using LogicLibrary.Utilities;
 
 namespace UI
 {
@@ -76,6 +77,12 @@ namespace UI
             mainPanel.Controls["ucDashboard"].BringToFront();
             goBackLink.Visible = false;
             toolStripStatusLabel1.Text = "Estás en el Dashboard";
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            Printing printing = new Printing(1, DateTime.Now.Date, "casa de omar", "casa de pamela", 12, "Saul");
+            printing.print();
         }
     }
 }
