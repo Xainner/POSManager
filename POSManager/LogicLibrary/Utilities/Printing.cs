@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLibrary.Models;
+using LogicLibrary.Management;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -33,48 +35,22 @@ namespace LogicLibrary.Utilities
             get { return this.TicketDate; }
         }
 
-        public String source
-        {
-            //set the person name
-            set { this.Source = value; }
-            //get the person name 
-            get { return this.Source; }
-        }
-        public String destination
-        {
-            //set the person name
-            set { this.Destination = value; }
-            //get the person name 
-            get { return this.Destination; }
-        }
-        public float amount
-        {
-            //set the person name
-            set { this.Amount = value; }
-            //get the person name 
-            get { return this.Amount; }
-        }
-        public String drawnBy
-        {
-            //set the person name
-            set { this.DrawnBy = value; }
-            //get the person name 
-            get { return this.DrawnBy; }
-        }
 
         public Printing()
         {
 
         }
-        public Printing(int ticketNo, DateTime TicketDate, String Source,
-               String Destination, float Amount, String DrawnBy)
+
+        string storeName;
+        List<ProductXQuantityModel> productXQuantityModels;
+        ExternalInvoiceSaleDetailsModel externalInvoiceSaleDetailsModels;
+        public Printing(int ticketNo, DateTime TicketDate, List<ProductXQuantityModel> productXQuantityModels, string storeName)
         {
             this.ticketNo = ticketNo;
             this.TicketDate = TicketDate;
-            this.Source = Source;
-            this.Destination = Destination;
-            this.Amount = Amount;
-            this.DrawnBy = DrawnBy;
+            this.storeName = storeName;
+            this.productXQuantityModels = productXQuantityModels;
+            externalInvoiceSaleDetailsModels = ExternalInvoiceSaleManagement.SelectInvoiceById2(ticketNo);
         }
         public void print()
         {
@@ -117,14 +93,15 @@ namespace LogicLibrary.Utilities
             int startX = 50;
             int startY = 55;
             int Offset = 40;
-            graphics.DrawString("Welcome to MSST", new Font("Courier New", 14),
+            
+            graphics.DrawString("Distribuidora " + storeName, new Font("Courier New", 14),
                                 new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + 20;
-            graphics.DrawString("Ticket No:" + this.TicketNo,
+            graphics.DrawString("Número de Factura:" + this.TicketNo,
                      new Font("Courier New", 14),
                      new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + 20;
-            graphics.DrawString("Ticket Date :" + this.ticketDate,
+            graphics.DrawString("Fecha:" + this.ticketDate,
                      new Font("Courier New", 12),
                      new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + 20;
@@ -133,12 +110,27 @@ namespace LogicLibrary.Utilities
                      new SolidBrush(Color.Black), startX, startY + Offset);
 
             Offset = Offset + 20;
-            String Source = this.source;
-            graphics.DrawString("From " + Source + " To " + Destination, new Font("Courier New", 10),
+            graphics.DrawString("Producto    Cantidad    Precio",
+                     new Font("Courier New", 12),
                      new SolidBrush(Color.Black), startX, startY + Offset);
 
+
             Offset = Offset + 20;
-            String Grosstotal = "Total Amount to Pay = " + this.amount;
+
+
+
+            graphics.DrawString(underLine, new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            foreach (ProductXQuantityModel item in productXQuantityModels)
+            {
+                Offset = Offset + 20;
+                graphics.DrawString($"{ item.description }      { item.quantity}      { item.amount }", new Font("Courier New", 10),
+                         new SolidBrush(Color.Black), startX, startY + Offset);
+            }
+
+            Offset = Offset + 20;
+            
 
             Offset = Offset + 20;
             underLine = "------------------------------------------";
@@ -146,12 +138,20 @@ namespace LogicLibrary.Utilities
                      new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + 20;
 
-            graphics.DrawString(Grosstotal, new Font("Courier New", 10),
+
+            graphics.DrawString("Total Descuento: " + externalInvoiceSaleDetailsModels.TotalDiscount.ToString(), new Font("Courier New", 10),
                      new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + 20;
-            String DrawnBy = this.drawnBy;
-            graphics.DrawString("Conductor - " + DrawnBy, new Font("Courier New", 10),
+            graphics.DrawString("SubTotal: " + externalInvoiceSaleDetailsModels.SubTotal.ToString(), new Font("Courier New", 10),
                      new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("I.V.I: " + externalInvoiceSaleDetailsModels.IviAmount.ToString(), new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("Total: " + externalInvoiceSaleDetailsModels.Total.ToString(), new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+
         }
     }
 }
