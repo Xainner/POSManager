@@ -24,6 +24,7 @@ namespace UI.Forms
         List<UserModel> userRolesModels;
         List<ExternalInvoiceSaleDetailsModel> invoices;
         List<ProductXQuantityModel> productsInvoices;
+        List<OffSetDetailsModel> offSet;
 
         int id;
 
@@ -48,6 +49,8 @@ namespace UI.Forms
             rangosProductos.SelectedIndex = 0;
             invoices = ExternalInvoiceSaleManagement.SelectInvoices();
             metroGrid1.DataSource = invoices;
+            offSet = OffsetDetailsManagement.SelectAllOffsetDetails();
+            offsetmetroGrid.DataSource = offSet;
         }
 
         private void FrmAdministrator_Leave(object sender, EventArgs e)
@@ -650,6 +653,35 @@ namespace UI.Forms
 
                 toolStripStatusLabel1.Text = ex.Message;
             }
+        }
+
+        private void offsetComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (offsetComboBox.SelectedIndex == 1)
+            {
+                firstDateTime.Enabled = true;
+                secondDateTime.Enabled = true;
+                searchOffsetButton.Enabled = true;
+            }
+            else
+            {
+                firstDateTime.Enabled = false;
+                secondDateTime.Enabled = false;
+                searchOffsetButton.Enabled = false;
+            }
+            switch (offsetComboBox.SelectedIndex)
+            {
+                case 0:
+                    offSet = OffsetDetailsManagement.SelectOffsetByDay(DateTime.Today);
+                    break;
+            }
+            offsetmetroGrid.DataSource = offSet;
+            GetTotal();
+        }
+
+        private void searchOffsetButton_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

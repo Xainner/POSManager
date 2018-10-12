@@ -19,6 +19,22 @@ namespace DataBaseLibrary.Connections
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
+        public static List<OffSetDetailsModel> SelectAllOffsetDetails()
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<OffSetDetailsModel>("SELECT * FROM detailoffsetinvoice");
+                    return output.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
         {
             try
@@ -77,6 +93,22 @@ namespace DataBaseLibrary.Connections
             {
 
                 throw;
+            }
+        }
+
+        public static List<OffSetDetailsModel> SelectOffsetByDay(DateTime date)
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<OffSetDetailsModel>("SELECT * FROM IdDetailOffsetInvoice WHERE CurrentDate = @CurrentDate", new { date });
+                    return output.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
 

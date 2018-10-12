@@ -10,6 +10,19 @@ namespace LogicLibrary.Management
 {
     public class OffsetDetailsManagement
     {
+        public static List<OffSetDetailsModel> SelectAllOffsetDetails()
+        {
+            try
+            {
+                return OffsetDetailsConnection.SelectAllOffsetDetails();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
         {
             try
@@ -115,6 +128,19 @@ namespace LogicLibrary.Management
             }
             catch (Exception ex)
             {
+                throw;
+            }
+        }
+
+        public static List<OffSetDetailsModel> SelectOffsetByDay(DateTime date)
+        {
+            try
+            {
+                return OffsetDetailsConnection.SelectOffsetByDay(date);
+            }
+            catch (Exception ex)
+            {
+
                 throw;
             }
         }
