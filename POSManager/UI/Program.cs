@@ -21,7 +21,7 @@ namespace UI
             Application.SetCompatibleTextRenderingDefault(false);
             if (BusinessManagement.SelectMainBusiness() == null)
             {
-                Application.Run(new FrmLogin());
+                Application.Run(new FrmFirstRun());
             } else
             {
                 Application.Run(new FrmLogin());

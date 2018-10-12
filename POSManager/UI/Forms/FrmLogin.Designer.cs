@@ -53,8 +53,7 @@
             this.userNameTextBox.CustomButton.Visible = false;
             this.userNameTextBox.DisplayIcon = true;
             this.userNameTextBox.Icon = global::UI.Properties.Resources.User_16px;
-            this.userNameTextBox.Lines = new string[] {
-        "omar"};
+            this.userNameTextBox.Lines = new string[0];
             this.userNameTextBox.Location = new System.Drawing.Point(23, 276);
             this.userNameTextBox.MaxLength = 32767;
             this.userNameTextBox.Name = "userNameTextBox";
@@ -67,7 +66,6 @@
             this.userNameTextBox.ShortcutsEnabled = true;
             this.userNameTextBox.Size = new System.Drawing.Size(364, 23);
             this.userNameTextBox.TabIndex = 1;
-            this.userNameTextBox.Text = "omar";
             this.userNameTextBox.UseSelectable = true;
             this.userNameTextBox.WaterMark = "Ingrese su nombre de usuario";
             this.userNameTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -90,8 +88,7 @@
             this.passwordTextBox.CustomButton.Visible = false;
             this.passwordTextBox.DisplayIcon = true;
             this.passwordTextBox.Icon = global::UI.Properties.Resources.Password_16px;
-            this.passwordTextBox.Lines = new string[] {
-        "1234"};
+            this.passwordTextBox.Lines = new string[0];
             this.passwordTextBox.Location = new System.Drawing.Point(23, 336);
             this.passwordTextBox.MaxLength = 32767;
             this.passwordTextBox.Name = "passwordTextBox";
@@ -104,7 +101,6 @@
             this.passwordTextBox.ShortcutsEnabled = true;
             this.passwordTextBox.Size = new System.Drawing.Size(364, 23);
             this.passwordTextBox.TabIndex = 2;
-            this.passwordTextBox.Text = "1234";
             this.passwordTextBox.UseSelectable = true;
             this.passwordTextBox.WaterMark = "Ingrese su contraseña";
             this.passwordTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));

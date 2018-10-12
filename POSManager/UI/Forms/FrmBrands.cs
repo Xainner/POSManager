@@ -100,11 +100,13 @@ namespace UI.Forms
                             brandNameTextBox.Text = string.Empty;
                             idLabel.Text = "Seleccione una";
                             WireUpBrandsDataGridView();
-                        } else
+                        }
+                        else
                         {
                             MetroMessageBox.Show(this, $"Ha ocurrido un error al agregar la marca: { brandNameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                    } else
+                    }
+                    else
                     {
                         MetroMessageBox.Show(this, "Ya existe una marca con ese nombre.", "Marca repetida", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
