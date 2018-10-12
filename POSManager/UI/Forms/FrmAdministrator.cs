@@ -12,6 +12,8 @@ using MetroFramework;
 using LogicLibrary.Management;
 using BusinessLibrary.Models;
 using LogicLibrary.Utilities;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace UI.Forms
 {
@@ -552,6 +554,102 @@ namespace UI.Forms
                     break;
             }
             metroGrid2.DataSource = productsInvoices;
+        }
+
+        private void ExportProductsButton_Click(object sender, EventArgs e)
+        {
+            if (metroGrid2.Rows.Count != 0)
+            {
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                worksheet = workbook.Sheets["Hoja1"];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "CustomerDetail";
+
+                for (int i = 1; i < metroGrid2.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[1, i] = metroGrid2.Columns[i - 1].HeaderText;
+                }
+
+                for (int i = 0; i < metroGrid2.Rows.Count; i++)
+                {
+                    for (int j = 0; j < metroGrid2.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = metroGrid2.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+
+                var saveFileDialoge = new SaveFileDialog();
+                saveFileDialoge.FileName = "Productos";
+                saveFileDialoge.DefaultExt = "xlsx";
+                if (saveFileDialoge.ShowDialog() == DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialoge.FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                }
+                app.Quit();
+            }
+        }
+
+        private void ExportInvoiceButton_Click(object sender, EventArgs e)
+        {
+            if (metroGrid1.Rows.Count != 0)
+            {
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                worksheet = workbook.Sheets["Hoja1"];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "CustomerDetail";
+
+                for (int i = 1; i < metroGrid1.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[1, i] = metroGrid1.Columns[i - 1].HeaderText;
+                }
+
+                for (int i = 0; i < metroGrid1.Rows.Count; i++)
+                {
+                    for (int j = 0; j < metroGrid1.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = metroGrid1.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+
+                var saveFileDialoge = new SaveFileDialog();
+                saveFileDialoge.FileName = "Facturas";
+                saveFileDialoge.DefaultExt = "xlsx";
+                if (saveFileDialoge.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(saveFileDialoge.FileName))
+                    {
+                        File.Delete(saveFileDialoge.FileName);
+                    }
+                    workbook.SaveAs(saveFileDialoge.FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                }
+                app.Quit();
+            }
+        }
+
+        private void metroGrid1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void metroGrid1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (metroGrid1.CurrentRow != null)
+                {
+                    FrmViewInvoiceSale frmViewInvoiceSale = new FrmViewInvoiceSale(int.Parse(metroGrid1.CurrentRow.Cells[0].Value.ToString()));
+                    frmViewInvoiceSale.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                toolStripStatusLabel1.Text = ex.Message;
+            }
         }
     }
 }

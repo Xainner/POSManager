@@ -23,7 +23,7 @@ namespace LogicLibrary.Management
             }
         }
 
-        public static bool InsertExternalInvoiceSaleDetails(decimal discount, decimal taxes, decimal subTotal, decimal total, decimal cashAmount, decimal cardAmount, string currencyType, int businessId, int clientId, int employeeId, List<int> productsIds, List<int> productquantity)
+        public static bool InsertExternalInvoiceSaleDetails(decimal discount, decimal taxes, decimal subTotal, decimal total, decimal cashAmount, decimal cardAmount, string currencyType, int businessId, int clientId, int employeeId, List<int> productsIds, List<int> productquantity, List<decimal> price, List<decimal> amout, List<decimal> discounts)
         {
             try
             {
@@ -40,7 +40,46 @@ namespace LogicLibrary.Management
                     TotalDiscount = discount,
                     Total = total
                 };
-                return ExternalInvoiceSaleDetailsConnection.InsertExternalInvoiceSaleDetails(externalInvoiceSaleDetailsModel, productsIds, productquantity);
+                return ExternalInvoiceSaleDetailsConnection.InsertExternalInvoiceSaleDetails(externalInvoiceSaleDetailsModel, productsIds, productquantity, price, amout, discounts);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static ExternalInvoiceSaleDetailsModel SelectInvoiceById2(int id)
+        {
+            try
+            {
+                return ExternalInvoiceSaleDetailsConnection.SelectInvoice2ById(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static List<ProductXQuantityModel> SelectProductsInvoiceXInvoiceId(int id)
+        {
+            try
+            {
+                return ExternalInvoiceSaleDetailsConnection.productXQuantityModels(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static ExternalInvoiceSaleDetailsModel SelectInvoiceById(int id)
+        {
+            try
+            {
+                return ExternalInvoiceSaleDetailsConnection.SelectInvoiceById(id);
             }
             catch (Exception ex)
             {

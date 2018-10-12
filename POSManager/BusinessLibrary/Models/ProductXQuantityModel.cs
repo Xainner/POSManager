@@ -10,5 +10,8 @@ namespace BusinessLibrary.Models
     {
         public string description { get; set; }
         public int quantity { get; set; }
+        public decimal price { get; set; }
+        public decimal amount { get; set; }
+        public decimal discount { get; set; }
     }
 }
