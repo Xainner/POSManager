@@ -280,7 +280,29 @@ namespace UI.Forms
             {
                 depositTextBox.Text = "0";
             }
+        }
 
+        private void ValidateChangeCredit()
+        {
+            decimal creditAmount = decimal.Parse(creditAmountTextBox.Text);
+            decimal totalPayment = decimal.Parse(totalTextBox.Text);
+            decimal residue = totalPayment - creditAmount;
+
+            if (residue >= 0 && creditAmount <= totalPayment)
+            {
+                depositTextBox.Text = residue.ToString("#.##");
+            }
+            else
+            {
+                cashAmountTextBox.Text = "";
+                depositTextBox.Text = "";
+                MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (residue == 0)
+            {
+                depositTextBox.Text = "0";
+            }
         }
 
         private void ValidateChangeOffset()
@@ -304,7 +326,29 @@ namespace UI.Forms
             {
                 newResidueTextBox.Text = "0";
             }
+        }
 
+        private void ValidateChangeOffsetCredit()
+        {
+            decimal creditAmount = decimal.Parse(offsetCreditTextbox.Text);
+            decimal deposit = decimal.Parse(currentResidueTextbox.Text);
+            decimal residue = deposit - creditAmount;
+
+            if (residue >= 0 && creditAmount <= deposit)
+            {
+                newResidueTextBox.Text = residue.ToString("#.##");
+            }
+            else
+            {
+                offsetCashTextbox.Text = "";
+                newResidueTextBox.Text = "";
+                MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (residue == 0)
+            {
+                newResidueTextBox.Text = "0";
+            }
         }
 
         private void reloadLatestInvoiceNumber_Tick(object sender, EventArgs e)
@@ -327,10 +371,9 @@ namespace UI.Forms
                     ValidateChange();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -342,15 +385,15 @@ namespace UI.Forms
                 {
                     ValidateChange();
                 }
-                else
+
+                if (!string.IsNullOrEmpty(creditAmountTextBox.Text) && !string.IsNullOrEmpty(totalTextBox.Text))
                 {
-                    MetroMessageBox.Show(this, "Debe ingresar un monto valido.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ValidateChangeCredit();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -365,8 +408,7 @@ namespace UI.Forms
             }
             catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -379,10 +421,9 @@ namespace UI.Forms
                     clientTextBox.Text = $" { ClientModel.Name } { ClientModel.Lastname}";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -392,10 +433,9 @@ namespace UI.Forms
             {
                 ModifyProductDetails(productsGridView.CurrentRow);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -406,6 +446,7 @@ namespace UI.Forms
                 if (e.KeyCode == Keys.Enter)
                 {
                     ProductModel productModel = ProductManagement.SelectProductByCode(codeTextBox.Text);
+
                     string code = productModel.Code;
                     string description = productModel.Description;
 
@@ -425,15 +466,17 @@ namespace UI.Forms
                         }
                         productsGridView.Rows.Add(code, description, subCategory, quantity, price, paymentAmount, discount, taxType, taxes, productModel.idProduct, 0);
                     }
+
                     ModifyProductDetails();
                     CalculateInvoiceDetails();
                     ValidateTaxes();
+                    
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
+                MetroMessageBox.Show(this, "No se encontro el codigo ingresado", "Codigo invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -451,7 +494,7 @@ namespace UI.Forms
                     decimal taxes = decimal.Parse(taxesTextBox.Text);
                     decimal subTotal = decimal.Parse(subTotalTextBox.Text);
                     decimal total = decimal.Parse(totalTextBox.Text);
-                    decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
+                    decimal cashAmount = 0;
                     decimal cardAmount = 0;
                     string currencyType = metroComboBox1.SelectedItem.ToString();
                     decimal totalPayment = decimal.Parse(totalTextBox.Text);
@@ -460,6 +503,16 @@ namespace UI.Forms
                     int mainBusinessId = BusinessManagement.SelectMainBusinessId();
                     string endDate = endDateTime.Text;
                     decimal deposit = decimal.Parse(depositTextBox.Text);
+
+                    if (cashAmountTextBox.Text != "")
+                    {
+                        cashAmount = decimal.Parse(cashAmountTextBox.Text);
+                    }
+
+                    if (creditAmountTextBox.Text != "")
+                    {
+                        cardAmount = decimal.Parse(creditAmountTextBox.Text);
+                    }
 
                     List<int> productsIds = new List<int>();
                     List<int> quantities = new List<int>();
@@ -482,10 +535,9 @@ namespace UI.Forms
                 }
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -500,6 +552,9 @@ namespace UI.Forms
                 {
                     offsetGridView.DataSource = depositModel;
                     offsetGridView.Columns.RemoveAt(2);
+                    offsetGridView.Columns[0].HeaderText = "Num Fact.";
+                    offsetGridView.Columns[1].HeaderText = "Nombre";
+                    offsetGridView.Columns[2].HeaderText = "Saldo Actual";
                 }
             }
             else
@@ -517,10 +572,9 @@ namespace UI.Forms
                     currentResidueTextbox.Text = offsetGridView.CurrentRow.Cells[2].Value.ToString();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -528,20 +582,19 @@ namespace UI.Forms
         {
             try
             {
-                if (!string.IsNullOrEmpty(offsetCashTextbox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.Text))
+                if (offsetCashTextbox.Text != "0" && !string.IsNullOrEmpty(currentResidueTextbox.Text))
                 {
                     ValidateChangeOffset();
                 }
-                else
+
+                if (offsetCreditTextbox.Text != "0" && !string.IsNullOrEmpty(currentResidueTextbox.Text))
                 {
-                    MetroMessageBox.Show(this, "Se encontraron campos vacios", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ValidateChangeOffsetCredit();
                 }
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 
@@ -551,8 +604,7 @@ namespace UI.Forms
             {
                 if (!currentResidueTextbox.Text.Equals("0,00"))
                 {
-                    if (!string.IsNullOrEmpty(newResidueTextBox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.Text)
-                    && !string.IsNullOrEmpty(offsetCashTextbox.Text))
+                    if (!string.IsNullOrEmpty(newResidueTextBox.Text) && !string.IsNullOrEmpty(currentResidueTextbox.Text))
                     {
                         string id = offsetGridView.CurrentRow.Cells[0].Value.ToString();
                         string name = offsetGridView.CurrentRow.Cells[1].Value.ToString();
@@ -574,10 +626,9 @@ namespace UI.Forms
                     MetroMessageBox.Show(this, "El apartado ya ha sido completado", "Datos invalidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
     }

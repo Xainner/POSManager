@@ -155,7 +155,7 @@ namespace DataBaseLibrary.Connections
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice", depositXOffset);
+                    var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice ORDER BY currentDate DESC LIMIT 1", depositXOffset);
                     return output.ToList();
                 }
             }
@@ -172,7 +172,7 @@ namespace DataBaseLibrary.Connections
                 depositXOffset.Name = $"%{ depositXOffset.Name }%";
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits WHERE Name like @Name", depositXOffset);
+                    var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits WHERE Name like @Name ORDER BY currentDate DESC LIMIT 1", depositXOffset);
                     return output.ToList();
                 }
             }
