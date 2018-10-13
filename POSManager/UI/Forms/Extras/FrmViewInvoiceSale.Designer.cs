@@ -61,7 +61,6 @@
             this.clearButton = new MetroFramework.Controls.MetroButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.currentTimeTimer = new System.Windows.Forms.Timer(this.components);
             this.reloadLatestInvoiceNumber = new System.Windows.Forms.Timer(this.components);
             this.codeTextBox = new MetroFramework.Controls.MetroTextBox();
@@ -252,6 +251,7 @@
             this.productsGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.productsGridView.Location = new System.Drawing.Point(23, 197);
             this.productsGridView.Name = "productsGridView";
+            this.productsGridView.ReadOnly = true;
             this.productsGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -647,16 +647,6 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // metroLabel14
-            // 
-            this.metroLabel14.AutoSize = true;
-            this.metroLabel14.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel14.Location = new System.Drawing.Point(697, 35);
-            this.metroLabel14.Name = "metroLabel14";
-            this.metroLabel14.Size = new System.Drawing.Size(113, 25);
-            this.metroLabel14.TabIndex = 6;
-            this.metroLabel14.Text = "metroLabel14";
-            // 
             // currentTimeTimer
             // 
             this.currentTimeTimer.Interval = 1000;
@@ -707,7 +697,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 669);
             this.Controls.Add(this.clearButton);
-            this.Controls.Add(this.metroLabel14);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.metroLabel5);
@@ -759,7 +748,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel10;
         private MetroFramework.Controls.MetroLabel metroLabel9;
         private MetroFramework.Controls.MetroButton clearButton;
-        private MetroFramework.Controls.MetroLabel metroLabel14;
         private MetroFramework.Controls.MetroButton changeButton;
         private System.Windows.Forms.Timer currentTimeTimer;
         private System.Windows.Forms.Timer reloadLatestInvoiceNumber;

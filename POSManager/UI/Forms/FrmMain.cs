@@ -12,6 +12,7 @@ using MetroFramework.Controls;
 using UI.UserControls;
 using BusinessLibrary.Models;
 using LogicLibrary.Utilities;
+using LogicLibrary.Management;
 
 namespace UI
 {
@@ -81,7 +82,7 @@ namespace UI
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            Printing printing = new Printing(1, DateTime.Now.Date, "casa de omar", "casa de pamela", 12, "Saul");
+            Printing printing = new Printing(1, DateTime.Now, ExternalInvoiceSaleManagement.SelectProductsInvoiceXInvoiceId(1), "Tienda Pamela");
             printing.print();
         }
     }
