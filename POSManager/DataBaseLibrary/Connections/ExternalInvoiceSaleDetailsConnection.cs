@@ -51,7 +51,7 @@ namespace DataBaseLibrary.Connections
             }
         }
 
-        public static bool InsertExternalInvoiceSaleDetails(ExternalInvoiceSaleDetailsModel externalInvoiceSaleDetailsModel, List<int> productsIds, List<int> productquantity)
+        public static bool InsertExternalInvoiceSaleDetails(ExternalInvoiceSaleDetailsModel externalInvoiceSaleDetailsModel, List<int> productsIds, List<int> productquantity, List<decimal> price, List<decimal> amount, List<decimal> discount)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace DataBaseLibrary.Connections
                     using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                     {
                         cnn.Execute("INSERT detailexternalinvoicesell (ActualDate, IdClient, idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDeposit, totalDiscount, subTotal, TOtal) VALUES (@ActualDate, @IdClient, @idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDeposit, @totalDiscount, @subTotal, @Total)", externalInvoiceSaleDetailsModel);
-                        InsertProductsXInvoice(productsIds, productquantity);
+                        InsertProductsXInvoice(productsIds, productquantity, price, amount, discount);
                         return true;
                     }
                 } else
@@ -69,7 +69,7 @@ namespace DataBaseLibrary.Connections
                     using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                     {
                         cnn.Execute("INSERT detailexternalinvoicesell (ActualDate, idEmployee, idBusiness, currencyType, iviAmount, cashDeposit, cardDeposit, totalDiscount, subTotal, TOtal) VALUES (@ActualDate, @idEmployee, @idBusiness, @currencyType, @iviAmount, @cashDeposit, @cardDeposit, @totalDiscount, @subTotal, @Total)", externalInvoiceSaleDetailsModel);
-                        InsertProductsXInvoice(productsIds, productquantity);
+                        InsertProductsXInvoice(productsIds, productquantity, price, amount, discount);
                         return true;
                     }
                 }
@@ -81,6 +81,7 @@ namespace DataBaseLibrary.Connections
                 throw;
             }
         }
+
 
         public static List<int> SelectProductsByDay(DateTime date)
         {
@@ -98,11 +99,43 @@ namespace DataBaseLibrary.Connections
             }
         }
 
+        public static ExternalInvoiceSaleDetailsModel SelectInvoiceById(int id)
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<ExternalInvoiceSaleDetailsModel>("SELECT numberInvoice FROM detailexternalinvoicesell WHERE numberInvoice = @id", new { id });
+                    return output.Single();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static ExternalInvoiceSaleDetailsModel SelectInvoice2ById(int id)
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<ExternalInvoiceSaleDetailsModel>("SELECT * FROM detailexternalinvoicesell WHERE numberInvoice = @id", new { id });
+                    return output.Single();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public static List<ProductXQuantityModel> productXQuantityModels(int id)
         {
             using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
             {
-                var output2 = cnn.Query<ProductXQuantityModel>("SELECT description, quantity FROM product INNER JOIN externalinvoicesell ON product.idProduct = externalinvoicesell.Product_idProduct WHERE externalinvoicesell.idDetailExternalInvoiceSell = @id", new { id });
+                var output2 = cnn.Query<ProductXQuantityModel>("SELECT description, quantity, price, amount, discount FROM product INNER JOIN externalinvoicesell ON product.idProduct = externalinvoicesell.Product_idProduct WHERE externalinvoicesell.idDetailExternalInvoiceSell =  @id", new { id });
                 return output2.ToList();
             }
         }
@@ -183,7 +216,7 @@ namespace DataBaseLibrary.Connections
             }
         }
 
-        private static void InsertProductsXInvoice(List<int> productsids, List<int> quantites)
+        private static void InsertProductsXInvoice(List<int> productsids, List<int> quantites, List<decimal> price, List<decimal> amount, List<decimal> discount)
         {
             ProductsXInvoiceModel productsXInvoiceModel;
             int i = 0;
@@ -194,11 +227,14 @@ namespace DataBaseLibrary.Connections
                     Product_idProduct = item,
                     IdDetailExternalInvoiceSell = SelectLastInvoiceNumber(),
                     Quantity = quantites[i],
+                    Amount = amount[i],
+                    Discount = discount[i],
+                    Price = price[i]
                 };
             
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    cnn.Execute("INSERT externalinvoicesell (Product_idProduct, idDetailExternalInvoiceSell, quantity) VALUES (@Product_idProduct, @idDetailExternalInvoiceSell, @Quantity)", productsXInvoiceModel);
+                    cnn.Execute("INSERT externalinvoicesell (Product_idProduct, idDetailExternalInvoiceSell, quantity, amount, discount, price) VALUES (@Product_idProduct, @idDetailExternalInvoiceSell, @Quantity, @Amount, @Discount, @Price)", productsXInvoiceModel);
                 }
                 i++;
             }

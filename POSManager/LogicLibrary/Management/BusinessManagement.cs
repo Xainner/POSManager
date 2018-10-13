@@ -147,7 +147,7 @@ namespace LogicLibrary.Management
             {
                 BusinessModel businessModel = new BusinessModel()
                 {
-                    FantasyName = fantasyName, SocietyName = societyName, LegalCertification = legalCertification, Main = main, Telephone = telephone, Logo = logo, GeneralAddress = "", MainAddress = ""
+                    FantasyName = fantasyName, SocietyName = societyName, LegalCertification = legalCertification, Main = 1, Telephone = telephone, Logo = logo, GeneralAddress = "", MainAddress = ""
                 };
                 return BusinessConnection.InsertBusiness(businessModel);
             }

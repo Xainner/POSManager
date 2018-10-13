@@ -181,7 +181,7 @@ namespace UI.Forms
                 productsGridView.Columns[6].ReadOnly = false;
 
                 productsGridView.Columns[9].Visible = false;
-                productsGridView.Columns[10].Visible = true;
+                productsGridView.Columns[10].Visible = false;
 
                 productsGridView.MultiSelect = false;
             }
@@ -479,7 +479,25 @@ namespace UI.Forms
                     {
                         productquantity.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
                     }
-                    ExternalInvoiceSaleManagement.InsertExternalInvoiceSaleDetails(discount, taxes, subTotal, total, cashAmount, cardAmount, currencyType, mainBusinessId, clientId, employeeId, productsIds, productquantity);
+
+                    List<decimal> productAmounts = new List<decimal>();
+                    foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                    {
+                        productAmounts.Add(decimal.Parse(dataGridViewRow.Cells[5].Value.ToString()));
+                    }
+
+                    List<decimal> productPrices = new List<decimal>();
+                    foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                    {
+                        productPrices.Add(decimal.Parse(dataGridViewRow.Cells[4].Value.ToString()));
+                    }
+
+                    List<decimal> productsDiscounts = new List<decimal>();
+                    foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                    {
+                        productsDiscounts.Add(decimal.Parse(dataGridViewRow.Cells[6].Value.ToString()));
+                    }
+                    ExternalInvoiceSaleManagement.InsertExternalInvoiceSaleDetails(discount, taxes, subTotal, total, cashAmount, cardAmount, currencyType, mainBusinessId, clientId, employeeId, productsIds, productquantity, productPrices, productAmounts, productsDiscounts);
                     clearButton.PerformClick();
                     toolStripStatusLabel1.Text = "Factura realizada con éxito";
                 } else
