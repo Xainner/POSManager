@@ -22,7 +22,7 @@ namespace DataBaseLibrary
         {
             using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<ProductModel>("SELECT * FROM product");
+                var output = cnn.Query<ProductModel>("SELECT * FROM product ORDER BY idProduct ASC LIMIT 20");
                 return output.ToList();
             }
         }
