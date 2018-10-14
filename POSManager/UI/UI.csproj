@@ -78,6 +78,12 @@
     <Compile Include="Forms\Extras\FrmViewInvoiceSale.Designer.cs">
       <DependentUpon>FrmViewInvoiceSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Extras\FrmViewOffsetDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extras\FrmViewOffsetDetails.Designer.cs">
+      <DependentUpon>FrmViewOffsetDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Extras\FrmViewInvoiceSale.resx">
       <DependentUpon>FrmViewInvoiceSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Extras\FrmViewOffsetDetails.resx">
+      <DependentUpon>FrmViewOffsetDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>

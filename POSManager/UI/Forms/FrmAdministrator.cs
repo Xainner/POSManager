@@ -14,6 +14,7 @@ using BusinessLibrary.Models;
 using LogicLibrary.Utilities;
 using System.Runtime.InteropServices;
 using System.IO;
+using UI.Forms.Extras;
 
 namespace UI.Forms
 {
@@ -45,12 +46,17 @@ namespace UI.Forms
             inicioFecha.Enabled = false;
             metroButton1.Enabled = false;
             finalFecha.Enabled = false;
+            firstDateTime.Enabled = false;
+            secondDateTime.Enabled = false;
+            searchOffsetButton.Enabled = false;
             comboBoxRangos.SelectedIndex = 0;
             rangosProductos.SelectedIndex = 0;
             invoices = ExternalInvoiceSaleManagement.SelectInvoices();
             metroGrid1.DataSource = invoices;
             offSet = OffsetDetailsManagement.SelectAllOffsetDetails();
             offsetmetroGrid.DataSource = offSet;
+            offsetmetroGrid.Columns.RemoveAt(3);
+            offsetmetroGrid.Columns.RemoveAt(3);
         }
 
         private void FrmAdministrator_Leave(object sender, EventArgs e)
@@ -655,8 +661,23 @@ namespace UI.Forms
             }
         }
 
+        //-----------------------------AREA DE APARTADOS ---------------------------------
+
+        private void GetPaymentsOffset()
+        {
+            decimal total = 0;
+            foreach (DataGridViewRow item in offsetmetroGrid.Rows)
+            {
+                total += decimal.Parse(item.Cells[9].Value.ToString());
+            }
+            totalOffsetTextBox.Text = total.ToString("#.##");
+        }
+
         private void offsetComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DateTime morning = DateTime.Today;
+            DateTime night = DateTime.Today;
+
             if (offsetComboBox.SelectedIndex == 1)
             {
                 firstDateTime.Enabled = true;
@@ -672,16 +693,82 @@ namespace UI.Forms
             switch (offsetComboBox.SelectedIndex)
             {
                 case 0:
-                    offSet = OffsetDetailsManagement.SelectOffsetByDay(DateTime.Today);
+                    offSet = OffsetDetailsManagement.SelectOffsetByDay(morning.ToString("dd-MM-yyyy 00:00:00"), night.ToString("dd-MM-yyyy 23:59:59"));
+                    offsetmetroGrid.DataSource = offSet;
+                    offsetmetroGrid.Columns.RemoveAt(3);
+                    offsetmetroGrid.Columns.RemoveAt(3);
+                    GetPaymentsOffset();
                     break;
             }
-            offsetmetroGrid.DataSource = offSet;
-            GetTotal();
+
         }
 
         private void searchOffsetButton_Click(object sender, EventArgs e)
         {
-            
+            DateTime first = firstDateTime.Value;
+            DateTime second = secondDateTime.Value;
+
+            offSet = OffsetDetailsManagement.SelectOffsetByDate(first.ToString("dd-MM-yyyy 00:00:00"), second.ToString("dd-MM-yyyy 23:59:59"));
+            offsetmetroGrid.DataSource = offSet;
+            offsetmetroGrid.Columns.RemoveAt(3);
+            offsetmetroGrid.Columns.RemoveAt(3);
+            GetPaymentsOffset();
+        }
+
+        private void offsetmetroGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            try
+            {
+                if (offsetmetroGrid.CurrentRow != null)
+                {
+                    FrmViewOffsetDetails frmViewOffsetDetails = new FrmViewOffsetDetails(offsetmetroGrid.CurrentRow.Cells[0].Value.ToString());
+                    frmViewOffsetDetails.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel1.Text = ex.Message;
+            }
+        }
+
+        private void ExportOffsetButton_Click(object sender, EventArgs e)
+        {
+            if (offsetmetroGrid.Rows.Count != 0)
+            {
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                worksheet = workbook.Sheets["Hoja1"];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "CustomerDetail";
+
+                for (int i = 1; i < offsetmetroGrid.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[1, i] = offsetmetroGrid.Columns[i - 1].HeaderText;
+                }
+
+                for (int i = 0; i < offsetmetroGrid.Rows.Count; i++)
+                {
+                    for (int j = 0; j < offsetmetroGrid.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = offsetmetroGrid.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+
+                var saveFileDialoge = new SaveFileDialog();
+                saveFileDialoge.FileName = "Apartados";
+                saveFileDialoge.DefaultExt = "xlsx";
+                if (saveFileDialoge.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(saveFileDialoge.FileName))
+                    {
+                        File.Delete(saveFileDialoge.FileName);
+                    }
+                    workbook.SaveAs(saveFileDialoge.FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                }
+                app.Quit();
+            }
         }
     }
 }

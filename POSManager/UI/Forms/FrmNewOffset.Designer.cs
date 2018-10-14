@@ -317,6 +317,7 @@
             this.depositTextBox.ShortcutsEnabled = true;
             this.depositTextBox.Size = new System.Drawing.Size(193, 39);
             this.depositTextBox.TabIndex = 7;
+            this.depositTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.depositTextBox.UseSelectable = true;
             this.depositTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.depositTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -415,7 +416,7 @@
             this.cashAmountTextBox.Icon = global::UI.Properties.Resources.Paper_Money_16px;
             this.cashAmountTextBox.Lines = new string[] {
         "0"};
-            this.cashAmountTextBox.Location = new System.Drawing.Point(139, 23);
+            this.cashAmountTextBox.Location = new System.Drawing.Point(127, 23);
             this.cashAmountTextBox.MaxLength = 32767;
             this.cashAmountTextBox.Name = "cashAmountTextBox";
             this.cashAmountTextBox.PasswordChar = '\0';

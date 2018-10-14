@@ -45,6 +45,15 @@ namespace DataBaseLibrary
             }
         }
 
+        public static ProductModel SelectProductByID(ProductModel productModel)
+        {
+            using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<ProductModel>("SELECT * FROM product WHERE idProduct = @idProduct", productModel);
+                return output.Single();
+            }
+        }
+
         public static ProductModel SelectProductByStyle(ProductModel productModel)
         {
             using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
