@@ -72,6 +72,22 @@ namespace LogicLibrary.Management
             }
         }
 
+        public static EmployeeModel SelectIdentification(string identification)
+        {
+            try
+            {
+                EmployeeModel employeeModel = new EmployeeModel()
+                {
+                    Identification = identification
+                };
+                return EmployeeConnection.SelectIdentification(employeeModel);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public static bool InsertEmployee(string name, string lastName, string idType, string identification, DateTime bornDate)
         {
             try

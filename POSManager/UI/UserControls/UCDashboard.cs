@@ -186,5 +186,19 @@ namespace UI.UserControls
             FrmNewOffset frmNewOffset = new FrmNewOffset();
             frmNewOffset.Show();
         }
+
+        private void metroTile3_Click(object sender, EventArgs e)
+        {
+            if (!FrmMain.Instance.metroPanel.Controls.ContainsKey("ucBusiness"))
+            {
+                UCBusiness ucBusiness = new UCBusiness
+                {
+                    Dock = DockStyle.Fill
+                };
+                FrmMain.Instance.metroPanel.Controls.Add(ucBusiness);
+            }
+            FrmMain.Instance.metroPanel.Controls["ucBusiness"].BringToFront();
+            FrmMain.Instance.metroLink.Visible = true;
+        }
     }
 }

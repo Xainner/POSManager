@@ -36,9 +36,7 @@
             this.rotateRightLink = new MetroFramework.Controls.MetroLink();
             this.rotateLeftLink = new MetroFramework.Controls.MetroLink();
             this.clearButton = new MetroFramework.Controls.MetroButton();
-            this.deleteButton = new MetroFramework.Controls.MetroButton();
             this.updateButton = new MetroFramework.Controls.MetroButton();
-            this.createButton = new MetroFramework.Controls.MetroButton();
             this.selectLogoButton = new MetroFramework.Controls.MetroButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.generalDirectionTextBox = new MetroFramework.Controls.MetroTextBox();
@@ -71,9 +69,7 @@
             this.groupBox1.Controls.Add(this.rotateRightLink);
             this.groupBox1.Controls.Add(this.rotateLeftLink);
             this.groupBox1.Controls.Add(this.clearButton);
-            this.groupBox1.Controls.Add(this.deleteButton);
             this.groupBox1.Controls.Add(this.updateButton);
-            this.groupBox1.Controls.Add(this.createButton);
             this.groupBox1.Controls.Add(this.selectLogoButton);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.generalDirectionTextBox);
@@ -97,7 +93,7 @@
             this.groupBox1.Size = new System.Drawing.Size(945, 257);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Información de los Negocios";
+            this.groupBox1.Text = "Información del Negocios";
             // 
             // businessIdLabel
             // 
@@ -131,7 +127,7 @@
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(249, 228);
+            this.clearButton.Location = new System.Drawing.Point(90, 228);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 12;
@@ -139,35 +135,15 @@
             this.clearButton.UseSelectable = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(168, 228);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 11;
-            this.deleteButton.Text = "Eliminar";
-            this.deleteButton.UseSelectable = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(87, 228);
+            this.updateButton.Location = new System.Drawing.Point(9, 228);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(75, 23);
             this.updateButton.TabIndex = 10;
             this.updateButton.Text = "Modificar";
             this.updateButton.UseSelectable = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
-            // 
-            // createButton
-            // 
-            this.createButton.Location = new System.Drawing.Point(6, 228);
-            this.createButton.Name = "createButton";
-            this.createButton.Size = new System.Drawing.Size(75, 23);
-            this.createButton.TabIndex = 9;
-            this.createButton.Text = "Agregar";
-            this.createButton.UseSelectable = true;
-            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // selectLogoButton
             // 
@@ -657,9 +633,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroButton clearButton;
-        private MetroFramework.Controls.MetroButton deleteButton;
         private MetroFramework.Controls.MetroButton updateButton;
-        private MetroFramework.Controls.MetroButton createButton;
         private MetroFramework.Controls.MetroButton selectLogoButton;
         private MetroFramework.Controls.MetroTextBox searchTextBox;
         private MetroFramework.Controls.MetroGrid businessGridView;

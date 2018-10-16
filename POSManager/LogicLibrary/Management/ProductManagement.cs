@@ -75,8 +75,7 @@ namespace LogicLibrary.Management
             }
             catch (Exception ex)
             {
-
-                throw;
+                return null;
             }
         }
 

@@ -134,34 +134,27 @@ namespace UI.UserControls
                 {
                     if (!string.IsNullOrEmpty(lastnameTextBox.Text))
                     {
-                        if (!string.IsNullOrEmpty(emailTextBox.Text))
+                        if (!string.IsNullOrEmpty(identificationTextBox.Text) && ClientManagement.SelectIdentification(identificationTextBox.Text) == null)
                         {
-                            if (!string.IsNullOrEmpty(identificationTextBox.Text))
+                            if (MetroMessageBox.Show(this, $"¿Seguro que desea agregar al cliente: { nameTextBox.Text }?", "Modificar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
-                                if (MetroMessageBox.Show(this, $"¿Seguro que desea agregar al cliente: { nameTextBox.Text }?", "Modificar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                                if (ClientManagement.InsertClient(nameTextBox.Text, lastnameTextBox.Text, idTypeComboBox.SelectedItem.ToString(),
+                                    identificationTextBox.Text, emailTextBox.Text, bornDateDateTime.Value))
                                 {
-                                    if (ClientManagement.InsertClient(nameTextBox.Text, lastnameTextBox.Text, idTypeComboBox.SelectedItem.ToString(),
-                                        identificationTextBox.Text, emailTextBox.Text, bornDateDateTime.Value))
-                                    {
-                                        FrmMain.Instance.ToolStripLabel.Text = "Cliente agregado de manera exitosa.";
-                                        Clear();
-                                        clientIdLabel.Text = "Vacío";
-                                        WireUpClientsGridView();
-                                    }
-                                    else
-                                    {
-                                        MetroMessageBox.Show(this, $"Ha ocurrido un error al agregar al cliente: { nameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
+                                    FrmMain.Instance.ToolStripLabel.Text = "Cliente agregado de manera exitosa.";
+                                    Clear();
+                                    clientIdLabel.Text = "Vacío";
+                                    WireUpClientsGridView();
                                 }
-                            }
-                            else
-                            {
-                                MetroMessageBox.Show(this, "La identificación estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                else
+                                {
+                                    MetroMessageBox.Show(this, $"Ha ocurrido un error al agregar al cliente: { nameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                         }
                         else
                         {
-                            MetroMessageBox.Show(this, "La dirección electrónica no puede estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MetroMessageBox.Show(this, "La identificación no puede ser vacía, ni repetida", "Campo vacío o Repetido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
@@ -190,34 +183,27 @@ namespace UI.UserControls
                     {
                         if (!string.IsNullOrEmpty(lastnameTextBox.Text))
                         {
-                            if (!string.IsNullOrEmpty(emailTextBox.Text))
+                            if (!string.IsNullOrEmpty(identificationTextBox.Text) && ClientManagement.SelectIdentification(identificationTextBox.Text) == null)
                             {
-                                if (!string.IsNullOrEmpty(identificationTextBox.Text))
+                                if (MetroMessageBox.Show(this, $"¿Seguro que desea modificar al cliente: { clientsGridView.CurrentRow.Cells[1].Value.ToString() }?", "Modificar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                                 {
-                                    if (MetroMessageBox.Show(this, $"¿Seguro que desea modificar al cliente: { clientsGridView.CurrentRow.Cells[1].Value.ToString() }?", "Modificar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                                    if (ClientManagement.UpdateClientById(int.Parse(clientIdLabel.Text), nameTextBox.Text, lastnameTextBox.Text, idTypeComboBox.SelectedItem.ToString(),
+                                        identificationTextBox.Text, emailTextBox.Text, bornDateDateTime.Value))
                                     {
-                                        if (ClientManagement.UpdateClientById(int.Parse(clientIdLabel.Text), nameTextBox.Text, lastnameTextBox.Text, idTypeComboBox.SelectedItem.ToString(),
-                                            identificationTextBox.Text, emailTextBox.Text , bornDateDateTime.Value))
-                                        {
-                                            FrmMain.Instance.ToolStripLabel.Text = "Cliente modificado de manera exitosa.";
-                                            Clear();
-                                            clientIdLabel.Text = "Vacío";
-                                            WireUpClientsGridView();
-                                        }
-                                        else
-                                        {
-                                            MetroMessageBox.Show(this, $"Ha ocurrido un error al modificar al cliente: { nameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
+                                        FrmMain.Instance.ToolStripLabel.Text = "Cliente modificado de manera exitosa.";
+                                        Clear();
+                                        clientIdLabel.Text = "Vacío";
+                                        WireUpClientsGridView();
                                     }
-                                }
-                                else
-                                {
-                                    MetroMessageBox.Show(this, "La identificación estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    else
+                                    {
+                                        MetroMessageBox.Show(this, $"Ha ocurrido un error al modificar al cliente: { nameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                 }
                             }
                             else
                             {
-                                MetroMessageBox.Show(this, "La dirección electrónica no puede estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MetroMessageBox.Show(this, "La identificación no puede ser vacía, ni repetida", "Campo vacío o Repetido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
                         else

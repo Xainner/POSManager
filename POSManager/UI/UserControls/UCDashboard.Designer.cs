@@ -191,6 +191,7 @@
             this.metroTile3.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroTile3.UseSelectable = true;
             this.metroTile3.UseTileImage = true;
+            this.metroTile3.Click += new System.EventHandler(this.metroTile3_Click);
             // 
             // logOutTile
             // 

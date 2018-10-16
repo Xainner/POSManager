@@ -130,7 +130,7 @@ namespace UI.UserControls
                 {
                     if (!string.IsNullOrEmpty(lastnameTextBox.Text))
                     {
-                        if (!string.IsNullOrEmpty(identificationTextBox.Text))
+                        if (!string.IsNullOrEmpty(identificationTextBox.Text) && EmployeeManagement.SelectIdentification(identificationTextBox.Text) == null)
                         {
                             if (MetroMessageBox.Show(this, $"¿Seguro que desea agregar al empleado: { nameTextBox.Text }?", "Modificar empleado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
@@ -150,7 +150,7 @@ namespace UI.UserControls
                         }
                         else
                         {
-                            MetroMessageBox.Show(this, "La identificación estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MetroMessageBox.Show(this, "La identificación no puede ser vacía, ni repetida", "Campo vacío o Repetido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
@@ -179,7 +179,7 @@ namespace UI.UserControls
                     {
                         if (!string.IsNullOrEmpty(lastnameTextBox.Text))
                         {
-                            if (!string.IsNullOrEmpty(identificationTextBox.Text))
+                            if (!string.IsNullOrEmpty(identificationTextBox.Text) && EmployeeManagement.SelectIdentification(identificationTextBox.Text) == null)
                             {
                                 if (MetroMessageBox.Show(this, $"¿Seguro que desea modificar al empleado: { clientsGridView.CurrentRow.Cells[1].Value.ToString() }?", "Modificar empleado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                                 {
@@ -199,7 +199,7 @@ namespace UI.UserControls
                             }
                             else
                             {
-                                MetroMessageBox.Show(this, "La identificación estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MetroMessageBox.Show(this, "La identificación no puede ser vacía, ni repetida", "Campo vacío o Repetido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
                         else

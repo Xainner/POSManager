@@ -73,6 +73,22 @@ namespace LogicLibrary.Management
             }
         }
 
+        public static ClientModel SelectIdentification(string identification)
+        {
+            try
+            {
+                ClientModel clientModel = new ClientModel()
+                {
+                    Identification = identification
+                };
+                return ClientConnection.SelectIdentification(clientModel);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public static bool InsertClient(string name, string lastName, string idType, string identification, string email, DateTime bornDate)
         {
             try

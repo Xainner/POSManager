@@ -120,7 +120,7 @@ namespace UI.UserControls
 
             try
             {
-                if (!string.IsNullOrEmpty(codeTextBox.Text))
+                if (!string.IsNullOrEmpty(codeTextBox.Text) && ProductManagement.SelectProductByCode(codeTextBox.Text) == null)
                 {
                     if (!string.IsNullOrEmpty(descriptionTextBox.Text))
                     {
@@ -165,7 +165,7 @@ namespace UI.UserControls
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "El Código no puede estar vacío", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MetroMessageBox.Show(this, "El Código no puede estar vacío, ni puede ser repetido.", "Error en el código", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -188,7 +188,7 @@ namespace UI.UserControls
                     taxes = false;
                 }
 
-                if (!string.IsNullOrEmpty(codeTextBox.Text))
+                if (!string.IsNullOrEmpty(codeTextBox.Text) && ProductManagement.SelectProductByCode(codeTextBox.Text) == null)
                 {
                     if (!string.IsNullOrEmpty(descriptionTextBox.Text))
                     {
@@ -231,12 +231,12 @@ namespace UI.UserControls
                     }
                     else
                     {
-                        MetroMessageBox.Show(this, "La descripción no puede ser vacía", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MetroMessageBox.Show(this, "La descripción no puede ser vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "El Código no puede estar vacío", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MetroMessageBox.Show(this, "El Código no puede estar vacío, ni puede ser repetido.", "Error en el código", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)

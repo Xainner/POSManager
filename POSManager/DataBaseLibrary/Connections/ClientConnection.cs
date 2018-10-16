@@ -88,6 +88,23 @@ namespace DataBaseLibrary
             }
         }
 
+        public static ClientModel SelectIdentification(ClientModel clientModel)
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<ClientModel>("SELECT * FROM client WHERE Identification = @Identification", clientModel);
+                    return output.Single();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public static bool InsertClient(ClientModel clientModel)
         {
             try

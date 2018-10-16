@@ -98,6 +98,7 @@ namespace DataBaseLibrary
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
+
                     cnn.Execute("INSERT INTO product (Code, Style, idBrand, idsubCategory, Description, " +
                         "normalPrice, lowerPrice, estableQuantity, variableQuantity, Image, Ivi, existingInvoice) VALUES" +
                         "(@Code, @Style, @idBrand, @idsubCategory, @Description, @normalPrice, @lowerPrice, @estableQuantity, @variableQuantity,  @Image, @Ivi, @existingInvoice)", productModel);

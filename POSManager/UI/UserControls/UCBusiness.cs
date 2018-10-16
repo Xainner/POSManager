@@ -164,92 +164,6 @@ namespace UI.UserControls
         }
         //---------CRUD---------\\
 
-        private void createButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (businessIdLabel.Text.Equals("Vacío"))
-                {
-                    if (!string.IsNullOrEmpty(fantasyNameTextBox.Text))
-                    {
-                        if (!string.IsNullOrEmpty(societyNameTextBox.Text))
-                        {
-                            if (!string.IsNullOrEmpty(juridicIdTextBox.Text))
-                            {
-                                if (!string.IsNullOrEmpty(telephoneTextBox.Text))
-                                {
-                                    if (!string.IsNullOrEmpty(exactDirectionTextBox.Text))
-                                    {
-                                        if (!string.IsNullOrEmpty(generalDirectionTextBox.Text))
-                                        {
-                                            if (!string.IsNullOrEmpty(emailTextBox.Text))
-                                            {
-                                                if (!string.IsNullOrEmpty(webPageTextBox.Text))
-                                                {
-                                                    if (pictureBox1.Image != null)
-                                                    {
-                                                        if (BusinessManagement.InsertBusiness(fantasyNameTextBox.Text, societyNameTextBox.Text, juridicIdTextBox.Text, telephoneTextBox.Text, exactDirectionTextBox.Text, generalDirectionTextBox.Text, emailTextBox.Text, webPageTextBox.Text, ImageManagement.ImageToByte(ImageManagement.TemporaryImage(pictureBox1.Image))))
-                                                        {
-                                                            FrmMain.Instance.ToolStripLabel.Text = "Negocio agregado de manera exitosa.";
-                                                            Clear();
-                                                            businessIdLabel.Text = "Vacío";
-                                                            WireUpBusinessGridView();
-                                                        }
-                                                        else
-                                                        {
-                                                            MetroMessageBox.Show(this, $"Ha ocurrido un error al agregar el negocio: { fantasyNameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        MetroMessageBox.Show(this, "El logo del negocio no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    MetroMessageBox.Show(this, "El sitio web no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                MetroMessageBox.Show(this, "El correo electrónico no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            MetroMessageBox.Show(this, "La dirección general no puede estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        MetroMessageBox.Show(this, "La dirección exacta no puede estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    }
-                                }
-                                else
-                                {
-                                    MetroMessageBox.Show(this, "El número de teléfono no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                            } else
-                            {
-                                MetroMessageBox.Show(this, "La cédula jurídica no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                        } else
-                        {
-                            MetroMessageBox.Show(this, "El nombre de la sociedad no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    else
-                    {
-                        MetroMessageBox.Show(this, "El nombre de fantasía no puede estar vacío", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
         private void updateButton_Click(object sender, EventArgs e)
         {
             try
@@ -262,47 +176,26 @@ namespace UI.UserControls
                         {
                             if (!string.IsNullOrEmpty(exactDirectionTextBox.Text))
                             {
-                                if (!string.IsNullOrEmpty(generalDirectionTextBox.Text))
+                                if (pictureBox1.Image != null)
                                 {
-                                    if (!string.IsNullOrEmpty(emailTextBox.Text))
+                                    if (MetroMessageBox.Show(this, $"¿Seguro que desea modificar el negocio: { fantasyNameTextBox.Text }?", "Modificar negocio", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                                     {
-                                        if (!string.IsNullOrEmpty(webPageTextBox.Text))
+                                        if (BusinessManagement.UpdateBusinessById(int.Parse(businessIdLabel.Text), fantasyNameTextBox.Text, telephoneTextBox.Text, exactDirectionTextBox.Text, generalDirectionTextBox.Text, emailTextBox.Text, webPageTextBox.Text, ImageManagement.ImageToByte(ImageManagement.TemporaryImage(pictureBox1.Image))))
                                         {
-                                            if (pictureBox1.Image != null)
-                                            {
-                                                if (MetroMessageBox.Show(this, $"¿Seguro que desea modificar el negocio: { fantasyNameTextBox.Text }?", "Modificar negocio", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                                                {
-                                                    if (BusinessManagement.UpdateBusinessById(int.Parse(businessIdLabel.Text), fantasyNameTextBox.Text, telephoneTextBox.Text, exactDirectionTextBox.Text, generalDirectionTextBox.Text, emailTextBox.Text, webPageTextBox.Text, ImageManagement.ImageToByte(ImageManagement.TemporaryImage(pictureBox1.Image))))
-                                                    {
-                                                        FrmMain.Instance.ToolStripLabel.Text = "Negocio modificado de manera exitosa.";
-                                                        Clear();
-                                                        businessIdLabel.Text = "Vacío";
-                                                        WireUpBusinessGridView();
-                                                    }
-                                                    else
-                                                    {
-                                                        MetroMessageBox.Show(this, $"Ha ocurrido un error al modificar el negocio: { fantasyNameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                MetroMessageBox.Show(this, "El logo del negocio no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            }
+                                            FrmMain.Instance.ToolStripLabel.Text = "Negocio modificado de manera exitosa.";
+                                            Clear();
+                                            businessIdLabel.Text = "Vacío";
+                                            WireUpBusinessGridView();
                                         }
                                         else
                                         {
-                                            MetroMessageBox.Show(this, "El sitio web no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            MetroMessageBox.Show(this, $"Ha ocurrido un error al modificar el negocio: { fantasyNameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
-                                    }
-                                    else
-                                    {
-                                        MetroMessageBox.Show(this, "El correo electrónico no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     }
                                 }
                                 else
                                 {
-                                    MetroMessageBox.Show(this, "La dirección general no puede estár vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    MetroMessageBox.Show(this, "El logo del negocio no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
                             }
                             else
@@ -322,38 +215,6 @@ namespace UI.UserControls
                 else
                 {
                     MetroMessageBox.Show(this, "Debe seleccionar una negocio para poder modificarlo.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!businessIdLabel.Text.Equals("Vacío"))
-                {
-                    if (MetroMessageBox.Show(this, $"¿Seguro que desea eliminar el negocio: { fantasyNameTextBox.Text }?", "Eliminar negocio", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                    {
-                        if (BusinessManagement.DeleteBusinessById(int.Parse(businessIdLabel.Text)))
-                        {
-                            FrmMain.Instance.ToolStripLabel.Text = "Negocio eliminado de manera exitosa.";
-                            Clear();
-                            businessIdLabel.Text = "Vacío";
-                            WireUpBusinessGridView();
-                        }
-                        else
-                        {
-                            MetroMessageBox.Show(this, $"Ha ocurrido un error al eliminar el negocio: { fantasyNameTextBox.Text}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                else
-                {
-                    MetroMessageBox.Show(this, "Debe seleccionar una negocio para poder eliminarlo.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)

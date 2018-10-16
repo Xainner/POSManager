@@ -87,6 +87,22 @@ namespace DataBaseLibrary.Connections
             }
         }
 
+        public static EmployeeModel SelectIdentification(EmployeeModel employeeModel)
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<EmployeeModel>("SELECT * FROM employee WHERE Identification = @Identification", employeeModel);
+                    return output.Single();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public static bool InsertEmployee(EmployeeModel employeeModel)
         {
             try
