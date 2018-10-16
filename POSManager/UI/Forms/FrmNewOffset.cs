@@ -504,7 +504,8 @@ namespace UI.Forms
                     string code = productModel.Code;
                     string description = productModel.Description;
 
-                    string subCategory = (SubCategoryManagement.SelectSubCategoryById(productModel.idsubCategory).Name);
+                    //string subCategory = (SubCategoryManagement.SelectSubCategoryById(productModel.idsubCategory).Name);
+                    string subCategory = "Temporal";
 
                     if (!SearchDuplicates(code))
                     {
