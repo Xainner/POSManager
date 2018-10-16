@@ -519,7 +519,10 @@ namespace UI.Forms
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            invoices = ExternalInvoiceSaleManagement.SelectInvoicesByDate(inicioFecha.Value, finalFecha.Value);
+            DateTime morning = inicioFecha.Value;
+            DateTime night = finalFecha.Value;
+
+            invoices = ExternalInvoiceSaleManagement.SelectInvoicesByDate(morning.ToString("dd-MM-yyyy 00:00:00"), night.ToString("dd-MM-yyyy 23:59:59"));
             metroGrid1.DataSource = invoices;
             GetTotal();
         }
@@ -538,7 +541,9 @@ namespace UI.Forms
 
         private void buscarFechaProductos_Click(object sender, EventArgs e)
         {
-            productsInvoices = ExternalInvoiceSaleManagement.SelectProductsByDate(inicioFechaProductos.Value, finFechaProductos.Value);
+            DateTime morning = inicioFechaProductos.Value;
+            DateTime night = finFechaProductos.Value;
+            productsInvoices = ExternalInvoiceSaleManagement.SelectProductsByDate(morning.ToString("dd-MM-yyyy 00:00:00"), night.ToString("dd-MM-yyyy 23:59:59"));
             metroGrid2.DataSource = productsInvoices;
         }
 

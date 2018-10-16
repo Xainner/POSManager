@@ -127,11 +127,11 @@ namespace LogicLibrary.Management
             }
         }
 
-        public static List<ExternalInvoiceSaleDetailsModel> SelectInvoicesByDate(DateTime start, DateTime end)
+        public static List<ExternalInvoiceSaleDetailsModel> SelectInvoicesByDate(string start, string end)
         {
             try
             {
-                return ExternalInvoiceSaleDetailsConnection.SelectInvoicesByDate(start, end);
+                return ExternalInvoiceSaleDetailsConnection.SelectInvoicesByDate(DateTime.Parse(start), DateTime.Parse(end));
             }
             catch (Exception ex)
             {
@@ -178,11 +178,11 @@ namespace LogicLibrary.Management
 
         }
 
-        public static List<ProductXQuantityModel> SelectProductsByDate(DateTime value1, DateTime value2)
+        public static List<ProductXQuantityModel> SelectProductsByDate(string value1, string value2)
         {
             try
             {
-                return SelectProductsByDay2(ExternalInvoiceSaleDetailsConnection.SelectInvoicesByDate2(value1, value2));
+                return SelectProductsByDay2(ExternalInvoiceSaleDetailsConnection.SelectInvoicesByDate2(DateTime.Parse(value1), DateTime.Parse(value2)));
             }
             catch (Exception ex)
             {
