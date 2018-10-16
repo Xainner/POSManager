@@ -19,45 +19,30 @@ namespace DataBaseLibrary.Connections
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
-        public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
+        //--------------AREA DE PRODUCTOS DE APARTADOS (PRODUCTXOFFSET)-------------------
+
+        public static List<OffSetDetailsModel> SelectAllOffsetDetails()
         {
             try
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits");
+                    var output = cnn.Query<OffSetDetailsModel>("SELECT * FROM detailoffsetinvoice");
                     return output.ToList();
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
 
-        public static DepositXOffsetModel SelectDepositByInvoice(DepositXOffsetModel depositXOffset)
+        public static OffSetDetailsModel SelectDetailOffsetByNumOffset(OffSetDetailsModel offSetDetails)
         {
             using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice", depositXOffset);
+                var output = cnn.Query<OffSetDetailsModel>("SELECT * FROM detailoffsetinvoice WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice", offSetDetails);
                 return output.Single();
-            }
-        }
-
-        public static int SelectLastOffsetNumber()
-        {
-            try
-            {
-                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
-                {
-                    var output = cnn.Query<int>("SELECT COUNT(IdDetailOffsetInvoice) FROM detailoffsetinvoice ORDER BY IdDetailOffsetInvoice DESC LIMIT 1");
-                    return output.Single();
-                }
-            }
-            catch (Exception ex)
-            {
-
-                return 0;
             }
         }
 
@@ -67,10 +52,10 @@ namespace DataBaseLibrary.Connections
             {
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                   cnn.Execute("INSERT detailoffsetinvoice (Client, IdEmployee, IdBusiness, EndDate, CurrencyType, Discount, SubTotal, Total, CashDeposit, CardDeposit, Taxes) VALUES (@Client, @IdEmployee, @IdBusiness, @EndDate, @CurrencyType, @Discount, @SubTotal, @Total, @CashDeposit, @CardDeposit, @Taxes)", offSetDetails);
-                   InsertProductsXOffset(productsIds, quantities);
-                   InsertDepositOffset(offSetDetails, deposit);
-                   return true;
+                    cnn.Execute("INSERT detailoffsetinvoice (Client, IdEmployee, IdBusiness, EndDate, CurrencyType, Discount, SubTotal, Total, CashDeposit, CardDeposit, Taxes) VALUES (@Client, @IdEmployee, @IdBusiness, @EndDate, @CurrencyType, @Discount, @SubTotal, @Total, @CashDeposit, @CardDeposit, @Taxes)", offSetDetails);
+                    InsertProductsXOffset(productsIds, quantities);
+                    InsertDepositOffset(offSetDetails, deposit);
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -79,6 +64,52 @@ namespace DataBaseLibrary.Connections
                 throw;
             }
         }
+
+        public static List<OffSetDetailsModel> SelectOffsetByDay(DateTime morning, DateTime night)
+        {
+            try
+            {
+                TestDateModel testDateModel = new TestDateModel()
+                {
+                    end = night,
+                    start = morning
+                };
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<OffSetDetailsModel>("SELECT * FROM detailoffsetinvoice WHERE CurrentDate BETWEEN " +
+                        "@start AND @end", testDateModel);
+                    return output.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static List<OffSetDetailsModel> SelectOffsetByDate(DateTime start, DateTime end)
+        {
+            try
+            {
+                TestDateModel testDateModel = new TestDateModel()
+                {
+                    end = end,
+                    start = start
+                };
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<OffSetDetailsModel>("SELECT * FROM detailoffsetinvoice WHERE CurrentDate BETWEEN " +
+                        "@start AND @end", testDateModel);
+                    return output.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        //--------------AREA DE PRODUCTOS DE APARTADOS (PRODUCTXOFFSET)-------------------
 
         private static void InsertProductsXOffset(List<int> productsids, List<int> quantities)
         {
@@ -104,6 +135,43 @@ namespace DataBaseLibrary.Connections
             {
 
                 throw;
+            }
+        }
+
+        public static List<ProductXOffsetModel> SelectProducXOffsetByNumOffset(ProductXOffsetModel offSetDetails)
+        {
+            using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<ProductXOffsetModel>("SELECT * FROM offsetinvoice WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice", offSetDetails);
+                return output.ToList();
+            }
+        }
+
+        //--------------AREA DE DEPOSITOS DE APARTADOS (DEPOSITXOFFSET)-------------------
+
+
+        public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits");
+                    return output.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static List<DepositXOffsetModel> SelectDepositByNumOffset(DepositXOffsetModel depositXOffset)
+        {
+            using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<DepositXOffsetModel>("SELECT * FROM offsetdeposits WHERE IdDetailOffsetInvoice = @IdDetailOffsetInvoice", depositXOffset);
+                return output.ToList();
             }
         }
 
@@ -182,5 +250,23 @@ namespace DataBaseLibrary.Connections
             }
         }
 
+        //--------------EXTRAS-------------------------
+
+        public static int SelectLastOffsetNumber()
+        {
+            try
+            {
+                using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
+                {
+                    var output = cnn.Query<int>("SELECT COUNT(IdDetailOffsetInvoice) FROM detailoffsetinvoice ORDER BY IdDetailOffsetInvoice DESC LIMIT 1");
+                    return output.Single();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return 0;
+            }
+        }
     }
 }

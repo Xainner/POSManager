@@ -80,6 +80,23 @@ namespace LogicLibrary.Management
             }
         }
 
+        public static ProductModel SelectProductByID(string id)
+        {
+            try
+            {
+                ProductModel productModel = new ProductModel()
+                {
+                    idProduct = int.Parse(id)
+                };
+                return ProductConnection.SelectProductByID(productModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public static bool UpdateProductById(
             string idProduct,
             string code, string style,

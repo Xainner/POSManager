@@ -47,6 +47,7 @@ namespace UI.Forms
             discountTextBox.Text = " ";
             subTotalTextBox.Text = " ";
             taxesTextBox.Text = " ";
+            totalTextBox.Text = " ";
            
             productsGridView.Rows.Clear();
         }
@@ -364,6 +365,8 @@ namespace UI.Forms
 
         private void cashAmountTextBox_KeyUp(object sender, KeyEventArgs e)
         {
+            creditAmountTextBox.Text = "";
+
             try
             {
                 if (e.KeyCode == Keys.Enter)
@@ -377,16 +380,33 @@ namespace UI.Forms
             }
         }
 
+        private void creditAmountTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            cashAmountTextBox.Text = "";
+
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    ValidateChangeCredit();
+                }
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
+            }
+        }
+
         private void changeButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!string.IsNullOrEmpty(cashAmountTextBox.Text) && !string.IsNullOrEmpty(totalTextBox.Text))
+                if (!string.IsNullOrEmpty(cashAmountTextBox.Text))
                 {
                     ValidateChange();
                 }
 
-                if (!string.IsNullOrEmpty(creditAmountTextBox.Text) && !string.IsNullOrEmpty(totalTextBox.Text))
+                if (!string.IsNullOrEmpty(creditAmountTextBox.Text))
                 {
                     ValidateChangeCredit();
                 }
@@ -487,8 +507,7 @@ namespace UI.Forms
             try
             {
                 if (!string.IsNullOrEmpty(depositTextBox.Text) && !string.IsNullOrEmpty(employeeTextBox.Text)
-                    && !string.IsNullOrEmpty(clientTextBox.Text) && !string.IsNullOrEmpty(totalTextBox.Text)
-                    && !string.IsNullOrEmpty(cashAmountTextBox.Text))
+                    && !string.IsNullOrEmpty(clientTextBox.Text) && !string.IsNullOrEmpty(totalTextBox.Text))
                 {
                     decimal discount = decimal.Parse(discountTextBox.Text);
                     decimal taxes = decimal.Parse(taxesTextBox.Text);

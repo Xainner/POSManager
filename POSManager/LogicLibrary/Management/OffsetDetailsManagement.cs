@@ -10,43 +10,33 @@ namespace LogicLibrary.Management
 {
     public class OffsetDetailsManagement
     {
-        public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
+        //--------------AREA DE DETALLES DE APARTADOS (OFFSETDETAILS)-------------------
+
+        public static List<OffSetDetailsModel> SelectAllOffsetDetails()
         {
             try
             {
-                return OffsetDetailsConnection.SelectAllOffsetDeposit();
+                return OffsetDetailsConnection.SelectAllOffsetDetails();
             }
             catch (Exception ex)
             {
+
                 throw;
             }
         }
 
-        public static DepositXOffsetModel SelectOffsetDetailByInvoice(string code)
+        public static OffSetDetailsModel SelectDetailOffsetByNumOffset(string code)
         {
             try
             {
-                DepositXOffsetModel offSetDetails = new DepositXOffsetModel()
+                OffSetDetailsModel offSetDetails = new OffSetDetailsModel()
                 {
                     IdDetailOffsetInvoice = int.Parse(code)
                 };
-                return OffsetDetailsConnection.SelectDepositByInvoice(offSetDetails);
+                return OffsetDetailsConnection.SelectDetailOffsetByNumOffset(offSetDetails);
             }
             catch (Exception ex)
             {
-                throw;
-            }
-        }
-
-        public static int SelectLastOffsetNumber()
-        {
-            try
-            {
-                return OffsetDetailsConnection.SelectLastOffsetNumber();
-            }
-            catch (Exception ex)
-            {
-
                 throw;
             }
         }
@@ -75,6 +65,80 @@ namespace LogicLibrary.Management
             catch (Exception ex)
             {
 
+                throw;
+            }
+        }
+
+        public static List<OffSetDetailsModel> SelectOffsetByDay(string morning, string night)
+        {
+            try
+            {
+                return OffsetDetailsConnection.SelectOffsetByDay(DateTime.Parse(morning), DateTime.Parse(night));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public static List<OffSetDetailsModel> SelectOffsetByDate(string start, string end)
+        {
+            try
+            {
+                return OffsetDetailsConnection.SelectOffsetByDate(DateTime.Parse(start), DateTime.Parse(end));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        //--------------AREA DE PRODUCTOS DE APARTADOS (PRODUCTXOFFSET)-------------------
+
+        public static List<ProductXOffsetModel> SelectProducXOffsetByNumOffset(string code)
+        {
+            try
+            {
+                ProductXOffsetModel productXOffset = new ProductXOffsetModel()
+                {
+                    IdDetailOffsetInvoice = int.Parse(code)
+                };
+                return OffsetDetailsConnection.SelectProducXOffsetByNumOffset(productXOffset);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        //--------------AREA DE DEPOSITOS DE APARTADOS (DEPOSITXOFFSET)-------------------
+
+        public static List<DepositXOffsetModel> SelectAllOffsetDeposit()
+        {
+            try
+            {
+                return OffsetDetailsConnection.SelectAllOffsetDeposit();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static List<DepositXOffsetModel> SelectDepositByNumOffset(string code)
+        {
+            try
+            {
+                DepositXOffsetModel offSetDetails = new DepositXOffsetModel()
+                {
+                    IdDetailOffsetInvoice = int.Parse(code)
+                };
+                return OffsetDetailsConnection.SelectDepositByNumOffset(offSetDetails);
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }
@@ -115,6 +179,21 @@ namespace LogicLibrary.Management
             }
             catch (Exception ex)
             {
+                throw;
+            }
+        }
+
+        //--------------EXTRAS-------------------
+
+        public static int SelectLastOffsetNumber()
+        {
+            try
+            {
+                return OffsetDetailsConnection.SelectLastOffsetNumber();
+            }
+            catch (Exception ex)
+            {
+
                 throw;
             }
         }
