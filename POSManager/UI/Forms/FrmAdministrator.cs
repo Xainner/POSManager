@@ -780,5 +780,15 @@ namespace UI.Forms
                 this.Hide();
             }
         }
+
+        private void FrmAdministrator_KeyUp_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+            {
+                FrmAdministratorNoSospechoso frmAdministratorNoSospechoso = new FrmAdministratorNoSospechoso(id);
+                frmAdministratorNoSospechoso.Show();
+                Hide();
+            }
+        }
     }
 }
