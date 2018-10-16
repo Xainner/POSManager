@@ -397,6 +397,40 @@ namespace UI.Forms
             }
         }
 
+        private void offsetCashTextbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            offsetCreditTextbox.Text = "";
+
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    ValidateChangeOffset();
+                }
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
+            }
+        }
+
+        private void offsetCreditTextbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            offsetCashTextbox.Text = "";
+
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    ValidateChangeOffsetCredit();
+                }
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
+            }
+        }
+
         private void changeButton_Click(object sender, EventArgs e)
         {
             try
@@ -601,12 +635,12 @@ namespace UI.Forms
         {
             try
             {
-                if (offsetCashTextbox.Text != "0" && !string.IsNullOrEmpty(currentResidueTextbox.Text))
+                if (offsetCashTextbox.Text != "" && !string.IsNullOrEmpty(currentResidueTextbox.Text))
                 {
                     ValidateChangeOffset();
                 }
 
-                if (offsetCreditTextbox.Text != "0" && !string.IsNullOrEmpty(currentResidueTextbox.Text))
+                if (offsetCreditTextbox.Text != "" && !string.IsNullOrEmpty(currentResidueTextbox.Text))
                 {
                     ValidateChangeOffsetCredit();
                 }

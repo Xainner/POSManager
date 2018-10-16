@@ -417,10 +417,9 @@ namespace UI.UserControls
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = "Error: "+ ex;
             }
         }
     }
