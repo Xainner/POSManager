@@ -71,45 +71,52 @@ namespace UI.Forms.Extras
                     startUpAdvancedWizard.BackButtonEnabled = false;
                     try
                     {
-                        if (!string.IsNullOrEmpty(userNameTextBox.Text))
+                        if (UserManagement.SelectUserByUserName(userNameTextBox.Text) == null)
                         {
-                            if (!string.IsNullOrEmpty(passwordTextBox.Text))
+                            if (!string.IsNullOrEmpty(userNameTextBox.Text))
                             {
-                                if (!string.IsNullOrEmpty(validatePasswordTextBox.Text))
+                                if (!string.IsNullOrEmpty(passwordTextBox.Text))
                                 {
-                                    if (validatePasswordTextBox.Text.Equals(passwordTextBox.Text))
+                                    if (!string.IsNullOrEmpty(validatePasswordTextBox.Text))
                                     {
-                                        if (UserManagement.InsertUser(userNameTextBox.Text, 0, passwordTextBox.Text))
+                                        if (validatePasswordTextBox.Text.Equals(passwordTextBox.Text))
                                         {
-                                            startUpAdvancedWizard.NextButtonEnabled = true;
+                                            if (UserManagement.InsertUser(userNameTextBox.Text, 0, passwordTextBox.Text))
+                                            {
+                                                startUpAdvancedWizard.NextButtonEnabled = true;
+                                            }
+                                            else
+                                            {
+                                                MetroMessageBox.Show(this, "Ha ocurrido un error, intentelo nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                startUpAdvancedWizard.ClickBack();
+                                            }
                                         }
                                         else
                                         {
-                                            MetroMessageBox.Show(this, "Ha ocurrido un error, intentelo nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            MetroMessageBox.Show(this, "Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             startUpAdvancedWizard.ClickBack();
                                         }
                                     }
                                     else
                                     {
-                                        MetroMessageBox.Show(this, "Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        MetroMessageBox.Show(this, "El campo de validación de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                         startUpAdvancedWizard.ClickBack();
                                     }
                                 }
                                 else
                                 {
-                                    MetroMessageBox.Show(this, "El campo de validación de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    MetroMessageBox.Show(this, "El campo de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     startUpAdvancedWizard.ClickBack();
                                 }
                             }
                             else
                             {
-                                MetroMessageBox.Show(this, "El campo de la contraseña no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MetroMessageBox.Show(this, "El campo del nombre de usuario no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 startUpAdvancedWizard.ClickBack();
                             }
-                        }
-                        else
+                        } else
                         {
-                            MetroMessageBox.Show(this, "El campo del nombre de usuario no puede estar vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MetroMessageBox.Show(this, "El campo del nombre de usuario no puede estar vacío.", "Campo Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             startUpAdvancedWizard.ClickBack();
                         }
                     }

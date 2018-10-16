@@ -66,10 +66,13 @@
             this.currentTimeTimer = new System.Windows.Forms.Timer(this.components);
             this.reloadLatestInvoiceNumber = new System.Windows.Forms.Timer(this.components);
             this.codeTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.deleteProductMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.metroContextMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -240,6 +243,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.productsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.productsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productsGridView.ContextMenuStrip = this.metroContextMenu1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -716,6 +720,20 @@
             this.codeTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.codeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.codeTextBox_KeyUp);
             // 
+            // metroContextMenu1
+            // 
+            this.metroContextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteProductMenu});
+            this.metroContextMenu1.Name = "metroContextMenu1";
+            this.metroContextMenu1.Size = new System.Drawing.Size(229, 48);
+            // 
+            // deleteProductMenu
+            // 
+            this.deleteProductMenu.Name = "deleteProductMenu";
+            this.deleteProductMenu.Size = new System.Drawing.Size(228, 22);
+            this.deleteProductMenu.Text = "Remover Producto de la Lista";
+            this.deleteProductMenu.Click += new System.EventHandler(this.deleteProductMenu_Click);
+            // 
             // FrmInvoiceSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -742,6 +760,7 @@
             this.groupBox2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.metroContextMenu1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -783,5 +802,7 @@
         private System.Windows.Forms.Timer reloadLatestInvoiceNumber;
         private MetroFramework.Controls.MetroComboBox metroComboBox1;
         private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
+        private System.Windows.Forms.ToolStripMenuItem deleteProductMenu;
     }
 }

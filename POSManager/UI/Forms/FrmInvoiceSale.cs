@@ -594,5 +594,13 @@ namespace UI.Forms
                 }
             }
         }
+
+        private void deleteProductMenu_Click(object sender, EventArgs e)
+        {
+            if (productsGridView.SelectedRows.Count != 0 && productsGridView.CurrentRow != null)
+            {
+                productsGridView.Rows.Remove(productsGridView.CurrentRow);
+            }
+        }
     }
 }

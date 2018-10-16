@@ -522,7 +522,7 @@ namespace UI.Forms
             DateTime morning = inicioFecha.Value;
             DateTime night = finalFecha.Value;
 
-            invoices = InternalManagement.SelectInvoicesByDate(DateTime.Parse(morning.ToString("dd-MM-yyyy 00:00:00")), (DateTime.Parse(night.ToString("dd-MM-yyyy 23:59:59")));
+            invoices = InternalManagement.SelectInvoicesByDate(DateTime.Parse(morning.ToString("dd-MM-yyyy 00:00:00")), (DateTime.Parse(night.ToString("dd-MM-yyyy 23:59:59"))));
             metroGrid1.DataSource = invoices;
             GetTotal();
         }

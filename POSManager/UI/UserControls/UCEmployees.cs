@@ -132,7 +132,7 @@ namespace UI.UserControls
                     {
                         if (!string.IsNullOrEmpty(identificationTextBox.Text) && EmployeeManagement.SelectIdentification(identificationTextBox.Text) == null)
                         {
-                            if (MetroMessageBox.Show(this, $"¿Seguro que desea agregar al empleado: { nameTextBox.Text }?", "Modificar empleado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            if (MetroMessageBox.Show(this, $"¿Seguro que desea agregar al empleado: { nameTextBox.Text }?", "Agregar empleado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
                                 if (EmployeeManagement.InsertEmployee(nameTextBox.Text, lastnameTextBox.Text, idTypeComboBox.SelectedItem.ToString(),
                                     identificationTextBox.Text, bornDateDateTime.Value))
