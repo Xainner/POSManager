@@ -75,5 +75,13 @@ namespace UI.Forms.SearchForms
                 employeesGridView.DataSource = null;
             }
         }
+
+        private void employeesGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (employeesGridView.CurrentCell != null)
+            {
+                getEmployeeButton.PerformClick();
+            }
+        }
     }
 }
