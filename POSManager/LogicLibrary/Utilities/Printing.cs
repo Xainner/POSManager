@@ -127,7 +127,7 @@ namespace LogicLibrary.Utilities
             foreach (ProductXQuantityModel item in productXQuantityModels)
             {
                 Offset = Offset + 20;
-                graphics.DrawString($"{ item.description }      { item.quantity}      { item.amount }", new Font("Courier New", 10),
+                graphics.DrawString($"{ item.description }      { item.quantity}      { item.amount }", new Font("Courier New", 8),
                          new SolidBrush(Color.Black), startX, startY + Offset);
             }
 

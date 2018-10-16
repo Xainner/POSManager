@@ -235,7 +235,7 @@ namespace DataBaseLibrary.Connections
 
                 using (IDbConnection cnn = new MySqlConnection(LoadConnectionString()))
                 {
-                    cnn.Execute("INSERT externalinvoicesell (Product_idProduct, idDetailInternalInvoiceSell, quantity, amount, discount, price) VALUES (@Product_idProduct, @idDetailInternalInvoiceSell, @Quantity, @Amount, @Discount, @Price)", productXInvoiceInternal);
+                    cnn.Execute("INSERT internalinvoicesell (Product_idProduct, idDetailInternalInvoiceSell, quantity, amount, discount, price) VALUES (@Product_idProduct, @idDetailInternalInvoiceSell, @Quantity, @Amount, @Discount, @Price)", productXInvoiceInternal);
                 }
                 i++;
             }

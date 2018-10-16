@@ -82,7 +82,7 @@ namespace UI
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            Printing printing = new Printing(1, DateTime.Now, ExternalInvoiceSaleManagement.SelectProductsInvoiceXInvoiceId(1), "Tienda Pamela");
+            Printing printing = new Printing(2, DateTime.Now, ExternalInvoiceSaleManagement.SelectProductsInvoiceXInvoiceId(2), "Tienda Pamela");
             printing.print();
         }
     }
