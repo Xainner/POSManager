@@ -66,7 +66,7 @@ namespace LogicLibrary.Utilities
             pd.Document = pdoc;
             pd.Document.DefaultPageSettings.PaperSize = psize;
             //pdoc.DefaultPageSettings.PaperSize.Height =320;
-            pdoc.DefaultPageSettings.PaperSize.Height = 820;
+            pdoc.DefaultPageSettings.PaperSize.Height = 500;
 
             pdoc.DefaultPageSettings.PaperSize.Width = 520;
 
@@ -82,7 +82,9 @@ namespace LogicLibrary.Utilities
                 {
                     pdoc.Print();
                 }
+
             }
+
 
         }
         void pdoc_PrintPage(object sender, PrintPageEventArgs e)
@@ -94,7 +96,7 @@ namespace LogicLibrary.Utilities
             int startY = 55;
             int Offset = 40;
             
-            graphics.DrawString("Distribuidora " + storeName, new Font("Courier New", 14),
+            graphics.DrawString("Distribuidora " + BusinessManagement.SelectMainBusinessName(), new Font("Courier New", 14),
                                 new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + 20;
             graphics.DrawString("Número de Factura:" + this.TicketNo,

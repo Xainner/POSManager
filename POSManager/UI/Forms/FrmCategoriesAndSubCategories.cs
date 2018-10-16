@@ -264,9 +264,12 @@ namespace UI.Forms
             {
                 subCategoryIdLabel.Text = subCategoriesGridView.CurrentRow.Cells[0].Value.ToString();
                 subCategoryNameTextBox.Text = subCategoriesGridView.CurrentRow.Cells[2].Value.ToString();
+
+                SubCategoryModel subCategoryModel = SubCategoryManagement.SelectSubCategoryById(int.Parse(subCategoryIdLabel.Text));
+
                 foreach (CategoryModel categoryModel in categoriesComboBox.Items)
                 {
-                    if (categoryModel.Name.Equals(subCategoryNameTextBox.Text))
+                    if (categoryModel.IdCategory == subCategoryModel.IdCategory)
                     {
                         categoriesComboBox.SelectedItem = categoryModel;
                         break;
@@ -350,7 +353,7 @@ namespace UI.Forms
                 {
                     if (MetroMessageBox.Show(this, $"¿Seguro que desea eliminar la subcategoría: { subCategoryNameTextBox.Text }?", "Eliminar subcategoría", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        if (SubCategoryManagement.DeleteSubCategoryById(int.Parse(categoryIdLabel.Text)))
+                        if (SubCategoryManagement.DeleteSubCategoryById(int.Parse(subCategoryIdLabel.Text)))
                         {
                             toolStripStatusLabel1.Text = "SubCategoría eliminada de manera exitosa.";
                             subCategoryNameTextBox.Text = string.Empty;

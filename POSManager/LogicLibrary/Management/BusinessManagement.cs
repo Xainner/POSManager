@@ -50,6 +50,18 @@ namespace LogicLibrary.Management
             }
         }
 
+        public static string SelectMainBusinessName()
+        {
+            try
+            {
+                return BusinessConnection.SelectMainBusinessName();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public static int SelectMainBusinessId()
         {
             try
