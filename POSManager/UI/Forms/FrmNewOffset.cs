@@ -596,23 +596,30 @@ namespace UI.Forms
 
         private void searchTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!string.IsNullOrEmpty(searchTextBox.Text))
+            try
             {
-                List<DepositXOffsetModel> depositModel;
-                depositModel = OffsetDetailsManagement.MultipleValueSearch(searchTextBox.Text);
-                
-                if (depositModel != null)
+                if (!string.IsNullOrEmpty(searchTextBox.Text))
                 {
-                    offsetGridView.DataSource = depositModel;
-                    offsetGridView.Columns.RemoveAt(2);
-                    offsetGridView.Columns[0].HeaderText = "Num Fact.";
-                    offsetGridView.Columns[1].HeaderText = "Nombre";
-                    offsetGridView.Columns[2].HeaderText = "Saldo Actual";
+                    List<DepositXOffsetModel> depositModel;
+                    depositModel = OffsetDetailsManagement.MultipleValueSearch(searchTextBox.Text);
+
+                    if (depositModel != null)
+                    {
+                        offsetGridView.DataSource = depositModel;
+                        offsetGridView.Columns.RemoveAt(2);
+                        offsetGridView.Columns[0].HeaderText = "Num Fact.";
+                        offsetGridView.Columns[1].HeaderText = "Nombre";
+                        offsetGridView.Columns[2].HeaderText = "Saldo Actual";
+                    }
+                }
+                else
+                {
+                    offsetGridView.DataSource = null;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                offsetGridView.DataSource = null;
+                toolStripStatusLabel1.Text = "Error: " + ex.Message;
             }
         }
 

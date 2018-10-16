@@ -170,7 +170,7 @@ namespace UI.UserControls
             }
             catch (Exception ex)
             {
-
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
             }
         }
 
@@ -188,68 +188,60 @@ namespace UI.UserControls
                     taxes = false;
                 }
 
-                try
+                if (!string.IsNullOrEmpty(codeTextBox.Text))
                 {
-                    if (!string.IsNullOrEmpty(codeTextBox.Text))
+                    if (!string.IsNullOrEmpty(descriptionTextBox.Text))
                     {
-                        if (!string.IsNullOrEmpty(descriptionTextBox.Text))
+                        if (!string.IsNullOrEmpty(estableQuantityTextBox.Text))
                         {
-                            if (!string.IsNullOrEmpty(estableQuantityTextBox.Text))
+                            if (!string.IsNullOrEmpty(variableQuantityTextBox.Text))
                             {
-                                if (!string.IsNullOrEmpty(variableQuantityTextBox.Text))
+                                if (!string.IsNullOrEmpty(priceTextBox.Text))
                                 {
-                                    if (!string.IsNullOrEmpty(priceTextBox.Text))
+                                    if (MetroMessageBox.Show(this, $"¿Seguro que desea modificar el Producto?", "Modificar Producto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                                     {
-                                        if (MetroMessageBox.Show(this, $"¿Seguro que desea modificar el Producto?", "Modificar Producto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                                        if (ProductManagement.UpdateProductById(id, codeTextBox.Text, StyleTextBox.Text, brand.IdBrand.ToString(), descriptionTextBox.Text, subcategory.IdSubCategory.ToString(),
+                                            priceTextBox.Text, lowerPorcentTextBox.Text, estableQuantityTextBox.Text, variableQuantityTextBox.Text,
+                                            ImageManagement.ImageToByte(ImageManagement.TemporaryImage(ImgpictureBox.Image)), taxes, true))
                                         {
-                                            if (ProductManagement.UpdateProductById(id, codeTextBox.Text, StyleTextBox.Text, brand.IdBrand.ToString(), descriptionTextBox.Text, subcategory.IdSubCategory.ToString(),
-                                                priceTextBox.Text, lowerPorcentTextBox.Text, estableQuantityTextBox.Text, variableQuantityTextBox.Text,
-                                                ImageManagement.ImageToByte(ImageManagement.TemporaryImage(ImgpictureBox.Image)), taxes, true))
-                                            {
-                                                FrmMain.Instance.ToolStripLabel.Text = "Producto modificado de manera exitosa.";
-                                                CleanProduct();
-                                                WireUpProdcutGridView();
-                                            }
-                                            else
-                                            {
-                                                MetroMessageBox.Show(this, $"Ha ocurrido un error al modificar el Producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                            }
+                                            FrmMain.Instance.ToolStripLabel.Text = "Producto modificado de manera exitosa.";
+                                            CleanProduct();
+                                            WireUpProdcutGridView();
                                         }
-                                    }
-                                    else
-                                    {
-                                        MetroMessageBox.Show(this, "El precio no puede ser vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        else
+                                        {
+                                            MetroMessageBox.Show(this, $"Ha ocurrido un error al modificar el Producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    MetroMessageBox.Show(this, "La cantidad de entrada no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    MetroMessageBox.Show(this, "El precio no puede ser vacío.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
                             }
                             else
                             {
-                                MetroMessageBox.Show(this, "La cantidad fija no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MetroMessageBox.Show(this, "La cantidad de entrada no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
                         else
                         {
-                            MetroMessageBox.Show(this, "La descripción no puede ser vacía", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MetroMessageBox.Show(this, "La cantidad fija no puede estar vacía.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
                     {
-                        MetroMessageBox.Show(this, "El Código no puede estar vacío", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MetroMessageBox.Show(this, "La descripción no puede ser vacía", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-
+                    MetroMessageBox.Show(this, "El Código no puede estar vacío", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
             }
         }
 
@@ -265,7 +257,7 @@ namespace UI.UserControls
                     {
                         if (ProductManagement.DeleteProductById(id))
                         {
-                            FrmMain.Instance.ToolStripLabel.Text = "Negocio eliminado de manera exitosa.";
+                            FrmMain.Instance.ToolStripLabel.Text = "Producto eliminado de manera exitosa.";
                             WireUpProdcutGridView();
                             CleanProduct();
                         }
@@ -277,13 +269,12 @@ namespace UI.UserControls
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Debe seleccionar una negocio para poder eliminarlo.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MetroMessageBox.Show(this, "Debe seleccionar un Producto para poder eliminarlo.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
             }
         }
 
@@ -293,43 +284,63 @@ namespace UI.UserControls
             {
                 CleanProduct();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
             }
         }
 
         private void photoButton_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog()
+            try
             {
-                Title = "Seleccione el logo",
-                Multiselect = false
-            })
-            {
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                using (OpenFileDialog openFileDialog = new OpenFileDialog()
                 {
-                    tempImage = ImageManagement.TemporaryImage(Image.FromFile(openFileDialog.FileName));
-                    ImgpictureBox.Load(tempImage);
+                    Title = "Seleccione el logo",
+                    Multiselect = false
+                })
+                {
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        tempImage = ImageManagement.TemporaryImage(Image.FromFile(openFileDialog.FileName));
+                        ImgpictureBox.Load(tempImage);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
             }
         }
 
         private void rotateLeftLink_Click(object sender, EventArgs e)
         {
-            RotateFlipType rp = RotateFlipType.Rotate90FlipXY;
-            Image image = ImgpictureBox.Image;
-            image.RotateFlip(rp);
-            ImgpictureBox.Image = image;
+            try
+            {
+                RotateFlipType rp = RotateFlipType.Rotate90FlipXY;
+                Image image = ImgpictureBox.Image;
+                image.RotateFlip(rp);
+                ImgpictureBox.Image = image;
+            }
+            catch (Exception ex)
+            {
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
+            }
         }
 
         private void rotateRightLink_Click(object sender, EventArgs e)
         {
-            RotateFlipType rp = RotateFlipType.Rotate90FlipNone;
-            Image image = ImgpictureBox.Image;
-            image.RotateFlip(rp);
-            ImgpictureBox.Image = image;
+            try
+            {
+                RotateFlipType rp = RotateFlipType.Rotate90FlipNone;
+                Image image = ImgpictureBox.Image;
+                image.RotateFlip(rp);
+                ImgpictureBox.Image = image;
+            }
+            catch (Exception ex)
+            {
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
+            }
         }
 
         private void lowerDiscountTextBox_KeyUp(object sender, KeyEventArgs e)
@@ -355,10 +366,9 @@ namespace UI.UserControls
                     FrmMain.Instance.ToolStripLabel.Text = "El precio y descuento minimo no pueden ser vacios.";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = "Error: " + ex.Message;
             }
         }
 
