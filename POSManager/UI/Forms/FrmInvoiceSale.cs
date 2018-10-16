@@ -521,5 +521,73 @@ namespace UI.Forms
             cashAmountTextBox.Text = string.Empty;
             creditAmountTextBox.Text = string.Empty;
         }
+
+        private void FrmInvoiceSale_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(cashAmountTextBox.Text) || !string.IsNullOrEmpty(creditAmountTextBox.Text))
+                    {
+                        decimal discount = decimal.Parse(discountTextBox.Text);
+                        decimal taxes = decimal.Parse(taxesTextBox.Text);
+                        decimal subTotal = decimal.Parse(subTotalTextBox.Text);
+                        decimal total = decimal.Parse(totalTextBox.Text);
+                        decimal cashAmount = decimal.Parse(cashAmountTextBox.Text);
+                        decimal cardAmount = 0;
+                        string currencyType = metroComboBox1.SelectedItem.ToString();
+                        decimal totalPayment = decimal.Parse(totalTextBox.Text);
+                        int employeeId = EmployeeModel.IdEmployee;
+                        int clientId = 0;
+                        int mainBusinessId = BusinessManagement.SelectMainBusinessId();
+                        if (ClientModel != null)
+                        {
+                            clientId = ClientModel.IdClient;
+                        }
+                        List<int> productsIds = new List<int>();
+                        foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                        {
+                            productsIds.Add(int.Parse(dataGridViewRow.Cells[9].Value.ToString()));
+                        }
+
+                        List<int> productquantity = new List<int>();
+                        foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                        {
+                            productquantity.Add(int.Parse(dataGridViewRow.Cells[3].Value.ToString()));
+                        }
+
+                        List<decimal> productAmounts = new List<decimal>();
+                        foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                        {
+                            productAmounts.Add(decimal.Parse(dataGridViewRow.Cells[5].Value.ToString()));
+                        }
+
+                        List<decimal> productPrices = new List<decimal>();
+                        foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                        {
+                            productPrices.Add(decimal.Parse(dataGridViewRow.Cells[4].Value.ToString()));
+                        }
+
+                        List<decimal> productsDiscounts = new List<decimal>();
+                        foreach (DataGridViewRow dataGridViewRow in productsGridView.Rows)
+                        {
+                            productsDiscounts.Add(decimal.Parse(dataGridViewRow.Cells[6].Value.ToString()));
+                        }
+                        InternalManagement.InsertInternalInvoiceSaleDetails(discount, taxes, subTotal, total, cashAmount, cardAmount, currencyType, mainBusinessId, clientId, employeeId, productsIds, productquantity, productPrices, productAmounts, productsDiscounts);
+                        clearButton.PerformClick();
+                        toolStripStatusLabel1.Text = "Factura realizada con éxito";
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Debe ingresar un monto.", "Monto invalido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    toolStripStatusLabel1.Text = "Error";
+                }
+            }
+        }
     }
 }

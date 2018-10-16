@@ -1,6 +1,6 @@
 ﻿namespace UI.Forms
 {
-    partial class FrmAdministrator
+    partial class FrmAdministratorNoSospechoso
     {
         /// <summary>
         /// Required designer variable.

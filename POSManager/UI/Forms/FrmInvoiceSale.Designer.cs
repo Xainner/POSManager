@@ -728,9 +728,11 @@
             this.Controls.Add(this.codeTextBox);
             this.Controls.Add(this.productsGridView);
             this.Controls.Add(this.groupBox1);
+            this.KeyPreview = true;
             this.Name = "FrmInvoiceSale";
             this.Text = "Factura de Venta";
             this.Load += new System.EventHandler(this.FrmInvoiceSale_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmInvoiceSale_KeyUp);
             this.Leave += new System.EventHandler(this.FrmInvoiceSale_Leave);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

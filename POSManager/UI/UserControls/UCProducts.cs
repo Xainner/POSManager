@@ -280,10 +280,10 @@ namespace UI.UserControls
                     MetroMessageBox.Show(this, "Debe seleccionar una negocio para poder eliminarlo.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = ex.Message;
             }
         }
 
@@ -293,10 +293,10 @@ namespace UI.UserControls
             {
                 CleanProduct();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = ex.Message;
             }
         }
 
@@ -355,10 +355,10 @@ namespace UI.UserControls
                     FrmMain.Instance.ToolStripLabel.Text = "El precio y descuento minimo no pueden ser vacios.";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = ex.Message;
             }
         }
 
@@ -417,10 +417,10 @@ namespace UI.UserControls
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                FrmMain.Instance.ToolStripLabel.Text = ex.Message;
             }
         }
     }
