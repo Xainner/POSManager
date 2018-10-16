@@ -50,6 +50,7 @@
     <Compile Include="Management\ClientManagement.cs" />
     <Compile Include="Management\EmployeeManagement.cs" />
     <Compile Include="Management\ExternalInvoiceSaleManagement.cs" />
+    <Compile Include="Management\InternalManagement.cs" />
     <Compile Include="Management\KeyManagement.cs" />
     <Compile Include="Management\OffsetDetailsManagement.cs" />
     <Compile Include="Management\PositionManagement.cs" />

@@ -90,6 +90,12 @@
     <Compile Include="Forms\FrmAbout.Designer.cs">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmAdministratorNoSospechoso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAdministratorNoSospechoso.Designer.cs">
+      <DependentUpon>FrmAdministratorNoSospechoso.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmAdministrator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmAdministratorNoSospechoso.resx">
+      <DependentUpon>FrmAdministratorNoSospechoso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAdministrator.resx">
       <DependentUpon>FrmAdministrator.cs</DependentUpon>

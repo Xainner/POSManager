@@ -18,12 +18,12 @@ using UI.Forms.Extras;
 
 namespace UI.Forms
 {
-    public partial class FrmAdministrator : MetroForm
+    public partial class FrmAdministratorNoSospechoso : MetroForm
     {
         //---------GLOBALS---------\\
         List<UserModel> userManagementModels;
         List<UserModel> userRolesModels;
-        List<ExternalInvoiceSaleDetailsModel> invoices;
+        List<InternalInvoiceSale> invoices;
         List<ProductXQuantityModel> productsInvoices;
         List<OffSetDetailsModel> offSet;
 
@@ -31,7 +31,7 @@ namespace UI.Forms
 
         //---------FORM---------\\
 
-        public FrmAdministrator(int idOld)
+        public FrmAdministratorNoSospechoso(int idOld)
         {
             InitializeComponent();
             id = idOld;
@@ -51,7 +51,7 @@ namespace UI.Forms
             searchOffsetButton.Enabled = false;
             comboBoxRangos.SelectedIndex = 0;
             rangosProductos.SelectedIndex = 0;
-            invoices = ExternalInvoiceSaleManagement.SelectInvoices();
+            invoices = InternalManagement.SelectInvoices();
             metroGrid1.DataSource = invoices;
             offSet = OffsetDetailsManagement.SelectAllOffsetDetails();
             offsetmetroGrid.DataSource = offSet;
@@ -510,7 +510,7 @@ namespace UI.Forms
             switch (comboBoxRangos.SelectedIndex)
             {
                 case 0:
-                    invoices = ExternalInvoiceSaleManagement.SelectInvoicesByDay(DateTime.Today);
+                    invoices = InternalManagement.SelectInvoicesByDay(DateTime.Today);
                     break;                  
             }
             metroGrid1.DataSource = invoices;
@@ -519,7 +519,7 @@ namespace UI.Forms
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            invoices = ExternalInvoiceSaleManagement.SelectInvoicesByDate(inicioFecha.Value, finalFecha.Value);
+            invoices = InternalManagement.SelectInvoicesByDate(inicioFecha.Value, finalFecha.Value);
             metroGrid1.DataSource = invoices;
             GetTotal();
         }
@@ -777,7 +777,7 @@ namespace UI.Forms
             {
                 FrmAdministratorNoSospechoso frmAdministratorNoSospechoso = new FrmAdministratorNoSospechoso(id);
                 frmAdministratorNoSospechoso.Show();
-                this.Hide();
+                this.Close();
             }
         }
     }
