@@ -73,7 +73,7 @@ namespace UI.Forms
             {
                 int quantity = int.Parse(dataGridViewRow.Cells[3].Value.ToString());
                 decimal amount = quantity * decimal.Parse(dataGridViewRow.Cells[4].Value.ToString());
-                decimal discount = int.Parse(dataGridViewRow.Cells[6].Value.ToString());
+                decimal discount = decimal.Parse(dataGridViewRow.Cells[6].Value.ToString());
 
                 decimal otrotest2 = amount * (discount / 100);
                 amount = (amount - (amount * (discount / 100)));
@@ -521,6 +521,10 @@ namespace UI.Forms
             changeTextBox.Text = string.Empty;
             cashAmountTextBox.Text = string.Empty;
             creditAmountTextBox.Text = string.Empty;
+            totalTextBox.Text = string.Empty;
+            discountTextBox.Text = string.Empty;
+            subTotalTextBox.Text = string.Empty;
+            taxesTextBox.Text = string.Empty;
         }
 
         private void FrmInvoiceSale_KeyUp(object sender, KeyEventArgs e)

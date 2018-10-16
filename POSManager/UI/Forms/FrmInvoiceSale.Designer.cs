@@ -134,6 +134,7 @@
             this.employeeTextBox.Name = "employeeTextBox";
             this.employeeTextBox.PasswordChar = '\0';
             this.employeeTextBox.PromptText = "Ingrese el nombre del vendedor";
+            this.employeeTextBox.ReadOnly = true;
             this.employeeTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.employeeTextBox.SelectedText = "";
             this.employeeTextBox.SelectionLength = 0;
