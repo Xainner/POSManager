@@ -56,13 +56,14 @@ namespace UI.Forms.Extras
 
             offsetGridView.Columns.Add("IdFact", "Factura");
             offsetGridView.Columns.Add("name", "Nombre");
-            offsetGridView.Columns.Add("payment", "Pagos");
+            offsetGridView.Columns.Add("payment", "Saldo");
+            offsetGridView.Columns.Add("date", "Fecha");
 
             offsetGridView.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             foreach (DepositXOffsetModel item2 in depositXOffset)
             {
-                offsetGridView.Rows.Add(item2.IdDetailOffsetInvoice, item2.Name, item2.Deposit);
+                offsetGridView.Rows.Add(item2.IdDetailOffsetInvoice, item2.Name, item2.Deposit, item2.CurrentDate);
             }
             
         }

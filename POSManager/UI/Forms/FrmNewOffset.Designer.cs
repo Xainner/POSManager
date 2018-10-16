@@ -898,8 +898,7 @@
             this.offsetCreditTextbox.DisplayIcon = true;
             this.offsetCreditTextbox.FontSize = MetroFramework.MetroTextBoxSize.Tall;
             this.offsetCreditTextbox.Icon = global::UI.Properties.Resources.Credit_Card_16px;
-            this.offsetCreditTextbox.Lines = new string[] {
-        "0"};
+            this.offsetCreditTextbox.Lines = new string[0];
             this.offsetCreditTextbox.Location = new System.Drawing.Point(158, 394);
             this.offsetCreditTextbox.MaxLength = 32767;
             this.offsetCreditTextbox.Name = "offsetCreditTextbox";
@@ -912,12 +911,12 @@
             this.offsetCreditTextbox.ShortcutsEnabled = true;
             this.offsetCreditTextbox.Size = new System.Drawing.Size(193, 39);
             this.offsetCreditTextbox.TabIndex = 21;
-            this.offsetCreditTextbox.Text = "0";
             this.offsetCreditTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.offsetCreditTextbox.UseSelectable = true;
             this.offsetCreditTextbox.WaterMark = "Ingrese el monto en crédito";
             this.offsetCreditTextbox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.offsetCreditTextbox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.offsetCreditTextbox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.offsetCreditTextbox_KeyUp);
             // 
             // offsetCashTextbox
             // 
@@ -936,8 +935,7 @@
             this.offsetCashTextbox.DisplayIcon = true;
             this.offsetCashTextbox.FontSize = MetroFramework.MetroTextBoxSize.Tall;
             this.offsetCashTextbox.Icon = global::UI.Properties.Resources.Paper_Money_16px;
-            this.offsetCashTextbox.Lines = new string[] {
-        "0"};
+            this.offsetCashTextbox.Lines = new string[0];
             this.offsetCashTextbox.Location = new System.Drawing.Point(158, 343);
             this.offsetCashTextbox.MaxLength = 32767;
             this.offsetCashTextbox.Name = "offsetCashTextbox";
@@ -950,12 +948,12 @@
             this.offsetCashTextbox.ShortcutsEnabled = true;
             this.offsetCashTextbox.Size = new System.Drawing.Size(193, 39);
             this.offsetCashTextbox.TabIndex = 20;
-            this.offsetCashTextbox.Text = "0";
             this.offsetCashTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.offsetCashTextbox.UseSelectable = true;
             this.offsetCashTextbox.WaterMark = "Ingrese el monto en efectivo";
             this.offsetCashTextbox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.offsetCashTextbox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.offsetCashTextbox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.offsetCashTextbox_KeyUp);
             // 
             // metroLabel16
             // 
